@@ -57,4 +57,8 @@ func InitDatabase() {
 		panic(err)
 	}
 	Database = db
+	Database.AutoMigrate(User{})
+	Database.AutoMigrate(Session{})
+	Database.AutoMigrate(Course{})
+	Database.AutoMigrate(Topic{})
 }
