@@ -1,5 +1,10 @@
 package main
 
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
+
 type Session struct {
 	ID            string `gorm:"primaryKey" json:"id"`
 	StudentID     string `json:"student"`
@@ -8,4 +13,9 @@ type Session struct {
 	TopicID       string `json:"topic"`
 	Description   string `json:"description"`
 	Retrospective string `json:"retrospective"`
+}
+
+func (session *Session) BeforeCreate(scope *gorm.DB) error {
+	session.ID = uuid.New().String()
+	return nil
 }
