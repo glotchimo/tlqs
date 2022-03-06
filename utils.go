@@ -43,9 +43,12 @@ func InitCache() {
 func InitRouter() {
 	Router = mux.NewRouter()
 	Router.PathPrefix("/").Handler(SPAHandler{staticPath: "dist", indexPath: "dist/index.html"})
+	for _, route := range Routes {
+		Router.Methods(route.Method).Path(route.Path).Name(route.Name).Handler(route.Handler)
+	}
 }
 
-func InitHandlers() {
+func InitHandler() {
 	h := handlers.CORS(CORSOrigins, CORSHeaders, CORSMethods)(Router)
 	h = handlers.LoggingHandler(os.Stdout, h)
 	Handler = &h

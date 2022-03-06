@@ -26,7 +26,7 @@ var (
 func init() {
 	InitCache()
 	InitRouter()
-	InitHandlers()
+	InitHandler()
 	InitDatabase()
 }
 
