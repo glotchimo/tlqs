@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  db:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+    restart: always
+    env_file:
+      - db.env
+
+  api:
+    restart: always
+    ports:
+      - "80:8080"
+    depends_on:
+      - db
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - api.env
+
+volumes:
+  db-data:
