@@ -20,8 +20,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    env_file:
-      - api.env
 
 volumes:
   db-data:
