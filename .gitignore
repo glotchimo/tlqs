@@ -2,6 +2,7 @@
 .vscode/
 dist/
 tlqs-bin
+*.env
 
 .DS_Store
 *.[56789ao]
