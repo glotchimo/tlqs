@@ -2,10 +2,16 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"gorm.io/gorm"
 )
 
+// Create a record in the database using the given pointer.
+// `obj` should be a pointer to an initialized model struct with data in it.
 func Create(w http.ResponseWriter, r *http.Request, obj *interface{}) {
 	if result := Database.Create(obj); result.Error != nil {
 		log.Println(result.Error)
@@ -17,8 +23,33 @@ func Create(w http.ResponseWriter, r *http.Request, obj *interface{}) {
 		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
-	} else {
-		w.WriteHeader(http.StatusCreated)
+	}
+
+	w.WriteHeader(http.StatusCreated)
+}
+
+// Get a record from the database by ID (in request pattern) using the given pointer.
+// `obj` should be a pointer to an empty model struct.
+func Get(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db *gorm.DB) *gorm.DB) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	result := Database.Scopes(scope).First(obj, "id = ?", id)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		w.Write([]byte("Object not found."))
+		w.WriteHeader(http.StatusNotFound)
+		return
+	} else if result.Error != nil {
+		log.Println(result.Error.Error())
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+
+	if err := json.NewEncoder(w).Encode(obj); err != nil {
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
 }
