@@ -53,3 +53,22 @@ func Get(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db
 
 	w.WriteHeader(http.StatusCreated)
 }
+
+// List records from the database by the given scope function.
+// `obj` should be a pointer to a slice of model type.
+func List(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db *gorm.DB) *gorm.DB) {
+	result := Database.Scopes(scope).Find(obj)
+	if result.Error != nil {
+		log.Println(result.Error.Error())
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err := json.NewEncoder(w).Encode(obj); err != nil {
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+}
