@@ -101,3 +101,28 @@ func Update(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func
 		return
 	}
 }
+
+// Delete a record from the database by ID (in request pattern) using the given pointer.
+// `obj` should be a pointer to an empty model struct.
+func Delete(w http.ResponseWriter, r *http.Request, obj *interface{}) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	result := Database.First(obj, "id = ?", id)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		http.Error(w, result.Error.Error(), http.StatusNotFound)
+		return
+	} else if result.Error != nil {
+		log.Println(result.Error)
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if result := Database.Delete(obj); result.Error != nil {
+		log.Println(result.Error)
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Write([]byte("Object deleted."))
+}
