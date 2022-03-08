@@ -36,12 +36,11 @@ func Get(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db
 
 	result := Database.Scopes(scope).First(obj, "id = ?", id)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		w.Write([]byte("Object not found."))
-		w.WriteHeader(http.StatusNotFound)
+		http.Error(w, result.Error.Error(), http.StatusNotFound)
 		return
 	} else if result.Error != nil {
 		log.Println(result.Error.Error())
-		w.WriteHeader(http.StatusInternalServerError)
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
 		return
 	}
 
