@@ -71,3 +71,33 @@ func List(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(d
 
 	w.WriteHeader(http.StatusCreated)
 }
+
+// Update a record in the database by ID (in request pattern) using the given pointer.
+// `obj` should be a pointer to an initialized model struct with data in it.
+func Update(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db *gorm.DB) *gorm.DB) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	result := Database.First(obj, "id = ?", id)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		http.Error(w, result.Error.Error(), http.StatusNotFound)
+		return
+	} else if result.Error != nil {
+		log.Println(result.Error.Error())
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var data interface{}
+	if err := json.NewDecoder(r.Body).Decode(obj); err != nil {
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	if result := Database.Model(obj).Updates(data); result.Error != nil {
+		log.Println(result.Error)
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+		return
+	}
+}
