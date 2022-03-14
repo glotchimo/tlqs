@@ -12,7 +12,7 @@ import (
 
 // Create a record in the database using the given pointer.
 // `obj` should be a pointer to an initialized model struct with data in it.
-func Create(w http.ResponseWriter, r *http.Request, obj *interface{}) {
+func Create(w http.ResponseWriter, r *http.Request, obj interface{}) {
 	if result := Database.Create(obj); result.Error != nil {
 		log.Println(result.Error)
 		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
@@ -30,7 +30,7 @@ func Create(w http.ResponseWriter, r *http.Request, obj *interface{}) {
 
 // Get a record from the database by ID (in request pattern) using the given pointer.
 // `obj` should be a pointer to an empty model struct.
-func Get(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db *gorm.DB) *gorm.DB) {
+func Get(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db *gorm.DB) *gorm.DB) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
@@ -55,7 +55,7 @@ func Get(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db
 
 // List records from the database by the given scope function.
 // `obj` should be a pointer to a slice of model type.
-func List(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db *gorm.DB) *gorm.DB) {
+func List(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db *gorm.DB) *gorm.DB) {
 	result := Database.Scopes(scope).Find(obj)
 	if result.Error != nil {
 		log.Println(result.Error.Error())
@@ -74,7 +74,7 @@ func List(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(d
 
 // Update a record in the database by ID (in request pattern) using the given pointer.
 // `obj` should be a pointer to an initialized model struct with data in it.
-func Update(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func(db *gorm.DB) *gorm.DB) {
+func Update(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db *gorm.DB) *gorm.DB) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
@@ -104,7 +104,7 @@ func Update(w http.ResponseWriter, r *http.Request, obj *interface{}, scope func
 
 // Delete a record from the database by ID (in request pattern) using the given pointer.
 // `obj` should be a pointer to an empty model struct.
-func Delete(w http.ResponseWriter, r *http.Request, obj *interface{}) {
+func Delete(w http.ResponseWriter, r *http.Request, obj interface{}) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
