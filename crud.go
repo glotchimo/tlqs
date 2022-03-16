@@ -19,13 +19,12 @@ func Create(w http.ResponseWriter, r *http.Request, obj interface{}) {
 		return
 	}
 
+	w.WriteHeader(http.StatusCreated)
 	if err := json.NewEncoder(w).Encode(obj); err != nil {
 		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
 }
 
 // Get a record from the database by ID (in request pattern) using the given pointer.
@@ -49,8 +48,6 @@ func Get(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
 }
 
 // List records from the database by the given scope function.
@@ -68,8 +65,6 @@ func List(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
 }
 
 // Update a record in the database by ID (in request pattern) using the given pointer.
