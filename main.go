@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gorilla/handlers"
@@ -23,12 +24,12 @@ var (
 )
 
 func init() {
-	// InitCache()
-	// InitRouter()
-	// InitHandler()
-	// InitDatabase()
+	InitCache()
+	InitRouter()
+	InitHandler()
+	InitDatabase()
 }
 
 func main() {
-	// log.Fatal(http.ListenAndServe(":"+Port, *Handler))
+	log.Fatal(http.ListenAndServe(":"+Port, *Handler))
 }
