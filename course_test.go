@@ -2,14 +2,17 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gorilla/mux"
 )
 
 func TestCourseCreate(t *testing.T) {
 	body := []byte(`{"title": "Machine Learning", "code": "CSCD496"}`)
-	req := httptest.NewRequest(http.MethodPost, "/courses", bytes.NewBuffer(body))
+	req := httptest.NewRequest(http.MethodPost, "/courses/", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
 
@@ -31,7 +34,8 @@ func TestCourseGet(t *testing.T) {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, "/courses/"+c.ID, nil)
+	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/courses/%s/", c.ID), nil)
+	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
 	rec := httptest.NewRecorder()
 
 	CourseGet(rec, req)
@@ -52,7 +56,7 @@ func TestCourseList(t *testing.T) {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, "/courses?offset=10&limit=100", nil)
+	req := httptest.NewRequest(http.MethodGet, "/courses/?offset=10&limit=100", nil)
 	rec := httptest.NewRecorder()
 
 	CourseList(rec, req)
@@ -74,7 +78,8 @@ func TestCourseUpdate(t *testing.T) {
 	}
 
 	body := []byte(`{"title": "Computer Architecture"}`)
-	req := httptest.NewRequest(http.MethodPatch, "/courses/"+c.ID, bytes.NewBuffer(body))
+	req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/courses/%s/", c.ID), bytes.NewBuffer(body))
+	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
 
@@ -96,7 +101,8 @@ func TestCourseDelete(t *testing.T) {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodDelete, "/courses/"+c.ID, nil)
+	req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/courses/%s/", c.ID), nil)
+	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
 	rec := httptest.NewRecorder()
 
 	CourseDelete(rec, req)
