@@ -13,31 +13,31 @@ var Routes []Route = []Route{
 	{
 		Name:    "Create Course",
 		Method:  http.MethodPost,
-		Path:    "/courses",
+		Path:    "/courses/",
 		Handler: CourseCreate,
 	},
 	{
 		Name:    "Get Course",
 		Method:  http.MethodGet,
-		Path:    "/courses/{id}",
+		Path:    "/courses/{id}/",
 		Handler: CourseGet,
 	},
 	{
 		Name:    "List Courses",
 		Method:  http.MethodGet,
-		Path:    "/courses",
+		Path:    "/courses/",
 		Handler: CourseList,
 	},
 	{
 		Name:    "Update Course",
 		Method:  http.MethodPatch,
-		Path:    "/courses/{id}",
+		Path:    "/courses/{id}/",
 		Handler: CourseUpdate,
 	},
 	{
 		Name:    "Delete Course",
 		Method:  http.MethodDelete,
-		Path:    "/courses/{id}",
+		Path:    "/courses/{id}/",
 		Handler: CourseDelete,
 	},
 }
