@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -11,6 +12,7 @@ import (
 	"github.com/patrickmn/go-cache"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type SPAHandler struct {
@@ -55,9 +57,12 @@ func InitHandler() {
 }
 
 func InitDatabase() {
-	db, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Silent),
+	})
 	if err != nil {
-		panic(err)
+		log.Println("InitDatabase couldn't connect to database (might be in test).")
+		return
 	}
 	Database = db
 	Database.AutoMigrate(User{})
