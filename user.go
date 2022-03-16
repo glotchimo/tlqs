@@ -13,6 +13,6 @@ type User struct {
 	Name     string    `json:"name"`
 	Email    string    `json:"email"`
 	Role     Role      `json:"role"`
-	Sessions []Session `json:"sessions"`
-	Courses  []Course  `json:"courses"`
+	Sessions []Session `gorm:"many2many:user_sessions" json:"sessions"`
+	Courses  []Course  `gorm:"many2many:user_courses" json:"courses"`
 }
