@@ -16,8 +16,6 @@ var (
 	Handler  *http.Handler
 	Database *gorm.DB
 
-	Port string
-
 	CORSOrigins = handlers.AllowedOrigins([]string{"*"})
 	CORSHeaders = handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Origin", "Accept"})
 	CORSMethods = handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})
@@ -31,5 +29,5 @@ func init() {
 }
 
 func main() {
-	log.Fatal(http.ListenAndServe(":"+Port, *Handler))
+	log.Fatal(http.ListenAndServe(":8080", *Handler))
 }
