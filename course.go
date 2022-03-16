@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"strconv"
@@ -22,13 +21,7 @@ func (course *Course) BeforeCreate(scope *gorm.DB) error {
 }
 
 func CourseCreate(w http.ResponseWriter, r *http.Request) {
-	var course Course
-	if err := json.NewDecoder(r.Body).Decode(&course); err != nil {
-		http.Error(w, "Couldn't decode request body.", http.StatusBadRequest)
-		return
-	}
-
-	Create(w, r, &course)
+	Create(w, r, &Course{})
 }
 
 func CourseGet(w http.ResponseWriter, r *http.Request) {
@@ -66,13 +59,7 @@ func CourseList(w http.ResponseWriter, r *http.Request) {
 }
 
 func CourseUpdate(w http.ResponseWriter, r *http.Request) {
-	var course Course
-	if err := json.NewDecoder(r.Body).Decode(&course); err != nil {
-		http.Error(w, "Couldn't decode request body.", http.StatusBadRequest)
-		return
-	}
-
-	Update(w, r, &course, func(db *gorm.DB) *gorm.DB { return db })
+	Update(w, r, &Course{}, func(db *gorm.DB) *gorm.DB { return db })
 }
 
 func CourseDelete(w http.ResponseWriter, r *http.Request) {
