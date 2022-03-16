@@ -7,7 +7,7 @@ import (
 
 type Session struct {
 	ID            string `gorm:"primaryKey" json:"id"`
-	StudentID     string `json:"student"`
+	UserID        string `json:"student"`
 	TutorID       string `json:"tutor"`
 	CourseID      string `json:"course"`
 	TopicID       string `json:"topic"`
