@@ -13,6 +13,11 @@ import (
 // Create a record in the database using the given pointer.
 // `obj` should be a pointer to an initialized model struct with data in it.
 func Create(w http.ResponseWriter, r *http.Request, obj interface{}) {
+	if err := json.NewDecoder(r.Body).Decode(obj); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
 	if result := Database.Create(obj); result.Error != nil {
 		log.Println(result.Error)
 		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
@@ -85,7 +90,6 @@ func Update(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(
 
 	var data interface{}
 	if err := json.NewDecoder(r.Body).Decode(obj); err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
