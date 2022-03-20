@@ -1,11 +1,21 @@
 package main
 
+import (
+	"errors"
+	"log"
+	"net/http"
+	"strconv"
+
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
+
 type Role int
 
 const (
-	Student Role = iota
+	Faculty Role = iota
+	Student
 	Tutor
-	Faculty
 )
 
 type User struct {
@@ -15,4 +25,68 @@ type User struct {
 	Role     Role      `json:"role"`
 	Sessions []Session `gorm:"many2many:user_sessions" json:"sessions"`
 	Courses  []Course  `gorm:"many2many:user_courses" json:"courses"`
+}
+
+// hook create
+func (user *User) BeforeCreate(tx *gorm.DB) (err error) {
+
+	user.ID = uuid.New().String()
+
+	if user.Role == Student || user.Role == Tutor {
+		return errors.New("invalid role")
+	}
+	return
+}
+
+// create a user for writting and requesting
+func UserCreate(w http.ResponseWriter, r *http.Request) {
+	Create(w, r, &User{})
+}
+
+// get the user
+
+func UserGet(w http.ResponseWriter, r *http.Request) {
+
+	Get(w, r, &User{}, func(db *gorm.DB) *gorm.DB { return db })
+}
+
+func UserUpdate(w http.ResponseWriter, r *http.Request) {
+	Update(w, r, &User{}, func(db *gorm.DB) *gorm.DB { return db })
+}
+
+func UserDelete(w http.ResponseWriter, r *http.Request) {
+	Delete(w, r, &User{})
+}
+
+func UserList(w http.ResponseWriter, r *http.Request) {
+
+	page, err := strconv.Atoi(r.URL.Query().Get("offset"))
+
+	if err != nil {
+		log.Fatal(err)
+		http.Error(w, "Internal server error.", http.StatusInternalServerError)
+		return
+	} else if page == 0 {
+		page = 1
+	}
+	// converting
+
+	size, err := strconv.Atoi(r.URL.Query().Get("limit"))
+	if err != nil {
+		log.Fatal(err)
+		http.Error(w, "Internal server error.", http.StatusInternalServerError)
+		return
+	}
+
+	offset := (page - 1) * size
+
+	scope := func(db *gorm.DB) *gorm.DB {
+		if size == 0 {
+			return db.Offset(offset).Limit(size)
+		}
+
+		return db.Offset(offset)
+	}
+
+	List(w, r, &[]User{}, scope)
 }
