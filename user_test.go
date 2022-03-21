@@ -42,7 +42,7 @@ func TestUserGet(t *testing.T) {
 	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
 	rec := httptest.NewRecorder()
 
-	CourseGet(rec, req)
+	UserGet(rec, req)
 	res := rec.Result()
 
 	if res.StatusCode != 200 {
