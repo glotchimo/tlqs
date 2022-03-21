@@ -1,7 +1,7 @@
 package main
 
 import (
-	"errors"
+	//
 	"log"
 	"net/http"
 	"strconv"
@@ -13,8 +13,8 @@ import (
 type Role int
 
 const (
-	Faculty Role = iota
-	Student
+	Student Role = iota
+	Faculty
 	Tutor
 )
 
@@ -27,24 +27,17 @@ type User struct {
 	Courses  []Course  `gorm:"many2many:user_courses" json:"courses"`
 }
 
-// hook create
-func (user *User) BeforeCreate(tx *gorm.DB) (err error) {
-
+func (user *User) BeforeCreate(scope *gorm.DB) error {
 	user.ID = uuid.New().String()
-
-	if user.Role == Student || user.Role == Tutor {
-		return errors.New("invalid role")
-	}
-	return
+	return nil
 }
 
-// create a user for writting and requesting
+//
 func UserCreate(w http.ResponseWriter, r *http.Request) {
 	Create(w, r, &User{})
 }
 
-// get the user
-
+//
 func UserGet(w http.ResponseWriter, r *http.Request) {
 
 	Get(w, r, &User{}, func(db *gorm.DB) *gorm.DB { return db })
