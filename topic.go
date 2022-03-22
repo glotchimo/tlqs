@@ -19,18 +19,17 @@ func (topic *Topic) BeforeCreate(scope *gorm.DB) error {
 }
 
 func TopicCreate(w http.ResponseWriter, r *http.Request) {
-	//calling the generic create with the following struct.
 	Create(w, r, &Topic{})
-}
-
-func TopicGet(w http.ResponseWriter, r *http.Request) {
-	Get(w, r, &Topic{}, func(db *gorm.DB) *gorm.DB { return db })
-}
-
-func TopicUpdate(w http.ResponseWriter, r *http.Request) {
-	Update(w, r, &Course{}, func(db *gorm.DB) *gorm.DB { return db })
 }
 
 func CouseDelete(w http.ResponseWriter, r *http.Request) {
 	Delete(w, r, &Topic{})
+}
+
+func TopicUpdate(w http.ResponseWriter, r *http.Request) {
+	Update(w, r, &Topic{}, func(db *gorm.DB) *gorm.DB { return db })
+}
+
+func TopicGet(w http.ResponseWriter, r *http.Request) {
+	Get(w, r, &Topic{}, func(db *gorm.DB) *gorm.DB { return db })
 }
