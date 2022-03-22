@@ -58,7 +58,7 @@ func TestTopicGet(t *testing.T) {
 	}
 }
 
-func TestTopicsUpdate(t *testing.T) {
+func TestTopicUpdate(t *testing.T) {
 	topic := Topic{
 		CourseID: "123",
 		Name:     "LearnGo",
@@ -76,6 +76,29 @@ func TestTopicsUpdate(t *testing.T) {
 	rec := httptest.NewRecorder()
 
 	TopicUpdate(rec, req)
+	res := rec.Result()
+
+	if res.StatusCode != 200 {
+		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+}
+
+func TestTopicDelete(t *testing.T) {
+	topic := Topic{
+		CourseID: "123",
+		Name:     "LearnGo",
+	}
+
+	result := Database.Create(&topic)
+	if result.Error != nil {
+		t.Error(result.Error)
+	}
+
+	req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/topics/%s/", topic.ID), nil)
+	req = mux.SetURLVars(req, map[string]string{"id": topic.ID})
+	rec := httptest.NewRecorder()
+
+	TopicDelete(rec, req)
 	res := rec.Result()
 
 	if res.StatusCode != 200 {
