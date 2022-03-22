@@ -22,14 +22,14 @@ func TopicCreate(w http.ResponseWriter, r *http.Request) {
 	Create(w, r, &Topic{})
 }
 
-func CouseDelete(w http.ResponseWriter, r *http.Request) {
-	Delete(w, r, &Topic{})
+func TopicGet(w http.ResponseWriter, r *http.Request) {
+	Get(w, r, &Topic{}, func(db *gorm.DB) *gorm.DB { return db })
 }
 
 func TopicUpdate(w http.ResponseWriter, r *http.Request) {
 	Update(w, r, &Topic{}, func(db *gorm.DB) *gorm.DB { return db })
 }
 
-func TopicGet(w http.ResponseWriter, r *http.Request) {
-	Get(w, r, &Topic{}, func(db *gorm.DB) *gorm.DB { return db })
+func TopicDelete(w http.ResponseWriter, r *http.Request) {
+	Delete(w, r, &Topic{})
 }
