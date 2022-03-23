@@ -50,7 +50,7 @@ func InitRouter() {
 	Router = mux.NewRouter()
 	Router.PathPrefix("/").Handler(SPAHandler{staticPath: "dist", indexPath: "dist/index.html"})
 	for _, route := range Routes {
-		Router.Methods(route.Method).Path(route.Path).Name(route.Name).Handler(route.Handler)
+		Router.Methods(route.Method).Path(route.Path).Name(route.Name).Handler(JWTM.Handler(route.Handler))
 	}
 }
 
