@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	jwtMiddleware "github.com/auth0/go-jwt-middleware"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/patrickmn/go-cache"
@@ -15,6 +16,7 @@ var (
 	Router   *mux.Router
 	Handler  *http.Handler
 	Database *gorm.DB
+	JWTM     *jwtMiddleware.JWTMiddleware
 
 	CORSOrigins = handlers.AllowedOrigins([]string{"*"})
 	CORSHeaders = handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Origin", "Accept"})
@@ -26,6 +28,7 @@ func init() {
 	InitRouter()
 	InitHandler()
 	InitDatabase()
+	InitJWTMiddleware()
 }
 
 func main() {

@@ -1,12 +1,16 @@
 package main
 
 import (
+	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 	"time"
 
+	jwtMiddleware "github.com/auth0/go-jwt-middleware"
+	"github.com/form3tech-oss/jwt-go"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/patrickmn/go-cache"
@@ -69,4 +73,71 @@ func InitDatabase() {
 	Database.AutoMigrate(Session{})
 	Database.AutoMigrate(Course{})
 	Database.AutoMigrate(Topic{})
+}
+
+func InitJWTMiddleware() {
+	JWTM = jwtMiddleware.New(jwtMiddleware.Options{
+		ValidationKeyGetter: func(t *jwt.Token) (interface{}, error) {
+			aud := os.Getenv("AUTH0_AUDIENCE")
+			checkAud := t.Claims.(jwt.MapClaims).VerifyAudience(aud, false)
+			if !checkAud {
+				return t, errors.New("invalid audience")
+			}
+			iss := os.Getenv("AUTH0_ISSUER")
+			checkIss := t.Claims.(jwt.MapClaims).VerifyIssuer(iss, false)
+			if !checkIss {
+				return t, errors.New("invalid issuer")
+			}
+			cert, err := getPEMCert(t)
+			if err != nil {
+				panic(err.Error())
+			}
+			result, _ := jwt.ParseRSAPublicKeyFromPEM([]byte(cert))
+			return result, nil
+		},
+		SigningMethod: jwt.SigningMethodRS256,
+	})
+}
+
+func getPEMCert(token *jwt.Token) (string, error) {
+	type jwk struct {
+		Kty string   `json:"kty"`
+		Kid string   `json:"kid"`
+		Use string   `json:"use"`
+		N   string   `json:"n"`
+		E   string   `json:"e"`
+		X5c []string `json:"x5c"`
+	}
+
+	type jwkList struct {
+		Keys []jwk `json:"keys"`
+	}
+
+	cert := ""
+	resp, err := http.Get("https://srro.us.auth0.com/.well-known/jwks.json")
+
+	if err != nil {
+		return cert, err
+	}
+	defer resp.Body.Close()
+
+	var jwks = jwkList{}
+	err = json.NewDecoder(resp.Body).Decode(&jwks)
+
+	if err != nil {
+		return cert, err
+	}
+
+	for k := range jwks.Keys {
+		if token.Header["kid"] == jwks.Keys[k].Kid {
+			cert = "-----BEGIN CERTIFICATE-----\n" + jwks.Keys[k].X5c[0] + "\n-----END CERTIFICATE-----"
+		}
+	}
+
+	if cert == "" {
+		err := errors.New("unable to find appropriate key")
+		return cert, err
+	}
+
+	return cert, nil
 }
