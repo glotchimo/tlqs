@@ -91,3 +91,25 @@ func TestTopicDelete(t *testing.T) {
 		t.Errorf("expected status code 200, got %d", res.StatusCode)
 	}
 }
+
+func TestTopicList(t *testing.T) {
+	topic := Topic{
+		CourseID: "123",
+		Name:     "LearnGo",
+	}
+
+	result := Database.Create(&topic)
+	if result.Error != nil {
+		t.Error(result.Error)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/topics/?offset=10&limit=100", nil)
+	rec := httptest.NewRecorder()
+
+	TopicList(rec, req)
+	res := rec.Result()
+
+	if res.StatusCode != 200 {
+		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+}
