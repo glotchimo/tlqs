@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Test from "./Student/Test";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
@@ -10,6 +11,7 @@ ReactDOM.render(
     redirectUri={window.location.origin}
   >
     <App />
+    <Test />
   </Auth0Provider>,
   document.getElementById("root")
 );
