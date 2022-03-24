@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func TestTopicCreate_GivenValidTopic_ReturnsSuccess(t *testing.T) {
+func TestTopicCreate(t *testing.T) {
 	body := []byte(`{"CourseID":"123", "Name":"LearnGo"}`)
 	req := httptest.NewRequest(http.MethodPost, "/topics/", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
