@@ -25,17 +25,43 @@ func TestTopicCreate(t *testing.T) {
 }
 
 func TestTopicGet(t *testing.T) {
-	topic := Topic{
-		CourseID: "123",
-		Name:     "LearnGo",
-	}
-	result := Database.Create(&topic)
-	if result.Error != nil {
-		t.Error(result.Error)
+	course := Course{
+		Title: "Database",
+		Code:  "123",
 	}
 
-	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/topics/%s/", topic.ID), nil)
-	req = mux.SetURLVars(req, map[string]string{"id": topic.ID})
+	testTopic := Topic{
+		CourseID: "111",
+		Name:     "dummytopic",
+	}
+
+	topic := Topic{
+		CourseID: "123",
+		Name:     "relations",
+	}
+
+	testTopicResult := Database.Create(&testTopic)
+	courseResult := Database.Create(&course)
+	topicResult := Database.Create(&topic)
+
+	if testTopicResult.Error != nil {
+		t.Error(testTopicResult.Error)
+	}
+
+	if courseResult.Error != nil {
+		t.Error(courseResult.Error)
+	}
+
+	if topicResult.Error != nil {
+		t.Error(topicResult.Error)
+	}
+
+	var dbTopic Topic
+
+	Database.Preload("Course").Where("name = ?", "relations").First(&dbTopic)
+
+	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/topics/%s/", dbTopic.ID), nil)
+	req = mux.SetURLVars(req, map[string]string{"id": dbTopic.ID})
 	rec := httptest.NewRecorder()
 
 	TopicGet(rec, req)
