@@ -30,7 +30,7 @@ func TestTopicGet(t *testing.T) {
 		Code:  "123",
 	}
 
-	testTopic := Topic{
+	dummyTopic := Topic{
 		CourseID: "111",
 		Name:     "dummytopic",
 	}
@@ -40,7 +40,7 @@ func TestTopicGet(t *testing.T) {
 		Name:     "relations",
 	}
 
-	testTopicResult := Database.Create(&testTopic)
+	testTopicResult := Database.Create(&dummyTopic)
 	courseResult := Database.Create(&course)
 	topicResult := Database.Create(&topic)
 
