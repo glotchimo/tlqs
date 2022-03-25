@@ -12,7 +12,7 @@ import (
 
 func TestUserCreate(t *testing.T) {
 
-	body := []byte(`{",name": "Hewr Tarkhany","email":"htarkhany@ewu.edu","role":"student","session":"ID ...","course":"cscd320 ...",}`)
+	body := []byte(`{"name": "Hewr Tarkhany","email":"htarkhany@ewu.edu","role":"student","session":"ID ...","course":"cscd320 ...",}`)
 
 	req := httptest.NewRequest(http.MethodPost, "/users/", bytes.NewBuffer(body))
 
@@ -35,7 +35,7 @@ func TestUserGet(t *testing.T) {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/courses/%s/", u.ID), nil)
+	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/users/%s/", u.ID), nil)
 	req = mux.SetURLVars(req, map[string]string{"id": u.ID})
 	rec := httptest.NewRecorder()
 
