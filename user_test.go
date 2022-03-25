@@ -12,7 +12,7 @@ import (
 
 func TestUserCreate(t *testing.T) {
 
-	body := []byte(`{"name": "Hewr Tarkhany","email":"htarkhany@ewu.edu","role":"student","session":"ID ...","course":"cscd320 ...",}`)
+	body := []byte(`{"name": "Tony Montana","email":"tmontana@ewu.edu","role":"100","sessions":"student": "00123456", "tutor": "00654321", "course": "CSCD488", "topic": "Web Application Design", "description","courses":"title": "Machine Learning", "code": "CSCD496"",}`)
 
 	req := httptest.NewRequest(http.MethodPost, "/users/", bytes.NewBuffer(body))
 
@@ -20,7 +20,7 @@ func TestUserCreate(t *testing.T) {
 
 	rec := httptest.NewRecorder()
 
-	CourseCreate(rec, req)
+	UserCreate(rec, req)
 	res := rec.Result()
 
 	if res.StatusCode != 201 {
@@ -57,7 +57,7 @@ func TestUserList(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/users/?offset=10&limit=100", nil)
 	rec := httptest.NewRecorder()
 
-	CourseList(rec, req)
+	UserList(rec, req)
 	res := rec.Result()
 
 	if res.StatusCode != 200 {
@@ -74,7 +74,7 @@ func TestUserUpdate(t *testing.T) {
 		t.Error(result.Error)
 	}
 
-	body := []byte(`{"name": "hewr tarkhany"}`)
+	body := []byte(`{"name": "tony montana"}`)
 	req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/users/%s/", u.ID), bytes.NewBuffer(body))
 	req = mux.SetURLVars(req, map[string]string{"id": u.ID})
 	req.Header.Set("Content-Type", "application/json")
