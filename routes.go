@@ -41,7 +41,6 @@ var Routes []Route = []Route{
 		Handler: CourseDelete,
 	},
 	{
-<<<<<<< HEAD
 		Name:    "Create Session",
 		Method:  http.MethodPost,
 		Path:    "/sessions/",
@@ -70,7 +69,8 @@ var Routes []Route = []Route{
 		Method:  http.MethodDelete,
 		Path:    "/sessions/{id}/",
 		Handler: SessionDelete,
-=======
+	},
+	{
 		Name:    "Create Topic",
 		Method:  http.MethodPost,
 		Path:    "/topics/",
@@ -99,7 +99,6 @@ var Routes []Route = []Route{
 		Method:  http.MethodDelete,
 		Path:    "/topics/{id}/",
 		Handler: TopicDelete,
->>>>>>> 46d59e6 (routes for topic defined)
 	},
 	{
 		Name:    "Create Topic",
