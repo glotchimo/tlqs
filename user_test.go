@@ -12,7 +12,7 @@ import (
 
 func TestUserCreate(t *testing.T) {
 
-	body := []byte(`{"id":"htarkhany",,name": "Hewr Tarkhany","email":"htarkhany@ewu.edu","role":"student","session":"ID ...","course":"cscd320 ...",}`)
+	body := []byte(`{",name": "Hewr Tarkhany","email":"htarkhany@ewu.edu","role":"student","session":"ID ...","course":"cscd320 ...",}`)
 
 	req := httptest.NewRequest(http.MethodPost, "/users/", bytes.NewBuffer(body))
 
@@ -29,14 +29,14 @@ func TestUserCreate(t *testing.T) {
 }
 
 func TestUserGet(t *testing.T) {
-	c := User{}
-	result := Database.Create(&c)
+	u := User{}
+	result := Database.Create(&u)
 	if result.Error != nil {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/courses/%s/", c.ID), nil)
-	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
+	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/courses/%s/", u.ID), nil)
+	req = mux.SetURLVars(req, map[string]string{"id": u.ID})
 	rec := httptest.NewRecorder()
 
 	UserGet(rec, req)
@@ -48,8 +48,8 @@ func TestUserGet(t *testing.T) {
 }
 
 func TestUserList(t *testing.T) {
-	c := User{}
-	result := Database.Create(&c)
+	u := User{}
+	result := Database.Create(&u)
 	if result.Error != nil {
 		t.Error(result.Error)
 	}
@@ -67,16 +67,16 @@ func TestUserList(t *testing.T) {
 
 func TestUserUpdate(t *testing.T) {
 
-	c := User{}
+	u := User{}
 
-	result := Database.Create(&c)
+	result := Database.Create(&u)
 	if result.Error != nil {
 		t.Error(result.Error)
 	}
 
 	body := []byte(`{"name": "hewr tarkhany"}`)
-	req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/users/%s/", c.ID), bytes.NewBuffer(body))
-	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
+	req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/users/%s/", u.ID), bytes.NewBuffer(body))
+	req = mux.SetURLVars(req, map[string]string{"id": u.ID})
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
 
