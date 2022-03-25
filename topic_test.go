@@ -32,16 +32,16 @@ func TestTopicGet(t *testing.T) {
 
 	courseResult := Database.Create(&course)
 
+	if courseResult.Error != nil {
+		t.Error(courseResult.Error)
+	}
+
 	topic := Topic{
 		CourseID: course.ID,
 		Name:     "relations",
 	}
 
 	topicResult := Database.Create(&topic)
-
-	if courseResult.Error != nil {
-		t.Error(courseResult.Error)
-	}
 
 	if topicResult.Error != nil {
 		t.Error(topicResult.Error)
