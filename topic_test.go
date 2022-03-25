@@ -11,7 +11,7 @@ import (
 )
 
 func TestTopicCreate(t *testing.T) {
-	body := []byte(`{"CourseID":"123", "Name":"LearnGo"}`)
+	body := []byte(`{"course":"123", "name":"LearnGo"}`)
 	req := httptest.NewRequest(http.MethodPost, "/topics/", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
@@ -27,26 +27,17 @@ func TestTopicCreate(t *testing.T) {
 func TestTopicGet(t *testing.T) {
 	course := Course{
 		Title: "Database",
-		Code:  "123",
+		Code:  "1",
 	}
 
-	dummyTopic := Topic{
-		CourseID: "111",
-		Name:     "dummytopic",
-	}
+	courseResult := Database.Create(&course)
 
 	topic := Topic{
-		CourseID: "123",
+		CourseID: course.ID,
 		Name:     "relations",
 	}
 
-	testTopicResult := Database.Create(&dummyTopic)
-	courseResult := Database.Create(&course)
 	topicResult := Database.Create(&topic)
-
-	if testTopicResult.Error != nil {
-		t.Error(testTopicResult.Error)
-	}
 
 	if courseResult.Error != nil {
 		t.Error(courseResult.Error)
@@ -56,12 +47,8 @@ func TestTopicGet(t *testing.T) {
 		t.Error(topicResult.Error)
 	}
 
-	var dbTopic Topic
-
-	Database.Preload("Course").Where("name = ?", "relations").First(&dbTopic)
-
-	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/topics/%s/", dbTopic.ID), nil)
-	req = mux.SetURLVars(req, map[string]string{"id": dbTopic.ID})
+	req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/topics/%s/", topic.ID), nil)
+	req = mux.SetURLVars(req, map[string]string{"id": topic.ID})
 	rec := httptest.NewRecorder()
 
 	TopicGet(rec, req)
