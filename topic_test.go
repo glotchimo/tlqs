@@ -29,9 +29,7 @@ func TestTopicGet(t *testing.T) {
 		Title: "Database",
 		Code:  "1",
 	}
-
 	courseResult := Database.Create(&course)
-
 	if courseResult.Error != nil {
 		t.Error(courseResult.Error)
 	}
@@ -40,9 +38,7 @@ func TestTopicGet(t *testing.T) {
 		CourseID: course.ID,
 		Name:     "relations",
 	}
-
 	topicResult := Database.Create(&topic)
-
 	if topicResult.Error != nil {
 		t.Error(topicResult.Error)
 	}
