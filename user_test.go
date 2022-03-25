@@ -12,7 +12,7 @@ import (
 
 func TestUserCreate(t *testing.T) {
 
-	body := []byte(`{"name": "Hewr Tarkhany"}`)
+	body := []byte(`{"id":"htarkhany",,name": "Hewr Tarkhany","email":"htarkhany@ewu.edu","role":"student","session":"ID ...","course":"cscd320 ...",}`)
 
 	req := httptest.NewRequest(http.MethodPost, "/users/", bytes.NewBuffer(body))
 

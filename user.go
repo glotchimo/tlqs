@@ -1,7 +1,6 @@
 package main
 
 import (
-	//
 	"log"
 	"net/http"
 	"strconv"
@@ -32,12 +31,10 @@ func (user *User) BeforeCreate(scope *gorm.DB) error {
 	return nil
 }
 
-//
 func UserCreate(w http.ResponseWriter, r *http.Request) {
 	Create(w, r, &User{})
 }
 
-//
 func UserGet(w http.ResponseWriter, r *http.Request) {
 
 	Get(w, r, &User{}, func(db *gorm.DB) *gorm.DB { return db })
@@ -62,7 +59,6 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 	} else if page == 0 {
 		page = 1
 	}
-	// converting
 
 	size, err := strconv.Atoi(r.URL.Query().Get("limit"))
 	if err != nil {

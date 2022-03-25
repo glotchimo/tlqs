@@ -24,3 +24,18 @@ To build and run the service, run `make run`, and to clean up binaries and distr
 - If you have a working PR and main has been updated, make sure you rebase before pushing
 - **Always** update and rebase before pushing to remote (i.e. GitHub)
 - If you run into issues or see errors, ask Elliott and he will help resolve
+
+### File Information
+
+
+#### Configuration files
+
+The `Dockerfile` and `docker-compose.yml` files define configuration and process information for our Docker setup. These don't need to be changed. The `.gitignore` file tells Git what files to never stage. The `Makefile` has some commands in it that make certain development/deployment steps simpler. And finally, `go.mod` and `go.sum` define dependencies and Go module info, and these two should never be changed manually.
+
+#### Utility Files
+
+`main.go` defines initialization and startup behavior for the app. It instantiates globals and calls a handful of init utilities that spin up things like the database and router. `utils.go` implements those init utilities among other various things. If there are system utilities that don't make sense living elsewhere, they go here. `routes.go` defines the API's routes in a structified way for readability and ease-of-use. `crud.go` implements 5 generic CRUD boilerplate functions.
+
+#### Model Files
+
+Every model file (i.e. `course.go`, `session.go`, `topic.go`, `user.go`) contains the same set of things: a struct that defines the model itself, any GORM hoooks that it requires (e.g. for setting ID), 5 CRUD functions (all of which should use the generic functions defined in `crud.go`), and any other model-relevant functions necessary.
