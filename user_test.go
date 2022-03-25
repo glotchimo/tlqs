@@ -12,9 +12,9 @@ import (
 
 func TestUserCreate(t *testing.T) {
 
-	body := []byte(`{"title": "Machine Learning", "code": "CSCD496"}`)
+	body := []byte(`{"name": "Hewr Tarkhany"}`)
 
-	req := httptest.NewRequest(http.MethodPost, "/courses/", bytes.NewBuffer(body))
+	req := httptest.NewRequest(http.MethodPost, "/users/", bytes.NewBuffer(body))
 
 	req.Header.Set("Content-Type", "application/json")
 
@@ -29,10 +29,7 @@ func TestUserCreate(t *testing.T) {
 }
 
 func TestUserGet(t *testing.T) {
-	c := Course{
-		Code:  "CSCD496",
-		Title: "Machine Learning",
-	}
+	c := User{}
 	result := Database.Create(&c)
 	if result.Error != nil {
 		t.Error(result.Error)
@@ -51,16 +48,13 @@ func TestUserGet(t *testing.T) {
 }
 
 func TestUserList(t *testing.T) {
-	c := Course{
-		Code:  "CSCD496",
-		Title: "Machine Learning",
-	}
+	c := User{}
 	result := Database.Create(&c)
 	if result.Error != nil {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, "/courses/?offset=10&limit=100", nil)
+	req := httptest.NewRequest(http.MethodGet, "/users/?offset=10&limit=100", nil)
 	rec := httptest.NewRecorder()
 
 	CourseList(rec, req)
@@ -73,18 +67,15 @@ func TestUserList(t *testing.T) {
 
 func TestUserUpdate(t *testing.T) {
 
-	c := Course{
-		Code:  "CSCD260",
-		Title: "Architecture & Organization",
-	}
+	c := User{}
 
 	result := Database.Create(&c)
 	if result.Error != nil {
 		t.Error(result.Error)
 	}
 
-	body := []byte(`{"title": "Computer Architecture"}`)
-	req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/courses/%s/", c.ID), bytes.NewBuffer(body))
+	body := []byte(`{"name": "hewr tarkhany"}`)
+	req := httptest.NewRequest(http.MethodPatch, fmt.Sprintf("/users/%s/", c.ID), bytes.NewBuffer(body))
 	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()
@@ -98,16 +89,13 @@ func TestUserUpdate(t *testing.T) {
 }
 
 func TestUserDelete(t *testing.T) {
-	c := Course{
-		Code:  "CSCD320",
-		Title: "Algorithms",
-	}
+	c := User{}
 	result := Database.Create(&c)
 	if result.Error != nil {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/user/%s/", c.ID), nil)
+	req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/users/%s/", c.ID), nil)
 	req = mux.SetURLVars(req, map[string]string{"id": c.ID})
 	rec := httptest.NewRecorder()
 
