@@ -70,4 +70,34 @@ var Routes []Route = []Route{
 		Path:    "/sessions/{id}/",
 		Handler: SessionDelete,
 	},
+	{
+		Name:    "Create User",
+		Method:  http.MethodPost,
+		Path:    "/users/",
+		Handler: UserCreate,
+	},
+	{
+		Name:    "Get User",
+		Method:  http.MethodGet,
+		Path:    "/users/{id}/",
+		Handler: UserGet,
+	},
+	{
+		Name:    "List Users",
+		Method:  http.MethodGet,
+		Path:    "/users/",
+		Handler: UserList,
+	},
+	{
+		Name:    "Update User",
+		Method:  http.MethodPatch,
+		Path:    "/users/{id}/",
+		Handler: UserUpdate,
+	},
+	{
+		Name:    "Delete User",
+		Method:  http.MethodDelete,
+		Path:    "/users/{id}/",
+		Handler: UserDelete,
+	},
 }
