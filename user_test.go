@@ -12,7 +12,7 @@ import (
 
 func TestUserCreate(t *testing.T) {
 
-	body := []byte(`{"name": "Tony Montana","email":"tmontana@ewu.edu","role":"100","sessions":"student": "00123456", "tutor": "00654321", "course": "CSCD488", "topic": "Web Application Design", "description","courses":"title": "Machine Learning", "code": "CSCD496"",}`)
+	body := []byte(`{"name":"Tony Montana","email":"tmontana@ewu.edu","role":"100","sessions":"student": "00123456", "tutor": "00654321", "course": "CSCD488", "topic": "Web Application Design", "description","courses":"title": "Machine Learning", "code": "CSCD496"",}`)
 
 	req := httptest.NewRequest(http.MethodPost, "/users/", bytes.NewBuffer(body))
 
