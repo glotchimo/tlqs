@@ -64,9 +64,8 @@ export default function SessionGlance(prop) {
         <PersonIcon style={stylingObject.personIcon} />
         <div style={stylingObject.studentDetails}>
           <h2>Email: {prop.email}</h2>
-      <h2>Description: {prop.description}</h2>
-      <h2>Retrospective: {prop.retrospective}</h2>
-          <h2>User Role: {prop.role}</h2>
+          <h2>Description: {prop.description}</h2>
+          <h2>Retrospective: {prop.retrospective}</h2>
           <Button variant="contained" onClick={handleOpen}>
             Mark Completed
           </Button>
@@ -82,8 +81,8 @@ export default function SessionGlance(prop) {
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Current Student: {prop.name}
-      </Typography>
-            <TutorForm/>
+          </Typography>
+          <TutorForm />
         </Box>
       </Modal>
     </>

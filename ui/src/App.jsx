@@ -32,13 +32,17 @@ user2 = {
 export default () => {
   return (
     <>
-      <SessionGlance
-        name={user.name}
-        email={user.email}
-        role={user.role}
-      description={user.description}
-      retrospective={user.retrospective}
-      />
+      <div className="home" style={{ height: "100vh" }}>
+        <SessionGlance
+          name={user.name}
+          email={user.email}
+          role={user.role}
+          description={user.description}
+          retrospective={user.retrospective}
+        />
+      </div>
+      <div className="inqueue">
+      </div>
     </>
   );
 };

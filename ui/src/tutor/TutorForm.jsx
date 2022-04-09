@@ -16,7 +16,7 @@ var stylingObject = {
   },
 };
 
-export default function SessionGlance(prop) {
+export default function TutorForm(prop) {
   return (
     <>
       <CssBaseline />
