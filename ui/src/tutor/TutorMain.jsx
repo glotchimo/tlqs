@@ -1,3 +1,5 @@
+//ToDo: Fix logic. Skip first user for secondary view.
+
 import React from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
@@ -78,15 +80,17 @@ export default class TutorMain extends React.Component {
             style={useStyles.gridContainer}
             justify="center"
           >
-            <Grid item xs={12} sm={6} md={4}>
-              <StudentCard
-                name={user.name}
-                email={user.email}
-                role={user.role}
-                description={user.description}
-                retrospective={user.retrospective}
-              />
-            </Grid>
+            {this.state.persons.map((person) => (
+              <Grid item xs={12} sm={6} md={4}>
+                <StudentCard
+                  name={`${person.name.first} ${person.name.last}`}
+                  image={person.picture.large}
+                  email={`${person.email}`}
+                  description={user.description}
+                  retrospective={user.retrospective}
+                />
+              </Grid>
+            ))}
           </Grid>
         </div>
       </>

@@ -2,7 +2,7 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import PersonIcon from "@mui/icons-material/Person";
+import Avatar from "@mui/material/Avatar";
 
 const colors = {
   cardColors: {
@@ -49,7 +49,11 @@ export default function StudentCard(prop) {
         >
           {prop.name}
         </Typography>
-        <PersonIcon style={stylingObject.personIcon} />
+        <Avatar
+          alt={prop.name}
+          src={prop.image}
+          style={stylingObject.personIcon}
+        />
         <div style={stylingObject.studentDetails}>
           <h2>Email: {prop.email}</h2>
           <h2>Description: {prop.description}</h2>
