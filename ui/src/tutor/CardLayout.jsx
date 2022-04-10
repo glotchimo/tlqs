@@ -11,7 +11,7 @@ const useStyles = {
   },
 };
 
-user = {
+const user = {
   id: "1",
   userid: "1",
   tutorid: "1",
