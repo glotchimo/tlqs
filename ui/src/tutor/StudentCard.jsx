@@ -1,21 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import PersonIcon from "@mui/icons-material/Person";
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
 
 const colors = {
   cardColors: {
@@ -50,11 +37,16 @@ var stylingObject = {
   },
 };
 
-export default function BasicCard(prop) {
+export default function StudentCard(prop) {
   return (
     <Card sx={{ minWidth: 275 }} style={colors.cardColors}>
       <CardContent>
-        <Typography style={stylingObject.studentDetails} gutterBottom variant="h2" component="h2">
+        <Typography
+          style={stylingObject.studentDetails}
+          gutterBottom
+          variant="h2"
+          component="h2"
+        >
           {prop.name}
         </Typography>
         <PersonIcon style={stylingObject.personIcon} />

@@ -4,9 +4,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import PersonIcon from "@mui/icons-material/Person";
 import TutorForm from "./TutorForm";
-
+import Avatar from "@mui/material/Avatar";
 var stylingObject = {
   container: {
     backgroundColor: "#525E75",
@@ -61,7 +60,11 @@ export default function SessionGlance(prop) {
         <Typography gutterBottom variant="h2" component="h2">
           {prop.name}
         </Typography>
-        <PersonIcon style={stylingObject.personIcon} />
+        <Avatar
+          alt={prop.name}
+          src={prop.image}
+          style={stylingObject.personIcon}
+        />
         <div style={stylingObject.studentDetails}>
           <h2>Email: {prop.email}</h2>
           <h2>Description: {prop.description}</h2>
