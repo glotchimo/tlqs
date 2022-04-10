@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import * as React from "react";
 import SessionGlance from "./tutor/SessionGlance";
-
+import CardLayout from "./tutor/CardLayout";
 user = {
   id: "1",
   userid: "1",
@@ -42,6 +42,7 @@ export default () => {
         />
       </div>
       <div className="inqueue">
+        <CardLayout />
       </div>
     </>
   );
