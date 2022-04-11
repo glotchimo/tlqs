@@ -20,6 +20,8 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
+    environment:
+      - DATABASE_URL=postgresql://tlqs:tlqs@db:5432/tlqs?sslmode=disable
 
 volumes:
   db-data:
