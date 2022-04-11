@@ -7,7 +7,7 @@ local:
 
 container:
 	docker-compose build
-	docker-compose up -d
+	docker-compose up
 
 rm-local:
 	rm -r ./dist
