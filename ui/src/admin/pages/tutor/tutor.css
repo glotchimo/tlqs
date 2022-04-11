@@ -1,0 +1,154 @@
+.tutor {
+    flex: 4;
+    padding: 20px;
+  }
+  
+  .tutorTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .tutorAddButton {
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: teal;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .tutorContainer {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .tutorShow {
+    flex: 1;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  }
+  
+  .tutorUpdate {
+    flex: 2;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    margin-left: 20px;
+  }
+  
+  .tutorShowTop {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tutorShowImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .tutorShowTopTitle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  
+  .tutorShowUsername {
+    font-weight: 600;
+  }
+  
+  .tutorShowUserTitle {
+    font-weight: 300;
+  }
+  
+  .tutorShowBottom{
+      margin-top: 20px;
+  }
+  
+  .tutorShowTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(175, 170, 170);
+  }
+  
+  .tutorShowInfo{
+      display: flex;
+      align-items: center;
+      margin: 20px 0px;
+      color: #444;
+  }
+  
+  .tutorShowIcon{
+      font-size: 16px !important;
+  }
+  
+  .tutorShowInfoTitle{
+      margin-left: 10px;
+  }
+  
+  .tutorUpdateTitle{
+      font-size: 24px;
+      font-weight: 600;
+  }
+  
+  .tutorUpdateForm{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+  }
+  
+  .tutorUpdateItem{
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+  }
+  
+  .tutorUpdateItem>label{
+      margin-bottom: 5px;
+      font-size: 14px;
+  }
+  
+  .tutorUpdateInput{
+      border: none;
+      width: 250px;
+      height: 30px;
+      border-bottom: 1px solid gray;
+  }
+  
+  .tutorUpdateRight{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+  
+  .tutorUpdateUpload{
+      display: flex;
+      align-items: center;
+  }
+  
+  .tutorUpdateImg{
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-right: 20px;
+  }
+  
+  .tutorUpdateIcon{
+      cursor: pointer;
+  }
+  
+  .tutorUpdateButton{
+      border-radius: 5px;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      background-color: darkblue;
+      color: white;
+      font-weight: 600;
+  }
