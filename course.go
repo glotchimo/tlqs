@@ -29,18 +29,28 @@ func CourseGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func CourseList(w http.ResponseWriter, r *http.Request) {
-	page, err := strconv.Atoi(r.URL.Query().Get("offset"))
+	strOffset := r.URL.Query().Get("offset")
+	if strOffset == "" {
+		strOffset = "0"
+	}
+
+	strLimit := r.URL.Query().Get("limit")
+	if strLimit == "" {
+		strLimit = "100"
+	}
+
+	page, err := strconv.Atoi(strOffset)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		http.Error(w, "Internal server error.", http.StatusInternalServerError)
 		return
 	} else if page == 0 {
 		page = 1
 	}
 
-	size, err := strconv.Atoi(r.URL.Query().Get("limit"))
+	size, err := strconv.Atoi(strLimit)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		http.Error(w, "Internal server error.", http.StatusInternalServerError)
 		return
 	}
