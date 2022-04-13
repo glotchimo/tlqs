@@ -1,5 +1,5 @@
-//ToDo: Fix logic. Skip first user for secondary view.
-
+//ToDo: Need the button to do something. As well as figure out how I want to fetch users through the map.
+//ToDo: Refactor and make it more readable.
 import React from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
@@ -13,66 +13,59 @@ const useStyles = {
   },
 };
 
-const user = {
-  id: "1",
-  userid: "1",
-  tutorid: "1",
-  courseid: "1",
-  topicid: "1",
-  name: "Luis Garcia",
-  email: "lgarcia29@ewu.edu",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  retrospective:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  role: "1",
-  //sessions
-  //Courses
-};
-
 export default class TutorMain extends React.Component {
   state = {
     loading: true,
-    firstPerson: null,
-    persons: null,
+    session: null,
+    firstSession: null,
+    firstUser: null,
+    currentUser: null,
   };
 
   async componentDidMount() {
-    //calling api
-    //fetching 3 random users
-    const url = "https://randomuser.me/api/?results=3";
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data.results);
+    const url = "http://localhost:8080/sessions/";
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      const user = await this.fetchUser(data[0].student);
+      console.log(data);
+      console.log(data[1]);
+      this.setState({
+        session: data,
+        firstSession: data[0],
+        firstUser: user,
+        loading: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-    //catching
-    this.setState({
-      loading: false,
-      firstPerson: data.results[0],
-      persons: data.results,
-    });
-
-    console.log(this.state.firstPerson);
+  async fetchUser(userId) {
+    const userResponse = await fetch(`http://localhost:8080/users/${userId}/`);
+    const user = await userResponse.json();
+    return user;
   }
 
   render() {
     if (this.state.loading) {
       return <div>Loading...</div>;
     }
-    if (!this.state.firstPerson || !this.state.persons)
+
+    if (this.state.firstUser == null)
       return <div>I'm sorry but couldn't load user</div>;
+
     return (
       <>
         <div className="MainView">
           <SessionGlance
-            name={`${this.state.firstPerson.name.first} ${this.state.firstPerson.name.last}`}
-            image={this.state.firstPerson.picture.large}
-            email={`${this.state.firstPerson.email}`}
-            description={user.description}
-            retrospective={user.retrospective}
+            name={this.state.firstUser.name}
+            email={this.state.firstUser.email}
+            course={this.state.firstSession.course}
+            description={this.state.firstSession.description}
+            retrospective={this.state.firstSession.retrospective}
           />
         </div>
-
         <div className="SecondaryView">
           <Grid
             container
@@ -80,14 +73,14 @@ export default class TutorMain extends React.Component {
             style={useStyles.gridContainer}
             justify="center"
           >
-            {this.state.persons.map((person) => (
-              <Grid item xs={12} sm={6} md={4}>
+            {this.state.session.slice(1).map((currentSession) => (
+              <Grid item xs={12} sm={12} md={12}>
                 <StudentCard
-                  name={`${person.name.first} ${person.name.last}`}
-                  image={person.picture.large}
-                  email={`${person.email}`}
-                  description={user.description}
-                  retrospective={user.retrospective}
+                  name={currentSession.name}
+                  email={currentSession.email}
+                  course={currentSession.course}
+                  description={currentSession.description}
+                  retrospective={currentSession.retrospective}
                 />
               </Grid>
             ))}
