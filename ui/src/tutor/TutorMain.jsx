@@ -1,5 +1,5 @@
-//ToDo: Need the button to do something. As well as figure out how I want to fetch users through the map.
-//ToDo: Refactor and make it more readable.
+//ToDo: This is a rough draft that needs to be cleaned up. There are some areas that I can shrink down and make simpler.
+//ToDo: /For Fun: Make button delete the current session until we add a field to mark sessions completed.
 import React from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
@@ -86,7 +86,7 @@ export default class TutorMain extends React.Component {
     return (
       <>
         <div className="MainView">
-           <SessionGlance
+          <SessionGlance
             name={this.state.firstUser.name}
             email={this.state.firstUser.email}
             course={this.state.firstSession.course}
@@ -101,17 +101,19 @@ export default class TutorMain extends React.Component {
             style={useStyles.gridContainer}
             justify="center"
           >
-            {this.state.arrayOfSessionPlusUsers.slice(1).map((currentSession) => (
-              <Grid item xs={12} sm={12} md={12}>
-                <StudentCard
-                  name={currentSession.user.name}
-                  email={currentSession.user.email}
-                  course={currentSession.session.course}
-                  description={currentSession.session.description}
-                  retrospective={currentSession.session.retrospective}
-                />
-              </Grid>
-            ))}
+            {this.state.arrayOfSessionPlusUsers
+              .slice(1)
+              .map((currentSession) => (
+                <Grid item xs={12} sm={12} md={12}>
+                  <StudentCard
+                    name={currentSession.user.name}
+                    email={currentSession.user.email}
+                    course={currentSession.session.course}
+                    description={currentSession.session.description}
+                    retrospective={currentSession.session.retrospective}
+                  />
+                </Grid>
+              ))}
           </Grid>
         </div>
       </>
