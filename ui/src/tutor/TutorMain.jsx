@@ -19,7 +19,8 @@ export default class TutorMain extends React.Component {
     session: null,
     firstSession: null,
     firstUser: null,
-    currentUser: null,
+    usersList: null,
+    arrayOfSessionPlusUsers: [],
   };
 
   async componentDidMount() {
@@ -28,17 +29,44 @@ export default class TutorMain extends React.Component {
       const response = await fetch(url);
       const data = await response.json();
       const user = await this.fetchUser(data[0].student);
-      console.log(data);
-      console.log(data[1]);
+
       this.setState({
         session: data,
         firstSession: data[0],
         firstUser: user,
+        usersList: await this.loadAllUsers(data),
         loading: false,
+      });
+
+      this.setState({
+        arrayOfSessionPlusUsers: await this.loadUsersAndSessions(
+          data,
+          this.state.usersList
+        ),
       });
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async loadUsersAndSessions(session, usersList) {
+    const arrayOfSessionPlusUsers = [];
+    for (let i = 0; i < session.length; i++) {
+      arrayOfSessionPlusUsers.push({
+        session: session[i],
+        user: usersList[i],
+      });
+    }
+    return arrayOfSessionPlusUsers;
+  }
+
+  async loadAllUsers(data) {
+    const users = [];
+    for (let i = 0; i < data.length; i++) {
+      const user = await this.fetchUser(data[i].student);
+      users.push(user);
+    }
+    return users;
   }
 
   async fetchUser(userId) {
@@ -58,7 +86,7 @@ export default class TutorMain extends React.Component {
     return (
       <>
         <div className="MainView">
-          <SessionGlance
+           <SessionGlance
             name={this.state.firstUser.name}
             email={this.state.firstUser.email}
             course={this.state.firstSession.course}
@@ -73,14 +101,14 @@ export default class TutorMain extends React.Component {
             style={useStyles.gridContainer}
             justify="center"
           >
-            {this.state.session.slice(1).map((currentSession) => (
+            {this.state.arrayOfSessionPlusUsers.slice(1).map((currentSession) => (
               <Grid item xs={12} sm={12} md={12}>
                 <StudentCard
-                  name={currentSession.name}
-                  email={currentSession.email}
-                  course={currentSession.course}
-                  description={currentSession.description}
-                  retrospective={currentSession.retrospective}
+                  name={currentSession.user.name}
+                  email={currentSession.user.email}
+                  course={currentSession.session.course}
+                  description={currentSession.session.description}
+                  retrospective={currentSession.session.retrospective}
                 />
               </Grid>
             ))}
