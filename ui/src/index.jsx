@@ -1,8 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import Test from "./Student/Test";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Auth0Provider } from "@auth0/auth0-react";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#ef5350',
+      main: '#d32f2f',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 ReactDOM.render(
   // <Auth0Provider
@@ -13,6 +24,8 @@ ReactDOM.render(
   //   <App />
 
   // </Auth0Provider>,
-  <Test />,
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
   document.getElementById("root")
 );
