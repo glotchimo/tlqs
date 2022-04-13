@@ -49,7 +49,7 @@ export default function StudentCard(prop) {
         >
           {prop.name}
         </Typography>
-        <Avatar style={stylingObject.personIcon}>{() => prop.name}</Avatar>
+        <Avatar style={stylingObject.personIcon}>{prop.name}</Avatar>
         <div style={stylingObject.studentDetails}>
           <h2>Email: {prop.email}</h2>
           <h2>Class: {prop.course}</h2>
