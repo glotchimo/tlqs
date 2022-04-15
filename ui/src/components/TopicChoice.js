@@ -25,9 +25,9 @@ function TopicChoice({ formData, setFormData }) {
                         label="Topics"
                         onChange={handleChange}
                     >
-                        <MenuItem value={'t1'}>Topic 1</MenuItem>
-                        <MenuItem value={'t2'}>Topic 2</MenuItem>
-                        <MenuItem value={'t3'}>Topic 3</MenuItem>
+                        <MenuItem value={'Topic 1'}>Topic 1</MenuItem>
+                        <MenuItem value={'Topic 2'}>Topic 2</MenuItem>
+                        <MenuItem value={'Topic 3'}>Topic 3</MenuItem>
                     </Select>
                 </FormControl>
             </Box>

@@ -5,9 +5,8 @@ import TextField from '@mui/material/TextField';
 
 
 function StudentInput({ formData, setFormData }) {
-
     const handleChange = (event) => {
-        setFormData({ ...formData, StudentInput: event.target.value })
+        setFormData({ ...formData, studentInput: event.target.value })
     };
 
     return (
@@ -15,7 +14,8 @@ function StudentInput({ formData, setFormData }) {
             <Box
                 component="form"
                 sx={{
-                    '& .MuiTextField-root': { m: 1, width: '45ch' },
+                    '& .MuiTextField-root': { m: 1, width: '100ch' },
+                    display: 'inline-block',
                 }}
                 noValidate
                 autoComplete="on"
@@ -26,8 +26,9 @@ function StudentInput({ formData, setFormData }) {
                     label="Student Input"
                     placeholder="Where do I begin..."
                     multiline
-                    defaultValue={formData.studentInput}
+                    value={formData.studentInput}
                     onChange={handleChange}
+                    autoComplete="off"
 
                 />
 

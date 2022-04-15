@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import './Form.css';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import AlertTitle from '@mui/material/AlertTitle';
+import Alert from '@mui/material/Alert';
 import DepartmentChoice from './DepartmentChoice'
 import ClassChoice from './ClassChoice'
 import TopicChoice from './TopicChoice'
 import StudentInput from './StudentInput';
 import QueueSubmission from './QueueSubmission'
+import QueueTicket from './QueueTicket'
 
 
 function Form() {
@@ -31,8 +35,36 @@ function Form() {
                 return <StudentInput formData={formData} setFormData={setFormData} />;
             case 4:
                 return <QueueSubmission formData={formData} setFormData={setFormData} />;
+            case 5:
+                return <QueueTicket formData={formData} setFormData={setFormData} />;
             default:
                 return <DepartmentChoice formData={formData} setFormData={setFormData} />;
+        }
+    }
+
+    const forwardButton = () => {
+        if (page !== 5) {
+            return (
+                <Button
+                    onClick={() => { setPage((curpage) => curpage + 1); }}
+                    variant="contained"
+                    size="large">{page === FormTitles.length - 1 ? "Submit" : "Next"}
+                </Button>)
+        }
+
+    }
+
+    const backwardButton = () => {
+        if (page !== 0 && page !== 5) {
+            return (
+                <Button
+                    disabled={page === 0}
+                    onClick={() => { setPage((curpage) => curpage - 1); }}
+                    variant="contained"
+                    size="large">
+                    Back
+                </Button>
+            )
         }
     }
 
@@ -46,17 +78,8 @@ function Form() {
                     {PageDisplay()}
                 </div>
                 <div className='footer'>
-                    <Button
-                        disabled={page === 0}
-                        onClick={() => { setPage((curpage) => curpage - 1); }}
-                        variant="contained"
-                        size="large">Back</Button>
-                    <Button
-                        disabled={page === FormTitles.length - 1}
-                        onClick={() => { setPage((curpage) => curpage + 1); }}
-                        variant="contained"
-                        size="large">Next
-                    </Button>
+                    {backwardButton()}
+                    {forwardButton()}
                 </div>
             </div>
         </div>

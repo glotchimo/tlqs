@@ -15,7 +15,7 @@ function ClassChoice({ formData, setFormData }) {
 
     return (
         <div className='class-choice-container'>
-            <Box m="auto" sx={{ maxWidth: '45ch' }}>
+            <Box m="auto" sx={{ maxWidth: '45ch', }}>
                 <FormLabel id="classes-group-label">Choose a class:</FormLabel>
                 <FormControl fullWidth>
                     <InputLabel id="class-simple-select-label">Classes</InputLabel>
@@ -27,9 +27,9 @@ function ClassChoice({ formData, setFormData }) {
                         label="Classes"
                         onChange={handleChange}
                     >
-                        <MenuItem value={'c1'}>Class 1</MenuItem>
-                        <MenuItem value={'c2'}>Class 2</MenuItem>
-                        <MenuItem value={'c3'}>Class 3</MenuItem>
+                        <MenuItem value={'Class 1'}>Class 1</MenuItem>
+                        <MenuItem value={'Class 2'}>Class 2</MenuItem>
+                        <MenuItem value={'Class 3'}>Class 3</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
