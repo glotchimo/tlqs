@@ -3,6 +3,7 @@
 import React from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
+import WaitingPage from "./WaitingPage";
 import Grid from "@mui/material/Grid";
 
 const useStyles = {
@@ -44,6 +45,7 @@ export default class TutorMain extends React.Component {
           this.state.usersList
         ),
       });
+      console.log(this.state.firstSession.id);
     } catch (error) {
       console.log(error);
     }
@@ -77,16 +79,18 @@ export default class TutorMain extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <WaitingPage />
+        </div>
+      );
     }
-
-    if (this.state.firstUser == null)
-      return <div>I'm sorry but couldn't load user</div>;
 
     return (
       <>
         <div className="MainView">
           <SessionGlance
+            id={this.state.firstSession.id}
             name={this.state.firstUser.name}
             email={this.state.firstUser.email}
             course={this.state.firstSession.course}

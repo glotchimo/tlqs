@@ -84,7 +84,7 @@ export default function SessionGlance(prop) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Current Student: {prop.name}
           </Typography>
-          <TutorForm />
+          <TutorForm id={prop.id} />
         </Box>
       </Modal>
     </>

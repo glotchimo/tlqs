@@ -1,6 +1,5 @@
 import React from "react";
 //This is an example for fetching sessions. 
-
 //reference material
 export default class FetchSessions extends React.Component {
   state = {

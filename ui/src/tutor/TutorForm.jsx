@@ -1,5 +1,4 @@
 //ToDo: Clean up the code like the way you set the fields making sure that equal signs are the same etc....
-
 import * as React from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
@@ -27,6 +26,7 @@ export default function TutorForm(prop) {
   const handleSubmitTextArea = (event) => {
     event.preventDefault();
 
+    console.log(prop.id);
     if (value.length == 0) {
       alert("Please enter a message");
       return;
@@ -35,9 +35,29 @@ export default function TutorForm(prop) {
     }
   };
 
+  const deleteCurrentSession = async (sessionId) => {
+    const response = await fetch(
+      `http://localhost:8080/sessions/${sessionId}/`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 200) {
+      location.reload();
+    }
+  };
+
   const handleSubmitNoTextArea = (event) => {
     event.preventDefault();
-    alert(`Are you sure about that?`);
+    if (confirm("Are you sure you want to mark complete without notes?")) {
+      deleteCurrentSession(prop.id);
+      console.log("Current session was removed from the database");
+    } else {
+      alert("Session not deleted");
+    }
   };
 
   return (
