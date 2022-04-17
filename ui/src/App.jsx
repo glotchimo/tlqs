@@ -1,7 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import Form from './components/Form';
+import './App.css'
 import * as React from 'react';
-
+//Change
 export default () => {
     const { isLoading, isAuthenticated } = useAuth0();
 
