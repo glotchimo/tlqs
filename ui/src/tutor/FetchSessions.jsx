@@ -16,13 +16,14 @@ export default class FetchSessions extends React.Component {
       const response = await fetch(url);
       const data = await response.json();
       const user = await this.userDidMount(data[0].student);
-
+    
       this.setState({
         session: data,
         firstSession: data[0],
         firstUser: user,
         loading: false,
       });
+        console.log(this.state.firstSession);
     } catch (error) {
       console.log(error);
     }

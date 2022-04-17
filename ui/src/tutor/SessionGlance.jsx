@@ -60,7 +60,9 @@ export default function SessionGlance(prop) {
         <Typography gutterBottom variant="h2" component="h2">
           {prop.name}
         </Typography>
-        <Avatar style={stylingObject.personIcon}>{prop.name.charAt(0).toUpperCase()}</Avatar>
+        <Avatar style={stylingObject.personIcon}>
+          {prop.name.charAt(0).toUpperCase()}
+        </Avatar>
         <div style={stylingObject.studentDetails}>
           <h2>Email: {prop.email}</h2>
           <h2>Course: {prop.course}</h2>
