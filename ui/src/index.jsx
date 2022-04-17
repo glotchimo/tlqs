@@ -12,6 +12,9 @@ const theme = createTheme({
       dark: '#ba000d',
       contrastText: '#000',
     },
+    text: {
+      disabled: '#000'
+    },
   },
 });
 
