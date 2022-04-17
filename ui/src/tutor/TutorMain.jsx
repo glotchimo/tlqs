@@ -1,5 +1,5 @@
 //ToDo: This is a rough draft that needs to be cleaned up. There are some areas that I can shrink down and make simpler.
-//ToDo: /For Fun: Make button delete the current session until we add a field to mark sessions completed.
+//ToDo: For Fun: Make button delete the current session until we add a field to mark sessions completed.
 import React from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
@@ -45,7 +45,6 @@ export default class TutorMain extends React.Component {
           this.state.usersList
         ),
       });
-      console.log(this.state.firstSession.id);
     } catch (error) {
       console.log(error);
     }

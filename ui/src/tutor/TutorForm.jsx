@@ -1,7 +1,5 @@
-//ToDo: Clean up the code like the way you set the fields making sure that equal signs are the same etc....
 import * as React from "react";
 import { useState } from "react";
-import ReactDOM from "react-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -22,14 +20,12 @@ var stylingObject = {
 export default function TutorForm(prop) {
   const [value, setValue] = useState("");
 
-  //Once the backend is sorted out make the patch request to retrospetive
+  //Once the back-end is sorted out make the patch request to retrospetive
   const handleSubmitTextArea = (event) => {
     event.preventDefault();
 
-    console.log(prop.id);
     if (value.length == 0) {
       alert("Please enter a message");
-      return;
     } else {
       alert(`Input from form: ${value}`);
     }
@@ -54,7 +50,6 @@ export default function TutorForm(prop) {
     event.preventDefault();
     if (confirm("Are you sure you want to mark complete without notes?")) {
       deleteCurrentSession(prop.id);
-      console.log("Current session was removed from the database");
     } else {
       alert("Session not deleted");
     }
