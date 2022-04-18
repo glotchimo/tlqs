@@ -9,7 +9,7 @@ import ClassChoice from './ClassChoice'
 import TopicChoice from './TopicChoice'
 import StudentInput from './StudentInput';
 import QueueSubmission from './QueueSubmission'
-import QueueTicket from './QueueTicket'
+import WaitRoom from './WaitRoom'
 
 
 function Form() {
@@ -36,7 +36,7 @@ function Form() {
             case 4:
                 return <QueueSubmission formData={formData} setFormData={setFormData} />;
             case 5:
-                return <QueueTicket formData={formData} setFormData={setFormData} />;
+                return <WaitRoom formData={formData} setFormData={setFormData} />;
             default:
                 return <DepartmentChoice formData={formData} setFormData={setFormData} />;
         }

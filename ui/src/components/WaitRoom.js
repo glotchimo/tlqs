@@ -8,9 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
 
-function QueueTicket({ formData, setFormData }) {
+function WaitRoom({ formData, setFormData }) {
     return (
-        <div className='queue-ticket-container'>
+        <div className='wait-room-container'>
             <Box
                 component="form"
                 sx={{
@@ -21,14 +21,14 @@ function QueueTicket({ formData, setFormData }) {
                 noValidate
                 autoComplete="on"
             >
-                <InputLabel id="queue-ticket-group-label">Queue Ticket</InputLabel>
+                <InputLabel id="wait-room-group-label">Queue Ticket</InputLabel>
                 <Typography sx={{ ml: 5, mr: 5, mt: 1 }} variant="subtitle1" gutterBottom component="div">
                     Thank you for your patience, a tutor will be with you shortly.
                 </Typography>
                 <Table sx={{ m: 'auto', maxWidth: '100ch' }} aria-label="simple table">
                     <TableBody>
                         <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <TableCell sx={{ fontWeight: 'bold', fontSize: '36px' }} align="center">Spot in line: {Math.floor(Math.random() * 50)}</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', fontSize: '36px' }} align="center">Spot in line: {Math.floor(Math.random() * 20)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -37,4 +37,4 @@ function QueueTicket({ formData, setFormData }) {
     )
 }
 
-export default QueueTicket
+export default WaitRoom
