@@ -67,7 +67,6 @@ export default function SessionGlance(prop) {
           <h2>Email: {prop.email}</h2>
           <h2>Course: {prop.course}</h2>
           <h2>Description: {prop.description}</h2>
-          <h2>Retrospective: {prop.retrospective}</h2>
           <Button variant="contained" onClick={handleOpen}>
             Mark Completed
           </Button>

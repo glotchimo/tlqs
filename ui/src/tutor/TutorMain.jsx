@@ -45,6 +45,14 @@ export default class TutorMain extends React.Component {
           this.state.usersList
         ),
       });
+
+        this.setState({
+            firstUser:this.state.arrayOfSessionPlusUsers[0].user, 
+            firstSession:this.state.arrayOfSessionPlusUsers[0].session
+        });
+
+        console.log(this.state.arrayOfSessionPlusUsers);
+
     } catch (error) {
       console.log(error);
     }
@@ -53,10 +61,12 @@ export default class TutorMain extends React.Component {
   async loadUsersAndSessions(session, usersList) {
     const arrayOfSessionPlusUsers = [];
     for (let i = 0; i < session.length; i++) {
-      arrayOfSessionPlusUsers.push({
-        session: session[i],
-        user: usersList[i],
-      });
+      if (!session[i].completed) {
+        arrayOfSessionPlusUsers.push({
+          session: session[i],
+          user: usersList[i],
+        });
+      }
     }
     return arrayOfSessionPlusUsers;
   }

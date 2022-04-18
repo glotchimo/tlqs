@@ -21,13 +21,26 @@ export default function TutorForm(prop) {
   const [value, setValue] = useState("");
 
   //Once the back-end is sorted out make the patch request to retrospetive
-  const handleSubmitTextArea = (event) => {
-    event.preventDefault();
+  const patchCurrentSession = async (sessionId) => {
+    const response = await fetch(
+      `http://localhost:8080/sessions/${sessionId}/`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tutor: {
+            retrospective: value,
+            completed: true,
+          },
+        }),
+      }
+    );
+    console.log(response.status)
 
-    if (value.length == 0) {
-      alert("Please enter a message");
-    } else {
-      alert(`Input from form: ${value}`);
+    if (response.status === 200) {
+      console.log("Successful patch request");
     }
   };
 
@@ -43,6 +56,13 @@ export default function TutorForm(prop) {
     );
     if (response.status === 200) {
       location.reload();
+    }
+  };
+
+  const handleSubmitTextArea = (event) => {
+    event.preventDefault;
+    if (confirm("Are you sure you want to submit with notes?")) {
+      patchCurrentSession(prop.id);
     }
   };
 

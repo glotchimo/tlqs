@@ -46,7 +46,6 @@ export default class FetchSessions extends React.Component {
         <h2>Student: {this.state.firstUser.name}</h2>
         <div>Course: {this.state.firstSession.course}</div>
         <div>Description: {this.state.firstSession.description}</div>
-        <div>Retrospective: {this.state.firstSession.retrospective}</div>
         <div>Topic: {this.state.firstSession.topic}</div>
       </div>
     );
