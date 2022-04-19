@@ -1,18 +1,18 @@
-local:
-	cd ui && yarn
-	cd ui && yarn build
-	cd ui && cp -r ./dist ../dist
-	go build -o tlqs-bin
-	./tlqs-bin
-
-container:
+run:
+	yarn --cwd ui/ install
 	docker-compose build
 	docker-compose up
 
-rm-local:
-	rm -r ./dist
-	rm ./tlqs-bin
+run-background:
+	yarn --cwd ui/ install
+	docker-compose build
+	docker-compose up -d
 
-rm-container:
-	docker-compose down
+clean:
+	docker-compose down -v
+	rm -rf ui/node_modules ui/dist
 
+clean-all:
+	docker-compose down -v
+	docker system prune
+	rm -rf ui/node_modules ui/dist

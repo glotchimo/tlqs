@@ -1,7 +1,7 @@
 # Tutor Lab Queue System
 This is the monorepo for TLQS, containing a React SPA and a Go back-end. It features a Dockerfile for quick containerized deployment and a Makefile for a rapid build-test-edit cycle.
 
-To build and run the service, run `make run`, and to clean up binaries and distribution files, run `make clean`.
+To build and run the service, run `make run`, and to clean up binaries and distribution files, run `make clean`. If you want to run it in the background, use `make run-background`, and if you want to clear all Docker caches, images, volumes, etc. on your system, use `make clean-all`.
 
 ### Git Instructions
 
@@ -24,8 +24,6 @@ To build and run the service, run `make run`, and to clean up binaries and distr
 - If you have a working PR and main has been updated, make sure you rebase before pushing
 - **Always** update and rebase before pushing to remote (i.e. GitHub)
 - If you run into issues or see errors, ask Elliott and he will help resolve
-
-### File Information
 
 
 #### Configuration files
