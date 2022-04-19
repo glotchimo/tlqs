@@ -4,7 +4,7 @@ COPY ./ui/package.json ./
 COPY ./ui/yarn.lock ./
 RUN yarn
 COPY ./ui/ ./
-RUN yarn build --no-cache
+RUN yarn build
 
 FROM golang:alpine as go_setup
 RUN apk update && apk add --no-cache git

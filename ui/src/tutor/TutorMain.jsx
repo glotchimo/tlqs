@@ -29,12 +29,9 @@ export default class TutorMain extends React.Component {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      const user = await this.fetchUser(data[0].student);
 
       this.setState({
         session: data,
-        firstSession: data[0],
-        firstUser: user,
         usersList: await this.loadAllUsers(data),
         loading: false,
       });
@@ -93,6 +90,14 @@ export default class TutorMain extends React.Component {
           <WaitingPage />
         </div>
       );
+    }
+
+    if(this.state.firstSession === null){
+        return(
+            <div>
+                <WaitingPage />
+            </div>
+        )
     }
 
     return (

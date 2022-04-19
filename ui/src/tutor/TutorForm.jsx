@@ -20,9 +20,9 @@ var stylingObject = {
 export default function TutorForm(prop) {
   const [value, setValue] = useState("");
 
-  //Once the back-end is sorted out make the patch request to retrospetive
-  const patchCurrentSession = async (sessionId) => {
-    const response = await fetch(
+    const patchCurrentSession = async (sessionId) => {
+
+    await fetch(
       `http://localhost:8080/sessions/${sessionId}/`,
       {
         method: "PATCH",
@@ -30,18 +30,11 @@ export default function TutorForm(prop) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          tutor: {
             retrospective: value,
             completed: true,
-          },
         }),
       }
     );
-    console.log(response.status)
-
-    if (response.status === 200) {
-      console.log("Successful patch request");
-    }
   };
 
   const deleteCurrentSession = async (sessionId) => {
@@ -63,6 +56,8 @@ export default function TutorForm(prop) {
     event.preventDefault;
     if (confirm("Are you sure you want to submit with notes?")) {
       patchCurrentSession(prop.id);
+    }else{
+        alert("You have not submitted your notes");
     }
   };
 
@@ -100,7 +95,7 @@ export default function TutorForm(prop) {
         </Button>
       </form>
 
-      <form onSubmit={handleSubmitNoTextArea}>
+      <form onSubmit={handleSubmitTextArea}>
         <Button
           variant="contained"
           type="submit"

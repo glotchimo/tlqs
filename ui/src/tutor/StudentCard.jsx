@@ -56,7 +56,6 @@ export default function StudentCard(prop) {
           <h2>Email: {prop.email}</h2>
           <h2>Class: {prop.course}</h2>
           <h2>Description: {prop.description}</h2>
-          <h2>Retrospective: {prop.retrospective}</h2>
         </div>
       </CardContent>
     </Card>
