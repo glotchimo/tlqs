@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
 import Avatar from "@mui/material/Avatar";
+
 var stylingObject = {
   container: {
     backgroundColor: "#525E75",

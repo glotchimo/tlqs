@@ -26,30 +26,21 @@ export default class TutorMain extends React.Component {
 
   async componentDidMount() {
     const url = "http://localhost:8080/sessions/";
+
     try {
       const response = await fetch(url);
       const data = await response.json();
-
       this.setState({
         session: data,
         usersList: await this.loadAllUsers(data),
-        loading: false,
-      });
-
-      this.setState({
         arrayOfSessionPlusUsers: await this.loadUsersAndSessions(
           data,
           this.state.usersList
         ),
+        firstUser: this.state.arrayOfSessionPlusUsers[0].user,
+        firstSession: this.state.arrayOfSessionPlusUsers[0].session,
+        loading: false,
       });
-
-        this.setState({
-            firstUser:this.state.arrayOfSessionPlusUsers[0].user, 
-            firstSession:this.state.arrayOfSessionPlusUsers[0].session
-        });
-
-        console.log(this.state.arrayOfSessionPlusUsers);
-
     } catch (error) {
       console.log(error);
     }
@@ -84,20 +75,16 @@ export default class TutorMain extends React.Component {
   }
 
   render() {
-    if (this.state.loading) {
+    if (
+      this.state.loading ||
+      this.state.firstSession === null ||
+      this.state.firstUser === null
+    ) {
       return (
         <div>
           <WaitingPage />
         </div>
       );
-    }
-
-    if(this.state.firstSession === null){
-        return(
-            <div>
-                <WaitingPage />
-            </div>
-        )
     }
 
     return (
