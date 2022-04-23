@@ -55,6 +55,36 @@ func TestTopicGet(t *testing.T) {
 	}
 }
 
+func TestTopicList(t *testing.T) {
+	course := Course{
+		Title: "Database",
+		Code:  "1",
+	}
+	courseResult := Database.Create(&course)
+	if courseResult.Error != nil {
+		t.Error(courseResult.Error)
+	}
+
+	topic := Topic{
+		CourseID: course.ID,
+		Name:     "relations",
+	}
+	topicResult := Database.Create(&topic)
+	if topicResult.Error != nil {
+		t.Error(topicResult.Error)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/topics/?offset=10&limit=100&course="+course.ID, nil)
+	rec := httptest.NewRecorder()
+
+	TopicList(rec, req)
+	res := rec.Result()
+
+	if res.StatusCode != 200 {
+		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+}
+
 func TestTopicUpdate(t *testing.T) {
 	topic := Topic{
 		CourseID: "123",
@@ -94,28 +124,6 @@ func TestTopicDelete(t *testing.T) {
 	rec := httptest.NewRecorder()
 
 	TopicDelete(rec, req)
-	res := rec.Result()
-
-	if res.StatusCode != 200 {
-		t.Errorf("expected status code 200, got %d", res.StatusCode)
-	}
-}
-
-func TestTopicList(t *testing.T) {
-	topic := Topic{
-		CourseID: "123",
-		Name:     "LearnGo",
-	}
-
-	result := Database.Create(&topic)
-	if result.Error != nil {
-		t.Error(result.Error)
-	}
-
-	req := httptest.NewRequest(http.MethodGet, "/topics/?offset=10&limit=100", nil)
-	rec := httptest.NewRecorder()
-
-	TopicList(rec, req)
 	res := rec.Result()
 
 	if res.StatusCode != 200 {
