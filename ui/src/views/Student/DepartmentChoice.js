@@ -8,13 +8,6 @@ import FormLabel from '@mui/material/FormLabel';
 
 function DepartmentChoice({ formData, setFormData }) {
 
-    // const [department, setDepartment] = React.useState('');
-    // const handleChange = (event) => {
-    //     console.log(formData.departmentInput);
-    //     setDepartment(event.target.value);
-    //     setFormData({ ...formData, departmentInput: event.target.value });
-    // };
-
     const deptChoice = (event) => {
         let check = formData.departmentInput;
         if (check !== '') {
@@ -47,24 +40,6 @@ function DepartmentChoice({ formData, setFormData }) {
             </Box>
         </div>
 
-
-        // <div className='department-choice-container'>
-        //     <Box m="auto" sx={{ maxWidth: 300 }}>
-        //         <FormControl fullWidth>
-        //             <InputLabel id="department-select-label">Department</InputLabel>
-        //             <Select
-        //                 labelId="department-select-label"
-        //                 id="department-simple-select"
-        //                 value={department}
-        //                 label="Department"
-        //                 onChange={handleChange}
-        //             >
-        //                 <MenuItem value={'Computer Science'}>Computer Science</MenuItem>
-        //                 <MenuItem value={'Mathematics'}>Mathematics</MenuItem>
-        //             </Select>
-        //         </FormControl>
-        //     </Box>
-        // </div>
     )
 }
 

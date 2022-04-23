@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import Form from './components/Form';
+import Student from './views/Student/Student';
 import './App.css'
 import * as React from 'react';
 
@@ -17,7 +17,7 @@ export default () => {
             )}
         </>,
         <div className="App">
-            <Form />
+            <Student />
         </div>
     );
 };

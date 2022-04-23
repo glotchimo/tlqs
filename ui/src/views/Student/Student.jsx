@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Form.css';
+import './Student.css';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
@@ -12,7 +12,7 @@ import QueueSubmission from './QueueSubmission'
 import WaitRoom from './WaitRoom'
 
 
-function Form() {
+function Student() {
 
     const [page, setPage] = useState(0);
     const FormTitles = ["Department", "Classes", "Topics", "Student Input", "Queue Submission"];
@@ -86,4 +86,4 @@ function Form() {
     )
 }
 
-export default Form
+export default Student
