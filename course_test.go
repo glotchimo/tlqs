@@ -56,7 +56,7 @@ func TestCourseList(t *testing.T) {
 		t.Error(result.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, "/courses/?offset=10&limit=100", nil)
+	req := httptest.NewRequest(http.MethodGet, "/courses/?offset=10&limit=100&department=0", nil)
 	rec := httptest.NewRecorder()
 
 	CourseList(rec, req)
