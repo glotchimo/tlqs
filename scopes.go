@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 	"strconv"
-	"strings"
 
 	"gorm.io/gorm"
 )
@@ -47,27 +46,23 @@ func ByOffset(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
 }
 
 func ByDepartment(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
-	table := strings.Split(r.URL.Path, "/")[0]
 	department := r.URL.Query().Get("department")
-
-	if table == "" || department == "" {
+	if department == "" {
 		return ByDefault()
 	}
 
 	return func(db *gorm.DB) *gorm.DB {
-		return db.Table(table).Where("department = ?", department)
+		return db.Where("department = ?", department)
 	}
 }
 
 func ByCourse(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
-	table := strings.Split(r.URL.Path, "/")[0]
 	course := r.URL.Query().Get("course")
-
-	if table == "" || course == "" {
+	if course == "" {
 		return ByDefault()
 	}
 
 	return func(db *gorm.DB) *gorm.DB {
-		return db.Table(table).Where("course_id = ?", course)
+		return db.Where("course_id = ?", course)
 	}
 }
