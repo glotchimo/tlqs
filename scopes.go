@@ -63,7 +63,7 @@ func ByCourse(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
 	table := strings.Split(r.URL.Path, "/")[0]
 	course := r.URL.Query().Get("course")
 
-	if table != "" || course == "" {
+	if table == "" || course == "" {
 		return ByDefault()
 	}
 
