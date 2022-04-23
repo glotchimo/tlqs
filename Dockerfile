@@ -1,4 +1,4 @@
-FROM node:latest as node_setup
+FROM node:lts as node_setup
 WORKDIR /root/
 COPY ./ui/package.json ./
 COPY ./ui/yarn.lock ./
