@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -56,6 +57,28 @@ func TestTopicGet(t *testing.T) {
 }
 
 func TestTopicList(t *testing.T) {
+	topic := Topic{
+		CourseID: "123",
+		Name:     "LearnGo",
+	}
+
+	result := Database.Create(&topic)
+	if result.Error != nil {
+		t.Error(result.Error)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/topics/?offset=10&limit=100", nil)
+	rec := httptest.NewRecorder()
+
+	TopicList(rec, req)
+	res := rec.Result()
+
+	if res.StatusCode != 200 {
+		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+}
+
+func TestTopicListFilter(t *testing.T) {
 	course := Course{
 		Title: "Database",
 		Code:  "1",
@@ -65,16 +88,24 @@ func TestTopicList(t *testing.T) {
 		t.Error(courseResult.Error)
 	}
 
-	topic := Topic{
+	topic1 := Topic{
 		CourseID: course.ID,
-		Name:     "relations",
+		Name:     "1",
 	}
-	topicResult := Database.Create(&topic)
+	topic2 := Topic{
+		CourseID: course.ID,
+		Name:     "2",
+	}
+	topic3 := Topic{
+		CourseID: "whoknows",
+		Name:     "3",
+	}
+	topicResult := Database.CreateInBatches([]Topic{topic1, topic2, topic3}, 3)
 	if topicResult.Error != nil {
 		t.Error(topicResult.Error)
 	}
 
-	req := httptest.NewRequest(http.MethodGet, "/topics/?offset=10&limit=100&course="+course.ID, nil)
+	req := httptest.NewRequest(http.MethodGet, "/topics/?course="+course.ID, nil)
 	rec := httptest.NewRecorder()
 
 	TopicList(rec, req)
@@ -82,6 +113,15 @@ func TestTopicList(t *testing.T) {
 
 	if res.StatusCode != 200 {
 		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+
+	topics := []Topic{}
+	if err := json.NewDecoder(res.Body).Decode(&topics); err != nil {
+		t.Error(err)
+	}
+
+	if len(topics) != 2 {
+		t.Errorf("expected 2 topics, got %d", len(topics))
 	}
 }
 

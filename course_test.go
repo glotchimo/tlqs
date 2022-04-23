@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -64,6 +65,48 @@ func TestCourseList(t *testing.T) {
 
 	if res.StatusCode != 200 {
 		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+}
+
+func TestCourseListFilter(t *testing.T) {
+	c1 := Course{
+		Code:       "1",
+		Title:      "1",
+		Department: CS,
+	}
+	c2 := Course{
+		Code:       "2",
+		Title:      "2",
+		Department: Math,
+	}
+	c3 := Course{
+		Code:       "3",
+		Title:      "3",
+		Department: Math,
+	}
+
+	result := Database.CreateInBatches([]Course{c1, c2, c3}, 3)
+	if result.Error != nil {
+		t.Error(result.Error)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/courses/?department=1", nil)
+	rec := httptest.NewRecorder()
+
+	CourseList(rec, req)
+	res := rec.Result()
+
+	if res.StatusCode != 200 {
+		t.Errorf("expected status code 200, got %d", res.StatusCode)
+	}
+
+	courses := []Course{}
+	if err := json.NewDecoder(res.Body).Decode(&courses); err != nil {
+		t.Error(err)
+	}
+
+	if len(courses) != 2 {
+		t.Errorf("expected 2 courses, got %d", len(courses))
 	}
 }
 
