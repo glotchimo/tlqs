@@ -57,8 +57,8 @@ func Get(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db 
 
 // List records from the database by the given scope function.
 // `obj` should be a pointer to a slice of model type.
-func List(w http.ResponseWriter, r *http.Request, obj interface{}, scope func(db *gorm.DB) *gorm.DB) {
-	result := Database.Scopes(scope).Find(obj)
+func List(w http.ResponseWriter, r *http.Request, obj interface{}, scopes ...func(db *gorm.DB) *gorm.DB) {
+	result := Database.Scopes(scopes...).Find(obj)
 	if result.Error != nil {
 		log.Println(result.Error.Error())
 		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
