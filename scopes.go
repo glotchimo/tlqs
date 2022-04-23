@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -13,7 +12,7 @@ func ByDefault() func(*gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB { return db }
 }
 
-func ByOffset(r *http.Request, w http.ResponseWriter) func(*gorm.DB) *gorm.DB {
+func ByOffset(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
 	strOffset := r.URL.Query().Get("offset")
 	if strOffset == "" {
 		strOffset = "0"
@@ -26,8 +25,6 @@ func ByOffset(r *http.Request, w http.ResponseWriter) func(*gorm.DB) *gorm.DB {
 
 	page, err := strconv.Atoi(strOffset)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, "Internal server error.", http.StatusInternalServerError)
 		return ByDefault()
 	} else if page == 0 {
 		page = 1
@@ -35,20 +32,42 @@ func ByOffset(r *http.Request, w http.ResponseWriter) func(*gorm.DB) *gorm.DB {
 
 	size, err := strconv.Atoi(strLimit)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, "Internal server error.", http.StatusInternalServerError)
 		return ByDefault()
 	}
 
 	offset := (page - 1) * size
 
-	scope := func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
 		if size == 0 {
 			return db.Offset(offset).Limit(size)
 		}
 
 		return db.Offset(offset)
 	}
+}
 
-	return scope
+func ByDepartment(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
+	table := strings.Split(r.URL.Path, "/")[0]
+	department := r.URL.Query().Get("department")
+
+	if table == "" || department == "" {
+		return ByDefault()
+	}
+
+	return func(db *gorm.DB) *gorm.DB {
+		return db.Table(table).Where("department = ?", department)
+	}
+}
+
+func ByCourse(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
+	table := strings.Split(r.URL.Path, "/")[0]
+	course := r.URL.Query().Get("course")
+
+	if table != "" || course == "" {
+		return ByDefault()
+	}
+
+	return func(db *gorm.DB) *gorm.DB {
+		return db.Table(table).Where("course_id = ?", course)
+	}
 }
