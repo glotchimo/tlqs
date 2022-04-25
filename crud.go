@@ -18,7 +18,7 @@ func Create(w http.ResponseWriter, r *http.Request, obj interface{}) {
 		return
 	}
 
-	if result := Database.FirstOrCreate(obj); result.Error != nil {
+	if result := Database.FirstOrCreate(obj, obj); result.Error != nil {
 		log.Println(result.Error)
 		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
 		return
