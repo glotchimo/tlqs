@@ -10,7 +10,30 @@ const columns = [
   { field: 'courses', headerName: 'Courses', width: 130 }, 
 ];
 export default () => {
+  const [rows, setRows] = useState([]);
+  const getAPI = () => {
+    fetch("/users/")
+      .then((response) => response.json())
+      .then((json) => {
+        setRows(json);
+          json.map((user)=>{
+            console.log(course.title);
+
+            rows.push({name:user.name, email: user.email, role:user.role, sessions: user.sessions, courses:user.courses},);
+          })
+      });
+  };
+  return (
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+       rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+      />
+    </div>
+  );
 
   
-  return "Admin";
-};
+}
