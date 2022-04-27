@@ -35,16 +35,9 @@ const stylingObject = {
 
 export default function SessionGlance(prop) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
-      <CssBaseline />
       <div >
         <Typography style ={stylingObject.studentDetails} gutterBottom variant="h2" component="h2">
           {prop.name}
@@ -56,7 +49,7 @@ export default function SessionGlance(prop) {
           <h2>{prop.email}</h2>
           <h2>{prop.course}</h2>
           <h2>{prop.description}</h2>
-          <Button variant="contained" onClick={handleOpen}>
+          <Button variant="contained" onClick={setOpen(true)}>
             Mark Completed
           </Button>
         </div>
@@ -64,7 +57,7 @@ export default function SessionGlance(prop) {
 
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
