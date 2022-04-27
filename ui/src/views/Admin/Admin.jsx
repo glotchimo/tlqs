@@ -40,6 +40,15 @@ export default () => {
           <Typography variant="h6" color="inherit" component="div">
             Users
           </Typography>
+          <Typography variant="h6" color="inherit" component="div">
+            Courses
+          </Typography>
+          <Typography variant="h6" color="inherit" component="div">
+            Sessions
+          </Typography>
+          <Typography variant="h6" color="inherit" component="div">
+            Topics
+          </Typography>
         </Toolbar>
       </AppBar>
     </Box>
