@@ -7,26 +7,19 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import React,{ useState } from "react";
 
 const columns = [
   { field: 'name', headerName: 'Names', width: 200},
-  { field: 'name', headerName: 'Names', width: 200},
   { field: 'email', headerName: 'Email', width: 200 },
-  { field: 'role', headerName: 'Role', width: 200 },
+  { field: 'role', headerName: 'Role', width: 80},
   { field: 'sessions', headerName: 'Sessions', width: 200 },
-  { field: 'courses', headerName: 'Courses', width: 200,
-  renderCell: (params) => {
-    return (
-      <>
-        <Link to={"/user/" + params.row.id}>
-          <button className="userListEdit">Edit</button>
-        </Link>
-        <DeleteOutline
-          className="userListDelete"
-          onClick={() => handleDelete(params.row.id)}
-        />
-      </>
-    );},},];
+  { field: 'courses', headerName: 'Courses', width: 200,},
+  {field: 'delete', headerName: 'Delete', width: 100, },
+  {field: 'edit', headerName: 'Edit', width: 100},
+  {field: 'reate', headerName: 'Edit', width: 100},
+
+];
 export default () =>{
   const [rows, setRows] = useState([]);
   const apiGet = () => {
@@ -35,7 +28,9 @@ export default () =>{
       .then((json) => {
         setRows(json);
           json.map((user)=>{
-            rows.push({name:user.name, email: user.email, role:user.role, sessions: user.sessions, courses:user.courses},);
+            rows.push({name:user.name, email: user.email, role:user.role, 
+              sessions: user.sessions, courses:user.courses,
+            },);
           })});};
   useEffect(() => {
     apiGet();
@@ -48,22 +43,11 @@ export default () =>{
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-          <div className={classes.navlinks}>
-            <Link to="/" className={classes.link}>
-              User
-            </Link>
-            <Link to="/Courses" className={classes.link}>
-              Course
-            </Link>
-            <Link to="/Sessions" className={classes.link}>
-              Sessions
-            </Link>
-            <Link to="/Topics" className={classes.link}>
-              Topics
-            </Link>
+          <div style={{ display: "flex", alignItems: "baseline"}}>
+           <Typography variant="title" color="inherit" noWrap>
+             USER
+           </Typography>
           </div>
-          </Typography>
         </Toolbar>
       </AppBar>
     </Box>
@@ -77,3 +61,20 @@ export default () =>{
     </div>
   );}
 
+/*
+  renderCell: (params) => {
+    return (
+      <>
+        <Link to={"/user/" + params.row.id}>
+          <button className="userListEdit">Edit</button>
+        </Link>
+        <DeleteOutline
+          className="userListDelete"
+          onClick={() => handleDelete(params.row.id)}
+        />
+      </>
+
+      <delete className="delete"><Button variant="contained">Delete</Button></delete>
+
+      
+    );},*/
