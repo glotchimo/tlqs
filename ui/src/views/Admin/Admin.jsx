@@ -49,7 +49,20 @@ export default () =>{
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
-            Users
+          <div className={classes.navlinks}>
+            <Link to="/" className={classes.link}>
+              User
+            </Link>
+            <Link to="/Courses" className={classes.link}>
+              Course
+            </Link>
+            <Link to="/Sessions" className={classes.link}>
+              Sessions
+            </Link>
+            <Link to="/Topics" className={classes.link}>
+              Topics
+            </Link>
+          </div>
           </Typography>
         </Toolbar>
       </AppBar>
