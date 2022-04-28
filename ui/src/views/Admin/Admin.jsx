@@ -18,13 +18,11 @@ const columns = [
 export default () => {
   const [rows, setRows] = useState([]);
   const getAPI = () => {
-    fetch("/users/")
+    fetch("http://localhost:8080/users/")
       .then((response) => response.json())
       .then((json) => {
         setRows(json);
           json.map((user)=>{
-            console.log(course.title);
-
             rows.push({name:user.name, email: user.email, role:user.role, sessions: user.sessions, courses:user.courses},);
           })
       });
