@@ -30,7 +30,7 @@ const columns = [
   },
  }, 
 ];
-export default function Users() {
+export default () =>{
   const [rows, setRows] = useState([]);
   const apiGet = () => {
     fetch("http://localhost:8080/users/")
