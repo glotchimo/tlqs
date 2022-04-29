@@ -39,6 +39,7 @@ export default ()=> {
         <> <AddCircleIcon /></>)},
     },
   ];
+
     const [rows, setRows] = useState([]);
     const apiGet = () => {
       fetch("http://localhost:8080/sessions/")
@@ -52,9 +53,11 @@ export default ()=> {
     useEffect(() => {
       apiGet();
     }, []);
+
   const handleDelete = (id) => {
     setRows(rows.filter((item) => item.id !== id));
   };
+  
     return (  
       <div style={{ height: 400, width: '100%' }}>
           <Box sx={{ flexGrow: 1 }}>
