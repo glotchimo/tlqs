@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-var stylingObject = {
+const stylingObject = {
   personIcon: {
     width: "125px",
     height: "125px",
