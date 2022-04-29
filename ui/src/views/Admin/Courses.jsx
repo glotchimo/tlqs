@@ -12,7 +12,6 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-
 export default ()=> {
   const columns = [
     { field: 'id', headerName: 'ID', width: 130 },
@@ -46,9 +45,15 @@ export default ()=> {
           json.map((course)=>{
             rows.push({title:course.title, code:course.code},);
           })}); };
+          
   useEffect(() => {
     apiGet();
   }, []);
+
+  const handleDelete = (id) => {
+    setRows(rows.filter((item) => item.id !== id));
+  };
+
   return (
     <div style={{ height: 400, width: '100%' }}>
               <Box sx={{ flexGrow: 1 }}>
@@ -59,7 +64,7 @@ export default ()=> {
           </IconButton>
           <div style={{ display: "flex", alignItems: "baseline"}}>
            <Typography variant="title" color="inherit" noWrap>
-             USER
+             COURSE
            </Typography>
           </div>
         </Toolbar>
