@@ -58,6 +58,20 @@ export default ()=> {
   };
     return (  
       <div style={{ height: 400, width: '100%' }}>
+          <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            <MenuIcon />
+          </IconButton>
+          <div style={{ display: "flex", alignItems: "baseline"}}>
+           <Typography variant="title" color="inherit" noWrap>
+             USER
+           </Typography>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </Box>
         <DataGrid
          rows={rows}
           columns={columns}
