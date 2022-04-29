@@ -37,7 +37,7 @@ export default ()=> {
     },];
   
   const [rows, setRows] = useState([]);
-  
+
   const apiGet = () => {
     fetch("/courses/")
       .then((response) => response.json())
@@ -57,7 +57,7 @@ export default ()=> {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
-              <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
