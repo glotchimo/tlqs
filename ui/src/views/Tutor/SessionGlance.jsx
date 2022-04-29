@@ -49,7 +49,7 @@ export default function SessionGlance(prop) {
           <h2>{prop.email}</h2>
           <h2>{prop.course}</h2>
           <h2>{prop.description}</h2>
-          <Button variant="contained" onClick={setOpen(true)}>
+          <Button variant="contained" onClick={() => setOpen(true)}>
             Mark Completed
           </Button>
         </div>
@@ -57,7 +57,7 @@ export default function SessionGlance(prop) {
 
       <Modal
         open={open}
-        onClose={setOpen(false)}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
