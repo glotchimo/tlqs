@@ -38,8 +38,13 @@ export default function SessionGlance(prop) {
 
   return (
     <>
-      <div >
-        <Typography style ={stylingObject.studentDetails} gutterBottom variant="h2" component="h2">
+      <div>
+        <Typography
+          style={stylingObject.studentDetails}
+          gutterBottom
+          variant="h2"
+          component="h2"
+        >
           {prop.name}
         </Typography>
         <Avatar style={stylingObject.personIcon}>
