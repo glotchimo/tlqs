@@ -37,6 +37,7 @@ export default ()=> {
     },];
   
   const [rows, setRows] = useState([]);
+  
   const apiGet = () => {
     fetch("/courses/")
       .then((response) => response.json())
@@ -45,7 +46,7 @@ export default ()=> {
           json.map((course)=>{
             rows.push({title:course.title, code:course.code},);
           })}); };
-          
+
   useEffect(() => {
     apiGet();
   }, []);
