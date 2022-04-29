@@ -25,8 +25,8 @@ const stylingObject = {
 export default function Tutor() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [arrayOfSessionPlusUsers, setArrayOfSessionPlusUsers] = useState([]);
-  const previousArrSessionsPlusUsers = React.useRef(arrayOfSessionPlusUsers);
+  const [sessionAndUsers, setSessionAndUsers] = useState([]);
+  const previousSessionAndUsers = React.useRef(sessionAndUsers);
   const previousData = React.useRef(data);
 
   const fetchUsers = async (userId) => {
@@ -84,15 +84,15 @@ export default function Tutor() {
   useEffect(() => {
     if (data != previousData.current) {
       loadAllSessionsUsersAndClasses().then((data) => {
-        setArrayOfSessionPlusUsers(data);
+        setSessionAndUsers(data);
       });
     }
   }, [data]);
   useEffect(() => {
-    if (previousArrSessionsPlusUsers.current !== arrayOfSessionPlusUsers) {
+    if (previousSessionAndUsers.current !== sessionAndUsers) {
       setIsLoading(false);
     }
-  }, [arrayOfSessionPlusUsers]);
+  }, [sessionAndUsers]);
 
   if (isLoading) {
     return (
@@ -102,7 +102,7 @@ export default function Tutor() {
     );
   }
 
-  if (arrayOfSessionPlusUsers.length === 0) {
+  if (sessionAndUsers.length === 0) {
     return (
       <div style={stylingObject.container}>
         <h1>Woohoo! You're all caught up with everything. </h1>
@@ -115,16 +115,16 @@ export default function Tutor() {
       <div style={stylingObject.container}>
         <SessionGlance
           style={stylingObject.container}
-          key={arrayOfSessionPlusUsers[0].session.id}
-          id={arrayOfSessionPlusUsers[0].session.id}
-          name={arrayOfSessionPlusUsers[0].user.name}
-          email={arrayOfSessionPlusUsers[0].user.email}
+          key={sessionAndUsers[0].session.id}
+          id={sessionAndUsers[0].session.id}
+          name={sessionAndUsers[0].user.name}
+          email={sessionAndUsers[0].user.email}
           course={
-            arrayOfSessionPlusUsers[0].class.code +
+            sessionAndUsers[0].class.code +
             " " +
-            arrayOfSessionPlusUsers[0].class.title
+            sessionAndUsers[0].class.title
           }
-          description={arrayOfSessionPlusUsers[0].session.description}
+          description={sessionAndUsers[0].session.description}
         />
       </div>
 
@@ -135,7 +135,7 @@ export default function Tutor() {
           style={stylingObject.gridContainer}
           justify="center"
         >
-          {arrayOfSessionPlusUsers.slice(1).map((currentSession) => (
+          {sessionAndUsers.slice(1).map((currentSession) => (
             <Grid item xs={12} key={currentSession.session.id}>
               <StudentCard
                 name={currentSession.user.name}
