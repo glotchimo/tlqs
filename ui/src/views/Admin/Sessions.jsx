@@ -66,7 +66,7 @@ export default ()=> {
           </IconButton>
           <div style={{ display: "flex", alignItems: "baseline"}}>
            <Typography variant="title" color="inherit" noWrap>
-             USER
+             SESSIONS
            </Typography>
           </div>
         </Toolbar>
