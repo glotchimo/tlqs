@@ -32,7 +32,6 @@ export default function TutorForm(prop) {
 
   return (
     <>
-      <CssBaseline />
       <form onSubmit={patchCurrentSession(prop.id)}>
         <TextField
           variant="outlined"
