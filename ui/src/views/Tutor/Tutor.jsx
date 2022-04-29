@@ -29,6 +29,32 @@ export default function Tutor() {
   const previousSessionAndUsers = React.useRef(sessionAndUsers);
   const previousData = React.useRef(data);
 
+  const displaySessionData = (currentSession) => {
+    return (
+      <Grid item xs={12} key={currentSession.session.id}>
+        <StudentCard
+          key={currentSession.session.id}
+          id={currentSession.session.id}
+          name={currentSession.user.name}
+          email={currentSession.user.email}
+          course={currentSession.class.code + " " + currentSession.class.title}
+          description={currentSession.session.description}
+        />
+      </Grid>
+    );
+  };
+
+  const fetchAllSessionData = () => {
+    fetch("/sessions/")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const fetchUser = async (userId) => {
     try {
       let response = await fetch(`/users/${userId}/`);
@@ -38,6 +64,7 @@ export default function Tutor() {
       console.log(err);
     }
   };
+
   const fetchCourse = async (classId) => {
     try {
       let response = await fetch(`/courses/${classId}/`);
@@ -49,15 +76,6 @@ export default function Tutor() {
   };
 
   const loadData = async () => {
-    try {
-      let response = await fetch(`/sessions/`);
-      let data = await response.json();
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const loadAllSessionsUsersAndClasses = async () => {
     try {
       let arr = [];
       for (let i = 0; i < data.length; i++) {
@@ -77,13 +95,11 @@ export default function Tutor() {
   };
 
   useEffect(() => {
-    loadData().then((data) => {
-      setData(data);
-    });
+    fetchAllSessionData();
   }, []);
   useEffect(() => {
     if (data != previousData.current) {
-      loadAllSessionsUsersAndClasses().then((data) => {
+      loadData().then((data) => {
         setSessionAndUsers(data);
       });
     }
@@ -120,9 +136,7 @@ export default function Tutor() {
           name={sessionAndUsers[0].user.name}
           email={sessionAndUsers[0].user.email}
           course={
-            sessionAndUsers[0].class.code +
-            " " +
-            sessionAndUsers[0].class.title
+            sessionAndUsers[0].class.code + " " + sessionAndUsers[0].class.title
           }
           description={sessionAndUsers[0].session.description}
         />
@@ -135,18 +149,9 @@ export default function Tutor() {
           style={stylingObject.gridContainer}
           justify="center"
         >
-          {sessionAndUsers.slice(1).map((currentSession) => (
-            <Grid item xs={12} key={currentSession.session.id}>
-              <StudentCard
-                name={currentSession.user.name}
-                email={currentSession.user.email}
-                course={
-                  currentSession.class.code + " " + currentSession.class.title
-                }
-                description={currentSession.session.description}
-              />
-            </Grid>
-          ))}
+          {sessionAndUsers.slice(1).map((currentSession) => {
+            return displaySessionData(currentSession);
+          })}
         </Grid>
       </div>
     </>
