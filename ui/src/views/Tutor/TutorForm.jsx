@@ -15,7 +15,7 @@ const stylingObject = {
 };
 
 export default function TutorForm(prop) {
-  const [value, setValue] = useState("");
+  const [tutorInput, setTutorInput] = useState("");
 
   const patchCurrentSession = async (sessionId) => {
     await fetch(`/sessions/${sessionId}/`, {
@@ -24,7 +24,7 @@ export default function TutorForm(prop) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        retrospective: value,
+        retrospective: tutorInput,
         completed: true,
       }),
     });
@@ -45,8 +45,8 @@ export default function TutorForm(prop) {
       <form onSubmit={handleSubmitTextArea}>
         <TextField
           variant="outlined"
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
+          value={tutorInput}
+          onChange={(event) => setTutorInput(event.target.value)}
           style={stylingObject.form}
           fullWidth
           rows={6}
