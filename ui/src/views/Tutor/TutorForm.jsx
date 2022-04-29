@@ -30,19 +30,10 @@ export default function TutorForm(prop) {
     });
   };
 
-  const handleSubmitTextArea = (event) => {
-    event.preventDefault;
-    if (confirm("Are you sure you want to submit with notes?")) {
-      patchCurrentSession(prop.id);
-    } else {
-      alert("You have not submitted your notes");
-    }
-  };
-
   return (
     <>
       <CssBaseline />
-      <form onSubmit={handleSubmitTextArea}>
+      <form onSubmit={patchCurrentSession(prop.id)}>
         <TextField
           variant="outlined"
           value={tutorInput}
