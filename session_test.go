@@ -8,7 +8,7 @@ import (
 )
 
 func TestSessionCreate(t *testing.T) {
-	body := []byte(`{"student": "00123456", "tutor": "00654321", "course": "CSCD488", "topic": "Web Application Design", "description": "I'm having trouble implementing a web application, can you help me?", "retrospective": "Not sure what this is to be honest."}`)
+	body := []byte(`{"student": "00123456", "tutor": "00654321", "course": "CSCD488", "topic": "Web Application Design", "description": "I'm having trouble implementing a web application, can you help me?", "retrospective": "Not sure what this is to be honest.", "completed":true}`)
 	req := httptest.NewRequest(http.MethodPost, "/sessions/", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rec := httptest.NewRecorder()

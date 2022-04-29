@@ -15,6 +15,7 @@ type Session struct {
 	Topics        []Topic `gorm:"many2many:session_topics" json:"topics"`
 	Description   string  `json:"description"`
 	Retrospective string  `json:"retrospective"`
+	Completed     bool    `json:"completed"`
 }
 
 func (session *Session) BeforeCreate(scope *gorm.DB) error {
