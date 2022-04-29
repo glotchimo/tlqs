@@ -29,7 +29,7 @@ export default function Tutor() {
   const previousSessionAndUsers = React.useRef(sessionAndUsers);
   const previousData = React.useRef(data);
 
-  const fetchUsers = async (userId) => {
+  const fetchUser = async (userId) => {
     try {
       let response = await fetch(`/users/${userId}/`);
       let data = await response.json();
@@ -65,7 +65,7 @@ export default function Tutor() {
           let currentSession = {
             session: data[i],
             class: await fetchCourse(data[i].course),
-            user: await fetchUsers(data[i].student),
+            user: await fetchUser(data[i].student),
           };
           arr.push(currentSession);
         }
