@@ -31,7 +31,7 @@ export default function Tutor() {
 
   const fetchUsers = async (userId) => {
     try {
-      let response = await fetch(`http://localhost:8080/users/${userId}/`);
+      let response = await fetch(`/users/${userId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -40,7 +40,7 @@ export default function Tutor() {
   };
   const fetchCourse = async (classId) => {
     try {
-      let response = await fetch(`http://localhost:8080/courses/${classId}/`);
+      let response = await fetch(`/courses/${classId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -50,7 +50,7 @@ export default function Tutor() {
 
   const loadData = async () => {
     try {
-      let response = await fetch(`http://localhost:8080/sessions/`);
+      let response = await fetch(`/sessions/`);
       let data = await response.json();
       return data;
     } catch (err) {

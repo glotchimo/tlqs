@@ -18,7 +18,7 @@ export default function TutorForm(prop) {
   const [value, setValue] = useState("");
 
   const patchCurrentSession = async (sessionId) => {
-    await fetch(`http://localhost:8080/sessions/${sessionId}/`, {
+    await fetch(`/sessions/${sessionId}/`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
