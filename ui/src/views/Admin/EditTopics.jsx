@@ -1,5 +1,5 @@
 import "./editcourse.css";
-export default  function CourseEdit() {
+export default  function EditTopics() {
 
 return (
 <div className="user">
