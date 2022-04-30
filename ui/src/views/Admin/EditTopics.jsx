@@ -13,8 +13,8 @@ return (
 
           <div className="item">
 
-            <label>Title</label>
-            <input type="text" placeholder="title" className="input" />
+            <label>Name</label>
+            <input type="text" placeholder="name" className="input" />
           </div>
 
           <div className="item">
