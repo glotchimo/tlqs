@@ -1,4 +1,4 @@
-import "./editcourse.css";
+import "./edittopics.css";
 export default  function EditTopics() {
 
 return (
