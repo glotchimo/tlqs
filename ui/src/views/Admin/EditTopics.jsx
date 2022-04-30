@@ -4,7 +4,7 @@ export default  function EditTopics() {
 return (
 <div className="user">
   <div className="titleContainer">
-    <h1 className="title">Edit Course</h1>
+    <h1 className="title">Edit Topics</h1>
   </div>
   <div className="container">
     <div className="update">
