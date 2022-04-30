@@ -1,10 +1,10 @@
 import "./editsessions.css";
-export default  function UserEdit() {
+export default  function EditSessions() {
 
 return (
 <div className="sessions">
   <div className="titleContainer">
-    <h1 className="title">Edit User</h1>
+    <h1 className="title">Edit Session</h1>
   </div>
   <div className="container">
     <div className="update">
