@@ -21,7 +21,7 @@ return (
             <label>CourseID</label>
             <input type="text" placeholder="courseid" className="input" />
           </div>
-\
+
         </div>
         <div className="right">
           <div className="upload">
