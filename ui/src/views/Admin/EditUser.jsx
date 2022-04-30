@@ -1,4 +1,4 @@
-import "./user.css";
+import "./edituser.css";
 export default  function UserEdit() {
 
 return (
