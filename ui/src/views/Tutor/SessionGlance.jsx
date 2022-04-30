@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
 import Avatar from "@mui/material/Avatar";
 
-const stylingObject = {
+const styles = {
   personIcon: {
     width: "125px",
     height: "125px",
@@ -33,27 +33,28 @@ const stylingObject = {
   },
 };
 
-export default function SessionGlance(prop) {
+export default (props) => {
   const [open, setOpen] = React.useState(false);
 
   return (
     <>
       <div>
         <Typography
-          style={stylingObject.studentDetails}
+          style={styles.studentDetails}
           gutterBottom
           variant="h2"
           component="h2"
         >
-          {prop.name}
+          {props.name}
         </Typography>
-        <Avatar style={stylingObject.personIcon}>
-          {prop.name.charAt(0).toUpperCase()}
+        <Avatar style={styles.personIcon}>
+          {props.name.charAt(0).toUpperCase()}
         </Avatar>
-        <div style={stylingObject.studentDetails}>
-          <h2>{prop.email}</h2>
-          <h2>{prop.course}</h2>
-          <h2>{prop.description}</h2>
+        <div style={styles.studentDetails}>
+          <h2>{props.email}</h2>
+          <h2>{props.course}</h2>
+          <h2>{props.topic}</h2>
+          <h2>{props.description}</h2>
           <Button variant="contained" onClick={() => setOpen(true)}>
             Mark Completed
           </Button>
@@ -66,13 +67,13 @@ export default function SessionGlance(prop) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={stylingObject.modalStyle}>
+        <Box sx={styles.modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Current Student: {prop.name}
+            Current Student: {props.name}
           </Typography>
-          <TutorForm id={prop.id} />
+          <TutorForm id={props.id} />
         </Box>
       </Modal>
     </>
   );
-}
+};

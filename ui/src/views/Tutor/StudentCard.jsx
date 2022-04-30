@@ -3,7 +3,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-const stylingObject = {
+
+const styles = {
   personIcon: {
     width: "125px",
     height: "125px",
@@ -23,27 +24,27 @@ const stylingObject = {
   },
 };
 
-export default function StudentCard(prop) {
+export default (props) => {
   return (
-    <Card sx={{ minWidth: 275 }} style={stylingObject.cardColors}>
+    <Card sx={{ minWidth: 275 }} style={styles.cardColors}>
       <CardContent>
         <Typography
-          style={stylingObject.studentDetails}
+          style={styles.studentDetails}
           gutterBottom
           variant="h2"
           component="h2"
         >
-          {prop.name}
+          {props.name}
         </Typography>
-        <Avatar style={stylingObject.personIcon}>
-          {prop.name.charAt(0).toUpperCase()}
+        <Avatar style={styles.personIcon}>
+          {props.name.charAt(0).toUpperCase()}
         </Avatar>
-        <div style={stylingObject.studentDetails}>
-          <h2>{prop.email}</h2>
-          <h2>{prop.course}</h2>
-          <h2>{prop.description}</h2>
+        <div style={styles.studentDetails}>
+          <h2>{props.email}</h2>
+          <h2>{props.course}</h2>
+          <h2>{props.description}</h2>
         </div>
       </CardContent>
     </Card>
   );
-}
+};

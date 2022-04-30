@@ -2,7 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-const stylingObject = {
+
+const styles = {
   form: {
     color: "#FFFFFF",
     border: "#FFFFFF",
@@ -13,7 +14,7 @@ const stylingObject = {
   },
 };
 
-export default function TutorForm(prop) {
+export default function TutorForm(props) {
   const [tutorInput, setTutorInput] = useState("");
 
   const patchCurrentSession = async (sessionId) => {
@@ -30,26 +31,24 @@ export default function TutorForm(prop) {
   };
 
   return (
-    <>
-      <form onSubmit={patchCurrentSession(prop.id)}>
-        <TextField
-          variant="outlined"
-          value={tutorInput}
-          onChange={(event) => setTutorInput(event.target.value)}
-          style={stylingObject.form}
-          fullWidth
-          rows={6}
-          multiline
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          style={stylingObject.button}
-        >
-          Submit Notes
-        </Button>
-      </form>
-    </>
+    <form onSubmit={patchCurrentSession(props.id)}>
+      <TextField
+        variant="outlined"
+        value={tutorInput}
+        onChange={(event) => setTutorInput(event.target.value)}
+        style={styles.form}
+        fullWidth
+        rows={6}
+        multiline
+      />
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        style={styles.button}
+      >
+        Submit Notes
+      </Button>
+    </form>
   );
 }
