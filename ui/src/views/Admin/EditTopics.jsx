@@ -2,7 +2,7 @@ import "./edittopics.css";
 export default  function EditTopics() {
 
 return (
-<div className="user">
+<div className="topic">
   <div className="titleContainer">
     <h1 className="title">Edit Topics</h1>
   </div>
