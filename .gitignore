@@ -16,6 +16,7 @@ tlqs-bin
 *.orig
 *.rej
 *.exe
+alidey_Notes.md
 .*.swp
 core
 *.cgo*.go

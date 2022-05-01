@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import Markdown from 'markdown-to-jsx';
 import FormControl from '@mui/material/FormControl';
 
 function StudentInput({ studentData, setStudentData }) {
@@ -31,7 +30,7 @@ function StudentInput({ studentData, setStudentData }) {
                     sx={{ height: '100px' }}
                     id="outlined-textarea"
                     label="Student Input"
-                    placeholder="Where do I begin..."
+                    placeholder="Where do I begin to describe..."
                     multiline
                     value={userInput}
                     onChange={renderValue}
