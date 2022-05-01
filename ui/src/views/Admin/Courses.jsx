@@ -39,7 +39,7 @@ export default ()=> {
   const [rows, setRows] = useState([]);
 
   const apiGet = () => {
-    fetch("/courses/")
+    fetch("http://localhost:8080/courses/")
       .then((response) => response.json())
       .then((json) => {
         setRows(json);
