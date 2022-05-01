@@ -11,7 +11,7 @@ const EditSessions = () => {
     event.preventDefault();
     const courseData = { student,tutor,course,topic,description,retrospective };
 
-    fetch('http://localhost:8080/courses/', {
+    fetch('http://localhost:8080/sessions/', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(courseData)
