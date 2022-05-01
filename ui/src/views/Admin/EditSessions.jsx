@@ -1,59 +1,57 @@
-import "./editsessions.css";
-import * as React from 'react';
-export default  function EditSessions() {
+import React from "react";
+import { useState } from "react";
+const EditSessions = () => {
+  const [student, setStudent] = useState('');
+  const [tutor, setTutor] = useState('');
+  const [course, setCourse]= useState('');
+  const [topic, setTopic] = useState('');
+  const [description, setDescription] = useState('');
+  const [retrospective, setRetrospective] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const courseData = { student,tutor,course,topic,description,retrospective };
 
-return (
-<div className="sessions">
-  <div className="titleContainer">
-    <h1 className="title">Edit Session</h1>
-  </div>
-  <div className="container">
-    <div className="update">
-      <form className="form">
-        <div className="left">
-
-          <div className="item">
-
-            <label>Student</label>
-            <input type="text" placeholder="student" className="input" />
-          </div>
-
-          <div className="item">
-            <label>Tutor</label>
-            <input type="text" placeholder="tutor" className="input" />
-          </div>
-
-          <div className="item">
-            <label>Course</label>
-            <input type="text" placeholder="course" className="input" />
-          </div>
-          <div className="item">
-            <label>Topic</label>
-            <input type="text" placeholder="topic" className="input" />
-          </div>
-          <div className="item">
-            <label>Description</label>
-            <input type="text" placeholder="Description" className="input" />
-          </div>
-          <div className="item">
-            <label>Retrospective</label>
-            <input type="text" placeholder="retrospective" className="input" />
-          </div>
-
-        </div>
-        <div className="right">
-          <div className="upload">
-            <img className="img" src="https://logodix.com/logo/1617208.jpg" alt="" />
-            <label htmlFor="file">
-            </label>
-            <input type="file" id="file" style={{ display: "none" }} />
-          </div>
-          <button className="button">Update</button>
-        </div>
-      </form>
-
+    fetch('http://localhost:8080/courses/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(courseData)
+    }).then(() => {
+      console.log('new  course updated', courseData);
+    })
+  }
+  return (
+    <div style={{flex: '4',padding: '20px'}}>
+    <div style={{ display: 'flex',alignitems: 'center',justifycontent: 'space-between'}}>
+      <h1 style={{ color: 'crimson'}}>Edit Course</h1>
+    </div>
+    <div style={{display: 'flex',margintop: '20px'}}>
+      <div style={{flex: '2',padding: '20px',webkitBoxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',boxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',marginLeft: '20px'}}>
+        <form onSubmit={handleSubmit}  style={{display: 'flex',justifyContent: 'space-between',marginTop: '20px'}}> 
+            <div style={{display: 'flex',flexDirection: 'column', marginTop: '10px'}}>
+              <label>Student:</label>
+              <input style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={student} onChange={(event) => setStudent(event.target.value)}/>
+              
+              <label>Tutor:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={tutor} onChange={(event) => setTutor(event.target.value)}/>
+              
+              <label>Course:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={course} onChange={(event) => setCourse(event.target.value)}/>
+              
+              <label>Topic:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={topic} onChange={(event) => setTopic(event.target.value)}/>
+              
+              <label>Description:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={description} onChange={(event) => setDescription(event.target.value)}/>
+              
+              <label>Retrospective:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={retrospective} onChange={(event) => setRetrospective(event.target.value)}/>
+              <button style={{backgroundColor:'crimson',color:'black'}}>Topics</button>  
+            </div>       
+        </form>
+      </div>
     </div>
   </div>
-</div>
-);
+    
+  );
 }
+export default EditSessions;
