@@ -4,7 +4,7 @@ import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
 import Grid from "@mui/material/Grid";
 
-const stylingObject = {
+const styles = {
   gridContainer: {
     paddingLeft: "40px",
     paddingRight: "40px",
@@ -22,7 +22,7 @@ const stylingObject = {
   },
 };
 
-export default function Tutor() {
+export default () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [sessionAndUsers, setSessionAndUsers] = useState([]);
@@ -47,12 +47,8 @@ export default function Tutor() {
   const fetchAllSessionData = () => {
     fetch("/sessions/")
       .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
   };
 
   const fetchUser = async (userId) => {
@@ -97,13 +93,13 @@ export default function Tutor() {
   useEffect(() => {
     fetchAllSessionData();
   }, []);
+
   useEffect(() => {
     if (data != previousData.current) {
-      loadData().then((data) => {
-        setSessionAndUsers(data);
-      });
+      loadData().then((data) => setSessionAndUsers(data));
     }
   }, [data]);
+
   useEffect(() => {
     if (previousSessionAndUsers.current !== sessionAndUsers) {
       setIsLoading(false);
@@ -112,7 +108,7 @@ export default function Tutor() {
 
   if (isLoading) {
     return (
-      <div style={stylingObject.container}>
+      <div style={styles.container}>
         <h1>Loading Sessions...</h1>
       </div>
     );
@@ -120,7 +116,7 @@ export default function Tutor() {
 
   if (sessionAndUsers.length === 0) {
     return (
-      <div style={stylingObject.container}>
+      <div style={styles.container}>
         <h1>Woohoo! You're all caught up with everything. </h1>
       </div>
     );
@@ -128,9 +124,9 @@ export default function Tutor() {
 
   return (
     <>
-      <div style={stylingObject.container}>
+      <div style={styles.container}>
         <SessionGlance
-          style={stylingObject.container}
+          style={styles.container}
           key={sessionAndUsers[0].session.id}
           id={sessionAndUsers[0].session.id}
           name={sessionAndUsers[0].user.name}
@@ -146,7 +142,7 @@ export default function Tutor() {
         <Grid
           container
           spacing={4}
-          style={stylingObject.gridContainer}
+          style={styles.gridContainer}
           justify="center"
         >
           {sessionAndUsers.slice(1).map((currentSession) => {
@@ -156,4 +152,4 @@ export default function Tutor() {
       </div>
     </>
   );
-}
+};
