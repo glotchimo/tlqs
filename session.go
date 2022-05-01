@@ -8,14 +8,14 @@ import (
 )
 
 type Session struct {
-	ID            string  `gorm:"primaryKey" json:"id"`
-	UserID        string  `json:"student"`
-	TutorID       string  `json:"tutor"`
-	CourseID      string  `json:"course"`
-	Topics        []Topic `gorm:"many2many:session_topics" json:"topics"`
-	Description   string  `json:"description"`
-	Retrospective string  `json:"retrospective"`
-	Completed     bool    `json:"completed"`
+	ID            string `gorm:"primaryKey" json:"id"`
+	UserID        string `json:"student"`
+	TutorID       string `json:"tutor"`
+	CourseID      string `json:"course"`
+	Topic         string `json:"topic"`
+	Description   string `json:"description"`
+	Retrospective string `json:"retrospective"`
+	Completed     bool   `json:"completed"`
 }
 
 func (session *Session) BeforeCreate(scope *gorm.DB) error {
