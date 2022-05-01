@@ -8,9 +8,10 @@ import (
 )
 
 type Topic struct {
-	ID       string `gorm:"primaryKey" json:"id"`
-	CourseID string `json:"course"`
-	Name     string `json:"name"`
+	ID         string     `gorm:"primaryKey" json:"id"`
+	Department Department `json:"department"`
+	CourseID   string     `json:"course"`
+	Name       string     `json:"name"`
 }
 
 func (topic *Topic) BeforeCreate(scope *gorm.DB) error {
@@ -27,7 +28,7 @@ func TopicGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func TopicList(w http.ResponseWriter, r *http.Request) {
-	List(w, r, &[]Topic{}, ByOffset(w, r), ByCourse(w, r))
+	List(w, r, &[]Topic{}, ByOffset(w, r), ByDepartment(w, r))
 }
 
 func TopicUpdate(w http.ResponseWriter, r *http.Request) {
