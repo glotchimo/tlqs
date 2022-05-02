@@ -129,7 +129,7 @@ func TestTopicListFilter(t *testing.T) {
 	if err := json.NewDecoder(res.Body).Decode(&topicsTest); err != nil {
 		t.Error(err)
 	}
-
+	fmt.Printf("Length: %d\n", len(topicsTest))
 }
 
 func TestTopicUpdate(t *testing.T) {
