@@ -25,6 +25,7 @@ function Class({ studentData, setStudentData }) {
         studentData.departmentSelection !== '' ? renderClasses() : setDisableClasses(deptState => true);
 
         const fetchData = async () => {
+
             try {
                 const response = await fetch(fetchLocation + specificDepartment);
                 const json = await response.json();
@@ -33,6 +34,7 @@ function Class({ studentData, setStudentData }) {
                 console.log("error", error);
             }
         }
+
         fetchData();
 
     }, [studentData])

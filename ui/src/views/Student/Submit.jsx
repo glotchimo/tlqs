@@ -3,12 +3,12 @@ import Button from '@mui/material/Button';
 import WaitingRoom from './WaitRoom';
 import { useEffect } from 'react';
 
-function Submit({ studentData, setStudentData }) {
+function Submit({ studentData, setStudentData, studentDescription, setStudentDescription }) {
     const [submitted, setSubmitted] = useState(false);
     let deptValid = studentData.departmentSelection !== '';
     let classValid = studentData.classSelection !== '';
-    let topicValid = studentData.multiTopicSelection !== '';
-    let studentInputValid = studentData.studentDescription !== '';
+    let topicValid = studentData.topicSelection !== '';
+    let studentInputValid = studentDescription !== '';
 
     function sendSession() {
         var myHeaders = new Headers();
@@ -18,8 +18,8 @@ function Submit({ studentData, setStudentData }) {
             "student": "WIP -- not valid",
             "tutor": "WIP -- not valid",
             "course": studentData.classSelection,
-            "topic": "WIP -- not valid",
-            "description": studentData.studentDescription,
+            "topic": studentData.topicSelection,
+            "description": studentDescription,
             "retrospective": "Not yet touched."
         });
 
@@ -44,10 +44,10 @@ function Submit({ studentData, setStudentData }) {
         if (studentData.classSelection === '') {
             results += "\nClass choice"
         }
-        if (studentData.multiTopicSelection.lenght === 0) {
+        if (studentData.topicSelection === '') {
             results += "\nTopic choice"
         }
-        if (studentData.studentDescription === '') {
+        if (studentDescription === '') {
             results += "\nStudent description"
         }
         return results
@@ -57,7 +57,7 @@ function Submit({ studentData, setStudentData }) {
     const verify = () => {
         //Topic is not included yet, because it's WIP at the moment
         //let missingFields = verifyMissingFields();
-        if (deptValid && classValid && studentInputValid) {
+        if (deptValid && classValid && topicValid && studentInputValid) {
             sendSession();
             setSubmitted(true);
             setStudentData(studentData => ({ ...studentData, submitted: true }));

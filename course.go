@@ -7,13 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Department int
-
-const (
-	CS Department = iota
-	Math
-)
-
 type Course struct {
 	ID         string     `gorm:"primary_key" json:"id"`
 	Title      string     `json:"title"`
