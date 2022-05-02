@@ -72,7 +72,6 @@ func InitDatabase() {
 	Database.AutoMigrate(User{})
 	Database.AutoMigrate(Session{})
 	Database.AutoMigrate(Course{})
-	Database.AutoMigrate(Topic{})
 }
 
 func InitJWTMiddleware() {
