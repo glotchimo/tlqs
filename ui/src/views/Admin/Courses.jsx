@@ -5,6 +5,8 @@ import React,{ useState } from "react";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Link from '@mui/material/Link';
+
 
 export default ()=> {
   const columns = [
@@ -19,15 +21,31 @@ export default ()=> {
     {field: 'edit', headerName: 'Edit', width: 100,
     renderCell: (params) => {
       return (
-        // a dom LINK here in a tag to link it to apage where user can edit
-            <> <EditIcon /></>
+        <Button
+        variant="line"
+        color="error"
+        a
+        href="/course/"
+      >
+        <EditIcon />
+      </Button>
         )},
     },
     {field: 'reate', headerName: 'Create', width: 100,
     renderCell: (params) => {
       return (
-        // a dom here to link to a page like <Link to {page we want}<Link> to create a new user
-        <> <AddCircleIcon /></>)},
+
+        <Button
+        variant="line"
+        color="error"
+        a
+        href="/EditCourse/"
+      >
+          <AddCircleIcon />
+
+      </Button>
+
+         )},
     },];
   
   const [rows, setRows] = useState([]);
