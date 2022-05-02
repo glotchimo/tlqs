@@ -7,18 +7,18 @@ const EditTopics = () => {
     event.preventDefault();
     const courseData = { name,courseid };
 
-    fetch('http://localhost:8080/courses/', {
+    fetch('http://localhost:8080/topics/', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(courseData)
     }).then(() => {
-      console.log('new  course updated', courseData);
+      console.log('new  Topic updated', courseData);
     })
   }
   return (
     <div style={{flex: '4',padding: '20px'}}>
     <div style={{ display: 'flex',alignitems: 'center',justifycontent: 'space-between'}}>
-      <h1 style={{ color: 'crimson'}}>Edit Course</h1>
+      <h1 style={{ color: 'crimson'}}>Edit Topic</h1>
     </div>
     <div style={{display: 'flex',margintop: '20px'}}>
       <div style={{flex: '2',padding: '20px',webkitBoxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',boxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',marginLeft: '20px'}}>
