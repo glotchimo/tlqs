@@ -1,54 +1,57 @@
-import "./edituser.css";
-export default  function UserEdit() {
+import { Button } from "@mui/material";
+import React from "react";
+import { useState } from "react";
+import Button from "@mui/material/Button";
 
-return (
-<div className="user">
-  <div className="titleContainer">
-    <h1 className="title">Edit User</h1>
-  </div>
-  <div className="container">
-    <div className="update">
-      <form className="form">
-        <div className="left">
+const EditUsers = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole]= useState('');
+  const [session, setSession] = useState('');
+  const [course, setCourse] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const courseData = { name,email,role,session,course};
 
-          <div className="item">
-
-            <label>Name</label>
-            <input type="text" placeholder="name" className="input" />
-          </div>
-
-          <div className="item">
-            <label>Email</label>
-            <input type="text" placeholder="username@ewu.edu" className="input" />
-          </div>
-
-          <div className="item">
-            <label>Role</label>
-            <input type="number" placeholder="0" className="input" />
-          </div>
-          <div className="item">
-            <label>Sessions</label>
-            <input type="text" placeholder="course" className="input" />
-          </div>
-          <div className="item">
-            <label>Courses</label>
-            <input type="text" placeholder="sessions" className="input" />
-          </div>
-
-        </div>
-        <div className="right">
-          <div className="upload">
-            <img className="img" src="https://logodix.com/logo/1617208.jpg" alt="" />
-            <label htmlFor="file">
-            </label>
-            <input type="file" id="file" style={{ display: "none" }} />
-          </div>
-          <button className="button">Update</button>
-        </div>
-      </form>
-
+    fetch('http://localhost:8080/users/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(courseData)
+    }).then(() => {
+      console.log('new  course updated', courseData);
+    })
+  }
+  return (
+    <div style={{flex: '4',padding: '20px'}}>
+    <div style={{ display: 'flex',alignitems: 'center',justifycontent: 'space-between'}}>
+      <h1 style={{ color: 'crimson'}}>Edit Course</h1>
+    </div>
+    <div style={{display: 'flex',margintop: '20px'}}>
+      <div style={{flex: '2',padding: '20px',webkitBoxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',boxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',marginLeft: '20px'}}>
+        <form onSubmit={handleSubmit}  style={{display: 'flex',justifyContent: 'space-between',marginTop: '20px'}}> 
+            <div style={{display: 'flex',flexDirection: 'column', marginTop: '10px'}}>
+              <label>Name:</label>
+              <input style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={name} onChange={(event) => setName(event.target.value)}/>
+              
+              <label>Email:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="email" required value={email} onChange={(event) => setEmail(event.target.value)}/>
+              
+              <label>Role:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="number" required value={role} onChange={(event) => setRole(event.target.value)}/>
+              
+              <label>Session:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={session} onChange={(event) => setSession(event.target.value)}/>
+              
+              <label>Course:</label>
+              <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={course} onChange={(event) => setCourse(event.target.value)}/>
+              <Button style={{backgroundColor:'crimson',color:'black'}}>Update</Button>
+              {/* <button style={{backgroundColor:'crimson',color:'black'}}>Topics</button>   */}
+            </div>       
+        </form>
+      </div>
     </div>
   </div>
-</div>
-);
+    
+  );
 }
+export default EditUsers;
