@@ -118,8 +118,8 @@ func TestTopicListFilter(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf("expected status code 200, got %d", res.StatusCode)
 	}
-
 	topics := []Topic{topic1, topic2, topic3}
+	fmt.Printf("Length: %d", len(topics))
 	fmt.Printf("topics: %v\n", topics)
 	if err := json.NewDecoder(res.Body).Decode(&topics); err != nil {
 		t.Error(err)
