@@ -116,10 +116,11 @@ func TestTopicListFilter(t *testing.T) {
 	}
 
 	topics := []Topic{}
+	fmt.Printf("topics: %v\n", topics)
 	if err := json.NewDecoder(res.Body).Decode(&topics); err != nil {
 		t.Error(err)
 	}
-	print(topics)
+
 	if len(topics) != 2 {
 		t.Errorf("expected 2 topics, got %d", len(topics))
 	}
