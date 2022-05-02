@@ -118,15 +118,16 @@ func TestTopicListFilter(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf("expected status code 200, got %d", res.StatusCode)
 	}
-	topics := []Topic{topic1, topic2, topic3}
-	fmt.Printf("Length: %d", len(topics))
-	fmt.Printf("topics: %v\n", topics)
-	if err := json.NewDecoder(res.Body).Decode(&topics); err != nil {
+	topicsTest := []Topic{topic1, topic2, topic3}
+	fmt.Printf("Length: %d\n", len(topicsTest))
+	fmt.Printf("topics: %v\n", topicsTest)
+
+	if err := json.NewDecoder(res.Body).Decode(&topicsTest); err != nil {
 		t.Error(err)
 	}
 
-	if len(topics) != 3 {
-		t.Errorf("expected 3 topics, got %d", len(topics))
+	if len(topicsTest) != 3 {
+		t.Errorf("expected 3 topics, got %d", len(topicsTest))
 	}
 }
 
