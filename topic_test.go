@@ -84,7 +84,7 @@ func TestTopicListFilter(t *testing.T) {
 		Code:  "1",
 	}
 	courseResult := Database.Create(&course)
-	fmt.Printf("courseResult: %v\n", courseResult)
+
 	if courseResult.Error != nil {
 		t.Error(courseResult.Error)
 	}
@@ -93,22 +93,21 @@ func TestTopicListFilter(t *testing.T) {
 		CourseID: course.ID,
 		Name:     "1",
 	}
-	fmt.Printf("topic1: %v\n", topic1)
+
 	topic2 := Topic{
 		CourseID: course.ID,
 		Name:     "2",
 	}
-	fmt.Printf("topic2: %v\n", topic2)
+
 	topic3 := Topic{
 		CourseID: "whoknows",
 		Name:     "3",
 	}
-	fmt.Printf("topic3: %v\n", topic3)
+
 	topicResult := Database.CreateInBatches([]Topic{topic1, topic2, topic3}, 3)
 	if topicResult.Error != nil {
 		t.Error(topicResult.Error)
 	}
-	fmt.Printf("topicResult: %v\n", topicResult)
 	req := httptest.NewRequest(http.MethodGet, "/topics/?course="+course.ID, nil)
 	rec := httptest.NewRecorder()
 
@@ -119,8 +118,6 @@ func TestTopicListFilter(t *testing.T) {
 		t.Errorf("expected status code 200, got %d", res.StatusCode)
 	}
 	topicsTest := []Topic{topic1, topic2, topic3}
-	fmt.Printf("Length: %d\n", len(topicsTest))
-	fmt.Printf("topics: %v\n", topicsTest)
 
 	if len(topicsTest) != 3 {
 		t.Errorf("expected 3 topics, got %d", len(topicsTest))
@@ -129,7 +126,6 @@ func TestTopicListFilter(t *testing.T) {
 	if err := json.NewDecoder(res.Body).Decode(&topicsTest); err != nil {
 		t.Error(err)
 	}
-	fmt.Printf("Length: %d\n", len(topicsTest))
 }
 
 func TestTopicUpdate(t *testing.T) {
