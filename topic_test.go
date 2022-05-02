@@ -96,7 +96,11 @@ func TestTopicListFilter(t *testing.T) {
 		CourseID: course.ID,
 		Name:     "2",
 	}
-	topicResult := Database.CreateInBatches([]Topic{topic1, topic2}, 2)
+	topic3 := Topic{
+		CourseID: "whoknows",
+		Name:     "3",
+	}
+	topicResult := Database.CreateInBatches([]Topic{topic1, topic2, topic3}, 3)
 	if topicResult.Error != nil {
 		t.Error(topicResult.Error)
 	}
@@ -115,7 +119,7 @@ func TestTopicListFilter(t *testing.T) {
 	if err := json.NewDecoder(res.Body).Decode(&topics); err != nil {
 		t.Error(err)
 	}
-
+	print(topics)
 	if len(topics) != 2 {
 		t.Errorf("expected 2 topics, got %d", len(topics))
 	}
