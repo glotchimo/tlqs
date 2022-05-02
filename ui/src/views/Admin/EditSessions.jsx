@@ -16,13 +16,13 @@ const EditSessions = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(courseData)
     }).then(() => {
-      console.log('new  course updated', courseData);
+      console.log('new  Session updated', courseData);
     })
   }
   return (
     <div style={{flex: '4',padding: '20px'}}>
     <div style={{ display: 'flex',alignitems: 'center',justifycontent: 'space-between'}}>
-      <h1 style={{ color: 'crimson'}}>Edit Course</h1>
+      <h1 style={{ color: 'crimson'}}>Edit Session</h1>
     </div>
     <div style={{display: 'flex',margintop: '20px'}}>
       <div style={{flex: '2',padding: '20px',webkitBoxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',boxShadow: '0px 0px 15px -10px rgba(0, 0, 0, 0.75)',marginLeft: '20px'}}>
@@ -45,7 +45,7 @@ const EditSessions = () => {
               
               <label>Retrospective:</label>
               <input  style={{border: 'none',width: '250px',height: '30px',borderBottom: '1px solid gray'}} type="text" required value={retrospective} onChange={(event) => setRetrospective(event.target.value)}/>
-              <button style={{backgroundColor:'crimson',color:'black'}}>Topics</button>  
+              <button >Update</button>  
             </div>       
         </form>
       </div>
