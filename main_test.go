@@ -60,7 +60,6 @@ func TestMain(m *testing.M) {
 	Database.AutoMigrate(User{})
 	Database.AutoMigrate(Session{})
 	Database.AutoMigrate(Course{})
-	Database.AutoMigrate(Topic{})
 	code := m.Run()
 
 	if err := pool.Purge(resource); err != nil {

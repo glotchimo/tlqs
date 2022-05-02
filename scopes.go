@@ -55,14 +55,3 @@ func ByDepartment(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.D
 		return db.Where("department = ?", department)
 	}
 }
-
-func ByCourse(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
-	course := r.URL.Query().Get("course")
-	if course == "" {
-		return ByDefault()
-	}
-
-	return func(db *gorm.DB) *gorm.DB {
-		return db.Where("course_id = ?", course)
-	}
-}

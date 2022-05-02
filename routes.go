@@ -71,36 +71,6 @@ var Routes []Route = []Route{
 		Handler: SessionDelete,
 	},
 	{
-		Name:    "Create Topic",
-		Method:  http.MethodPost,
-		Path:    "/topics/",
-		Handler: TopicCreate,
-	},
-	{
-		Name:    "Get Topic",
-		Method:  http.MethodGet,
-		Path:    "/topics/{id}/",
-		Handler: TopicGet,
-	},
-	{
-		Name:    "List Topics",
-		Method:  http.MethodGet,
-		Path:    "/topics/",
-		Handler: TopicList,
-	},
-	{
-		Name:    "Update Topic",
-		Method:  http.MethodPatch,
-		Path:    "/topics/{id}/",
-		Handler: TopicUpdate,
-	},
-	{
-		Name:    "Delete Topic",
-		Method:  http.MethodDelete,
-		Path:    "/topics/{id}/",
-		Handler: TopicDelete,
-	},
-	{
 		Name:    "Create User",
 		Method:  http.MethodPost,
 		Path:    "/users/",
