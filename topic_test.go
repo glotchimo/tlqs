@@ -122,13 +122,14 @@ func TestTopicListFilter(t *testing.T) {
 	fmt.Printf("Length: %d\n", len(topicsTest))
 	fmt.Printf("topics: %v\n", topicsTest)
 
+	if len(topicsTest) != 3 {
+		t.Errorf("expected 3 topics, got %d", len(topicsTest))
+	}
+
 	if err := json.NewDecoder(res.Body).Decode(&topicsTest); err != nil {
 		t.Error(err)
 	}
 
-	if len(topicsTest) != 3 {
-		t.Errorf("expected 3 topics, got %d", len(topicsTest))
-	}
 }
 
 func TestTopicUpdate(t *testing.T) {
