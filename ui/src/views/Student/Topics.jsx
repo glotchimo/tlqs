@@ -9,29 +9,62 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 function Topics({ studentData, setStudentData }) {
 
+    const fetchLocation = "http://localhost:8080/topics/"; //TODO: Fix when bringing over to new branch, should be /courses/
+
+    const [allTopics, setAllTopics] = useState([]);
+
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([]);
+    const [disableTopics, setDisableTopics] = useState(true);
     const loading = open && options.length === 0;
 
+    // This will grab the "master" list of all topics, store it in local state.
+    useEffect(() => {
+        let specificDepartment = "";
+        const renderClasses = () => {
+            setDisableTopics(deptState => false)
+            studentData.departmentSelection === 'Computer Science' ? specificDepartment = "?department=0" : specificDepartment = "?department=1";
+        }
+        //Enable or disable Topics dropdown based on Department selection
+        studentData.departmentSelection !== '' ? renderClasses() : setDisableTopics(deptState => true);
+
+        const fetchData = async () => {
+            try {
+                const response = await fetch(fetchLocation + specificDepartment);
+                const json = await response.json();
+                setAllTopics(json);
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
+        fetchData();
+
+    }, [studentData])
+
+    useEffect(() => {
+        if (!loading) {
+            return undefined;
+        }
+        setOptions([...allTopics]);
+    }, [allTopics, loading]);
+
+    useEffect(() => {
+        if (!open) {
+            setOptions([]);
+        }
+    }, [open]);
+
     const handleChange = (event, newValue) => {
-        newValue === null ? studentData.classSelection = '' : studentData.classSelection += newValue.code;
+        newValue === null ? studentData.topicSelection = '' : studentData.topicSelection += newValue.code;
     };
 
 
     return (
         <Box className="Topics-class-container" sx={{ width: '100%' }}>
-            {/* <FormGroup sx={{ display: 'flex', mt: 1, flexDirection: 'row', color: 'black', alignContent: 'start' }}>
-                {topicsByDepartment.map(selectedTopic => {
-                    return (
-                        <FormControlLabel key={selectedTopic.Name} control={<Checkbox />} label={selectedTopic.Name} />
-                    );
-                })}
-                Testing
-            </FormGroup> */}
             <Autocomplete
-                multiple
                 id="classes-autocomplete"
-                sx={{ width: 'calc(100% - 20px)', pl: '10px', pt: '10px', textAlign: "center" }}
+                sx={{ width: '80%', ml: '10%', mb: '10%', textAlign: "center" }}
+                disabled={disableTopics}
                 open={open}
                 onOpen={() => {
                     setOpen(true);
@@ -39,9 +72,10 @@ function Topics({ studentData, setStudentData }) {
                 onClose={() => {
                     setOpen(false);
                 }}
-                isOptionEqualToValue={(option, value) => option.title === value.title}
-                getOptionLabel={(option) => option.title}
-                options={top100Films}
+                isOptionEqualToValue={(option, value) => option.name === value.name}
+                getOptionLabel={(option) => option.name}
+                options={options}
+                loading={loading}
                 onChange={handleChange}
                 renderInput={(params) => (
                     <TextField
@@ -54,15 +88,5 @@ function Topics({ studentData, setStudentData }) {
     )
 }
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
-];
 
 export default Topics

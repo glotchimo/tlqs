@@ -6,6 +6,7 @@ import Topics from './Topics';
 import Submit from './Submit';
 import StudentInput from './StudentInput';
 import WaitRoom from './WaitRoom'
+import './Student.css';
 import FormLabel from '@mui/material/FormLabel';
 
 
@@ -14,10 +15,11 @@ function Student() {
     const [studentData, setStudentData] = useState({
         departmentSelection: '',
         classSelection: '',
-        multiTopicSelection: [],
-        studentDescription: '',
+        topicSelection: '',
         submitted: false
     });
+
+    const [studentDescription, setStudentDescription] = useState('');
 
     if (studentData.submitted === true) {
         return (<WaitRoom />);
@@ -61,7 +63,7 @@ function Student() {
 
                             <FormLabel sx={{ ml: '10px', textAlign: 'left' }}>Topics</FormLabel>
                             <Box classname="topics-box" sx={{
-                                height: '20vh', m: 1, bgcolor: 'white', display: 'flex', justify: "center", outline: 'solid', outlineColor: 'lightgrey', outlineWidth: '1px'
+                                height: '20vh', m: 1, bgcolor: 'white', display: 'flex', alignItems: "center", justify: "center", outline: 'solid', outlineColor: 'lightgrey', outlineWidth: '1px'
                             }}>
                                 <Topics studentData={studentData} setStudentData={setStudentData} />
                             </Box>
@@ -78,13 +80,13 @@ function Student() {
                     <Box className='right' sx={{ width: '50%', height: '90vh', bgcolor: '#e8e8e8', textAlign: 'left', pt: '4px' }}>
                         <FormLabel sx={{ ml: '10px' }}>Describe your problem</FormLabel>
                         <Box sx={{ height: '80vh', m: 1, overflow: 'hidden', bgcolor: 'white', outline: 'solid', outlineColor: 'lightgrey', outlineWidth: '1px' }}>
-                            <StudentInput studentData={studentData} setStudentData={setStudentData} />
+                            <StudentInput studentData={studentData} setStudentData={setStudentData} studentDescription={studentDescription} setStudentDescription={setStudentDescription} />
                         </Box>
                     </Box>
                 </Box>
 
                 <Box sx={{ bgcolor: '#e8e8e8', }}>
-                    <Submit studentData={studentData} setStudentData={setStudentData} />
+                    <Submit studentData={studentData} setStudentData={setStudentData} studentDescription={studentDescription} setStudentDescription={setStudentDescription} />
                 </Box>
             </div >
 
