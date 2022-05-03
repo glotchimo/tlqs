@@ -41,6 +41,7 @@ export default (props) => {
         </Avatar>
         <div style={styles.studentDetails}>
           <h2>{props.email}</h2>
+          <h2>{props.topic}</h2>
           <h2>{props.course}</h2>
           <h2>{props.description}</h2>
         </div>

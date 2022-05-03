@@ -37,6 +37,7 @@ export default () => {
           id={currentSession.session.id}
           name={currentSession.user.name}
           email={currentSession.user.email}
+          topic={currentSession.session.topic}
           course={currentSession.class.code + " " + currentSession.class.title}
           description={currentSession.session.description}
         />
@@ -131,6 +132,7 @@ export default () => {
           id={sessionAndUsers[0].session.id}
           name={sessionAndUsers[0].user.name}
           email={sessionAndUsers[0].user.email}
+          topic={sessionAndUsers[0].session.topic}
           course={
             sessionAndUsers[0].class.code + " " + sessionAndUsers[0].class.title
           }
