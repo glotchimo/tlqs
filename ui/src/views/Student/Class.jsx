@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 function Class({ studentData, setStudentData }) {
 
-    const fetchLocation = "http://localhost:8080/courses/"; //TODO: Fix when bringing over to new branch, should be /courses/
+    const fetchLocation = "http://localhost:8080/courses/";
     const [allDeptClasses, setAllDeptClasses] = useState([]);
     const [disableClasses, setDisableClasses] = useState(true);
 
@@ -14,14 +14,13 @@ function Class({ studentData, setStudentData }) {
     const [options, setOptions] = useState([]);
     const loading = open && options.length === 0;
 
-    // This will grab the "master" list of all classes, store it in local state.
     useEffect(() => {
         let specificDepartment = "";
         const renderClasses = () => {
             setDisableClasses(deptState => false)
             studentData.departmentSelection === 'Computer Science' ? specificDepartment = "?department=0" : specificDepartment = "?department=1";
         }
-        //Enable or disable classes dropdown based on Department selection
+
         studentData.departmentSelection !== '' ? renderClasses() : setDisableClasses(deptState => true);
 
         const fetchData = async () => {

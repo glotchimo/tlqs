@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
-import WaitingRoom from './WaitRoom';
-import { useEffect } from 'react';
 
 function Submit({ studentData, setStudentData, studentDescription, setStudentDescription }) {
     const [submitted, setSubmitted] = useState(false);
@@ -55,8 +53,6 @@ function Submit({ studentData, setStudentData, studentDescription, setStudentDes
 
     //Debug function
     const verify = () => {
-        //Topic is not included yet, because it's WIP at the moment
-        //let missingFields = verifyMissingFields();
         if (deptValid && classValid && topicValid && studentInputValid) {
             sendSession();
             setSubmitted(true);
@@ -65,7 +61,6 @@ function Submit({ studentData, setStudentData, studentDescription, setStudentDes
         else {
             let notification = verifyMissingFields();
             alert(notification);
-            console.log(studentData);
         }
     }
 

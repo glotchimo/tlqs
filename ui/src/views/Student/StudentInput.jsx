@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import Markdown from 'markdown-to-jsx';
 import FormControl from '@mui/material/FormControl';
 
 function StudentInput({ studentData, setStudentData, studentDescription, setStudentDescription }) {
@@ -25,9 +23,9 @@ function StudentInput({ studentData, setStudentData, studentDescription, setStud
                 width: '100%',
                 display: 'inline-block',
             }}>
-            <FormControl sx={{ width: '97.80%' }}>
+            <FormControl sx={{ width: 'calc(100% - 16px)' }}>
                 <TextField
-                    maxRows={29.75}
+                    rows={30.5}
                     sx={{ height: '100px' }}
                     id="outlined-textarea"
                     label="Student Input"

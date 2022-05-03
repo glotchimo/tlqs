@@ -1,0 +1,20 @@
+h2.queue-confirm-title {
+    margin-left: 20px;
+    text-align: center;
+    font-size: 1.9vw;
+}
+
+p.queue-confirm-subtitle {
+    font-size: 1.4vw;
+    margin: 1vw;
+}
+
+.queue-leave-btn {
+    min-width: 2vw;
+    min-height: 2vw;
+
+    max-width: 8vw;
+    max-height: 4vw;
+
+    font-size: 1vw;
+}
