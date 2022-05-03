@@ -12,7 +12,6 @@ function Department({ studentData, setStudentData }) {
 
     const handleChange = (event) => {
         setDepartment(event.target.value);
-        //studentData.departmentSelection = event.target.value;
         setStudentData(studentData => ({ ...studentData, departmentSelection: event.target.value }));
     };
 

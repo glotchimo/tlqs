@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState } from 'react'
 import Box from '@mui/material/Box';
 import Department from './Department';
 import Class from './Class';
@@ -63,7 +63,7 @@ function Student() {
 
                             <FormLabel sx={{ ml: '10px', textAlign: 'left' }}>Topics</FormLabel>
                             <Box classname="topics-box" sx={{
-                                height: '20vh', m: 1, bgcolor: 'white', display: 'flex', alignItems: "center", justify: "center", outline: 'solid', outlineColor: 'lightgrey', outlineWidth: '1px'
+                                height: '10vh', m: 1, bgcolor: 'white', display: 'flex', alignItems: "center", justify: "center", outline: 'solid', outlineColor: 'lightgrey', outlineWidth: '1px'
                             }}>
                                 <Topics studentData={studentData} setStudentData={setStudentData} />
                             </Box>
