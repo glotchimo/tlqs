@@ -4,18 +4,19 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+
 export default function Admin() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Button color="error" href="https://www.google.com/">
+            <Button href="Users.jsx">
               Users
             </Button>
-            <Button color="error">Courses</Button>
-            <Button color="error">Sessions</Button>
-            <Button color="error">Topics</Button>
+            <Button href="Courses.jsx">Courses</Button>
+            <Button href="Sessions.jsx">Sessions</Button>
+            <Button href="Topics.jsx">Topics</Button>
           </Typography>
         </Toolbar>
       </AppBar>
