@@ -31,11 +31,10 @@ export default function TutorForm(props) {
   };
 
   return (
-    <form onSubmit={patchCurrentSession(props.id)}>
+    <form onSubmit={() => patchCurrentSession(props.id)}>
       <TextField
         variant="outlined"
-        value={tutorInput}
-        onChange={(event) => setTutorInput(event.target.value)}
+        onChange={(e) => setTutorInput(e.target.value)}
         style={styles.form}
         fullWidth
         rows={6}
