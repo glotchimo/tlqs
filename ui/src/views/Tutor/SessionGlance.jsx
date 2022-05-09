@@ -7,7 +7,20 @@ import TutorForm from "./TutorForm";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
 import Grid from "@mui/material/Grid";
+
 const styles = {
+  sessionGlance: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+      margin: "10px",
+          backgroundColor: "#292929",
+    color: "#fff",
+    height: "100vh",
+    width: "100vw",
+  },
+
   container: {
     backgroundColor: "#292929",
     color: "#fff",
@@ -38,31 +51,43 @@ const styles = {
 export default (props) => {
   const [open, setOpen] = React.useState(false);
 
-  return (
-    <>
-      <div style={styles.container}>
-        <Grid container>
-          <Grid item xs={6}>
-            <h2>{props.name}</h2>
-            <Avatar style={styles.avatarSx}>
-              {props.name.charAt(0).toUpperCase()}
-            </Avatar>
-            <h2>{props.email}</h2>
-            <h2>{props.course}</h2>
-            <h2>{props.topic}</h2>
-            <Button
-              sx={styles.buttonSx}
-              variant="contained"
-              onClick={() => setOpen(true)}
-            >
-              Mark Completed
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <h2>{props.description}</h2>
-          </Grid>
+  const showStudentInformation = () => {
+    return (
+      <div style={styles.sessionGlance}>
+        <Grid item xs={4}>
+          <h2>{props.name}</h2>
+          <Avatar style={styles.avatarSx}>
+            {props.name.charAt(0).toUpperCase()}
+          </Avatar>
+          <h2>{props.email}</h2>
+          <h2>{props.course}</h2>
+          <h2>{props.topic}</h2>
+          <Button
+            sx={styles.buttonSx}
+            variant="contained"
+            onClick={() => setOpen(true)}
+          >
+            Mark Completed
+          </Button>
+        </Grid>
+
+        <Grid item xs={4}>
+          <h2>{props.description}</h2>
         </Grid>
       </div>
+    );
+  };
+
+  return (
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={1}>
+          <Grid container item spacing={3}>
+            {showStudentInformation()}
+          </Grid>
+        </Grid>
+      </Box>
+
       <Modal
         open={open}
         onClose={() => setOpen(false)}
