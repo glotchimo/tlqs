@@ -6,19 +6,22 @@ import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
+import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
 
 const styles = {
   sessionGlance: {
     display: "flex",
-    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-      margin: "10px",
-          backgroundColor: "#292929",
+    backgroundColor: "#292929",
     color: "#fff",
     height: "100vh",
     width: "100vw",
+  },
+  personIcon: {
+    fontSize: "100px",
+    color: "#ffa31a",
   },
 
   container: {
@@ -26,9 +29,6 @@ const styles = {
     color: "#fff",
     height: "100vh",
     width: "100vw",
-  },
-  studentDetails: {
-    color: "#ffa31a",
   },
 
   avatarSx: {
@@ -53,12 +53,11 @@ export default (props) => {
 
   const showStudentInformation = () => {
     return (
+    <Box sx={{ textAlign: "justify", m: 1 }}>
       <div style={styles.sessionGlance}>
         <Grid item xs={4}>
           <h2>{props.name}</h2>
-          <Avatar style={styles.avatarSx}>
-            {props.name.charAt(0).toUpperCase()}
-          </Avatar>
+          <PersonIcon style={styles.personIcon} />
           <h2>{props.email}</h2>
           <h2>{props.course}</h2>
           <h2>{props.topic}</h2>
@@ -75,18 +74,19 @@ export default (props) => {
           <h2>{props.description}</h2>
         </Grid>
       </div>
+          </Box>
     );
   };
 
+
+
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
-          <Grid container item spacing={3}>
+      <Grid container spacing={1}>
+        <Grid container item>
             {showStudentInformation()}
-          </Grid>
         </Grid>
-      </Box>
+      </Grid>
 
       <Modal
         open={open}
