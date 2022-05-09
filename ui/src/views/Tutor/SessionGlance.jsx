@@ -41,25 +41,28 @@ export default (props) => {
   return (
     <>
       <div style={styles.container}>
-        <h1 style={styles.studentDetails}>{props.name}</h1>
-        <Avatar style={styles.avatarIcon} sx={styles.avatarSx}>
-          {props.name.charAt(0).toUpperCase()}
-        </Avatar>
-        <div style={styles.studentDetails}>
-          <h2>{props.email}</h2>
-          <h2>{props.course}</h2>
-          <h2>{props.topic}</h2>
-          <h2>{props.description}</h2>
-          <Button
-            variant="contained"
-            sx={styles.buttonSx}
-            onClick={() => setOpen(true)}
-          >
-            Mark Completed
-          </Button>
-        </div>
+        <Grid container>
+          <Grid item xs={6}>
+            <h2>{props.name}</h2>
+            <Avatar style={styles.avatarSx}>
+              {props.name.charAt(0).toUpperCase()}
+            </Avatar>
+            <h2>{props.email}</h2>
+            <h2>{props.course}</h2>
+            <h2>{props.topic}</h2>
+            <Button
+              sx={styles.buttonSx}
+              variant="contained"
+              onClick={() => setOpen(true)}
+            >
+              Mark Completed
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <h2>{props.description}</h2>
+          </Grid>
+        </Grid>
       </div>
-
       <Modal
         open={open}
         onClose={() => setOpen(false)}
