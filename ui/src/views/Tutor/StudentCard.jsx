@@ -43,7 +43,6 @@ export default (props) => {
           <h2>{props.email}</h2>
           <h2>{props.topic}</h2>
           <h2>{props.course}</h2>
-          <h2>{props.description}</h2>
         </div>
       </CardContent>
     </Card>

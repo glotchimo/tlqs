@@ -82,7 +82,6 @@ export default (props) => {
           <Typography variant="subtitle1" gutterBottom component="div">
             <h2>{props.course}</h2>
           </Typography>
-
           <Button
             sx={styles.buttonSx}
             variant="contained"
