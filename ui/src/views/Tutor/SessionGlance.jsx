@@ -4,16 +4,12 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
-import Avatar from "@mui/material/Avatar";
-import { deepOrange } from "@mui/material/colors";
 import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
+import "@fontsource/niramit";
 
 const styles = {
   sessionGlance: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#292929",
     color: "#fff",
     height: "100vh",
@@ -23,14 +19,12 @@ const styles = {
     fontSize: "100px",
     color: "#ffa31a",
   },
-
   container: {
     backgroundColor: "#292929",
     color: "#fff",
     height: "100vh",
     width: "100vw",
   },
-
   avatarSx: {
     bgcolor: "#808080",
     fontSize: 30,
@@ -38,7 +32,6 @@ const styles = {
     height: 120,
     width: 120,
   },
-
   buttonSx: {
     bgcolor: "#808080",
     hover: "#ffa31a",
@@ -46,21 +39,50 @@ const styles = {
       bgcolor: "#ffa31a",
     },
   },
+  modalStyle: {
+    color: "#fff",
+    position: "absolute",
+    backgroundColor: "#292929",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    border: "2px solid #000",
+    align: "center",
+    boxShadow: 24,
+    p: 4,
+  },
 };
 
 export default (props) => {
   const [open, setOpen] = React.useState(false);
 
-  const showStudentInformation = () => {
-    return (
-    <Box sx={{ textAlign: "justify", m: 1 }}>
-      <div style={styles.sessionGlance}>
-        <Grid item xs={4}>
-          <h2>{props.name}</h2>
-          <PersonIcon style={styles.personIcon} />
-          <h2>{props.email}</h2>
-          <h2>{props.course}</h2>
-          <h2>{props.topic}</h2>
+  return (
+    <>
+      <Grid
+        style={styles.sessionGlance}
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={3} md={5}>
+          <Typography variant="h3" component="div" gutterBottom>
+            {props.name}
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom component="div">
+            <PersonIcon style={styles.personIcon} />
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom component="div">
+            <h2>{props.email}</h2>
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom component="div">
+            <h2>{props.topic}</h2>
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom component="div">
+            <h2>{props.course}</h2>
+          </Typography>
+
           <Button
             sx={styles.buttonSx}
             variant="contained"
@@ -71,20 +93,11 @@ export default (props) => {
         </Grid>
 
         <Grid item xs={4}>
-          <h2>{props.description}</h2>
-        </Grid>
-      </div>
+          <Box sx={{ textAlign: "justify", m: 5 }}>
+            <Typography variant="body1" gutterBottom>
+              <h2>{props.description}</h2>
+            </Typography>
           </Box>
-    );
-  };
-
-
-
-  return (
-    <>
-      <Grid container spacing={1}>
-        <Grid container item>
-            {showStudentInformation()}
         </Grid>
       </Grid>
 

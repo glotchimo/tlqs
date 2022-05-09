@@ -2,15 +2,20 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
 const styles = {
   form: {
-    color: "#FFFFFF",
-    border: "#FFFFFF",
-    marginTop: "10px",
+      marginTop: "10px",
+      color:"#ffffff", 
+      background: "#808080",  
   },
   button: {
-    marginTop: "10px",
+    bgcolor: "#808080",
+    hover: "#ffa31a",
+    "&:hover": {
+      bgcolor: "#ffa31a",
+    },   
+      marginTop: "20px",
+
   },
 };
 
@@ -30,21 +35,23 @@ export default function TutorForm(props) {
     });
   };
 
+
+
   return (
     <form onSubmit={() => patchCurrentSession(props.id)}>
       <TextField
         variant="outlined"
-        onChange={(e) => setTutorInput(e.target.value)}
-        style={styles.form}
+      onChange={(e) => setTutorInput(e.target.value)}
         fullWidth
         rows={6}
         multiline
+        sx={styles.form}
       />
       <Button
         variant="contained"
         color="primary"
-        type="submit"
-        style={styles.button}
+      type="submit"
+      sx={styles.button}
       >
         Submit Notes
       </Button>
