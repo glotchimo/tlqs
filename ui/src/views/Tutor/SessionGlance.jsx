@@ -1,35 +1,37 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
 import Avatar from "@mui/material/Avatar";
-
+import { deepOrange } from "@mui/material/colors";
+import Grid from "@mui/material/Grid";
 const styles = {
-  personIcon: {
-    width: "125px",
-    height: "125px",
-    margin: "0 auto",
+  container: {
+    backgroundColor: "#292929",
+    color: "#fff",
+    height: "100vh",
+    width: "100vw",
   },
   studentDetails: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    color: "#ffa31a",
   },
-  modalStyle: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "#525E75",
-    border: "2px solid #000",
-    align: "center",
-    color: "#fff",
-    boxShadow: 24,
-    p: 4,
+
+  avatarSx: {
+    bgcolor: "#808080",
+    fontSize: 30,
+    size: 100,
+    height: 120,
+    width: 120,
+  },
+
+  buttonSx: {
+    bgcolor: "#808080",
+    hover: "#ffa31a",
+    "&:hover": {
+      bgcolor: "#ffa31a",
+    },
   },
 };
 
@@ -38,16 +40,9 @@ export default (props) => {
 
   return (
     <>
-      <div>
-        <Typography
-          style={styles.studentDetails}
-          gutterBottom
-          variant="h2"
-          component="h2"
-        >
-          {props.name}
-        </Typography>
-        <Avatar style={styles.personIcon}>
+      <div style={styles.container}>
+        <h1 style={styles.studentDetails}>{props.name}</h1>
+        <Avatar style={styles.avatarIcon} sx={styles.avatarSx}>
           {props.name.charAt(0).toUpperCase()}
         </Avatar>
         <div style={styles.studentDetails}>
@@ -55,7 +50,11 @@ export default (props) => {
           <h2>{props.course}</h2>
           <h2>{props.topic}</h2>
           <h2>{props.description}</h2>
-          <Button variant="contained" onClick={() => setOpen(true)}>
+          <Button
+            variant="contained"
+            sx={styles.buttonSx}
+            onClick={() => setOpen(true)}
+          >
             Mark Completed
           </Button>
         </div>
