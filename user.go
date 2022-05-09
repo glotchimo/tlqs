@@ -36,7 +36,7 @@ func UserGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func UserList(w http.ResponseWriter, r *http.Request) {
-	List(w, r, &[]User{}, ByOffset(w, r))
+	List(w, r, &[]User{}, ByOffset(w, r), ByEmail(w, r))
 }
 
 func UserUpdate(w http.ResponseWriter, r *http.Request) {

@@ -1,17 +1,18 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
+import './Student.css';
 import Box from '@mui/material/Box';
-import Department from './Department';
 import Class from './Class';
-import Topics from './Topics';
+import Department from './Department';
+import FormLabel from '@mui/material/FormLabel';
 import Submit from './Submit';
 import StudentInput from './StudentInput';
+import Topics from './Topics';
 import WaitRoom from './WaitRoom'
-import './Student.css';
-import FormLabel from '@mui/material/FormLabel';
 
 
-function Student() {
+function Student({ user }) {
 
+    const fetchLocation = "http://localhost:8080/users/";
     const [studentData, setStudentData] = useState({
         departmentSelection: '',
         classSelection: '',
@@ -20,6 +21,27 @@ function Student() {
     });
 
     const [studentDescription, setStudentDescription] = useState('');
+    const [studentID, setStudentID] = useState('');
+
+    //console.log(user);
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+
+            try {
+                const response = await fetch(fetchLocation + "?email=" + user.email);
+                const json = await response.json();
+                setStudentID(json[0].id);
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
+
+        fetchData();
+
+    }, [studentData])
+
 
     if (studentData.submitted === true) {
         return (<WaitRoom />);
@@ -86,7 +108,7 @@ function Student() {
                 </Box>
 
                 <Box sx={{ bgcolor: '#e8e8e8', }}>
-                    <Submit studentData={studentData} setStudentData={setStudentData} studentDescription={studentDescription} setStudentDescription={setStudentDescription} />
+                    <Submit studentData={studentData} setStudentData={setStudentData} studentDescription={studentDescription} setStudentDescription={setStudentDescription} studentID={studentID} />
                 </Box>
             </div >
 

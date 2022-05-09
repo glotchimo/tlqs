@@ -59,7 +59,7 @@ function Class({ studentData, setStudentData }) {
         <Box sx={{ width: '100%', }}>
             <Autocomplete
                 id="classes-autocomplete"
-                sx={{ width: '80%', ml: '10%', mb: '10%', textAlign: "center" }}
+                sx={{ width: '80%', ml: '10%', mb: '10%', textAlign: "left" }}
                 disabled={disableClasses}
                 open={open}
                 onOpen={() => {

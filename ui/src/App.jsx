@@ -41,7 +41,7 @@ export default () => {
   if (isAuthenticated) {
     switch (role) {
       case 0:
-        return <Student />;
+        return <Student user={user} />;
       case 1:
         return <Tutor />;
       case 2:

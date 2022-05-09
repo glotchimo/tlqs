@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 
-function Submit({ studentData, setStudentData, studentDescription, setStudentDescription }) {
+function Submit({ studentData, setStudentData, studentDescription, setStudentDescription, studentID }) {
     const [submitted, setSubmitted] = useState(false);
     let deptValid = studentData.departmentSelection !== '';
     let classValid = studentData.classSelection !== '';
@@ -13,12 +13,12 @@ function Submit({ studentData, setStudentData, studentDescription, setStudentDes
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "student": "WIP -- not valid",
-            "tutor": "WIP -- not valid",
+            "student": studentID,
+            "tutor": '',
             "course": studentData.classSelection,
             "topic": studentData.topicSelection,
             "description": studentDescription,
-            "retrospective": "Not yet touched."
+            "retrospective": ''
         });
 
         var requestOptions = {
