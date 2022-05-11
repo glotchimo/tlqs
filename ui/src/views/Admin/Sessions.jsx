@@ -19,6 +19,7 @@ export default () => {
     { field: "topic", headerName: "Topic", flex: 1 },
     { field: "description", headerName: "Description", flex: 1 },
     { field: "retrospective", headerName: "Retrospective", flex: 1 },
+    {field: "status", headerName: "Status", flex: 1},
   ];
 
   const toolbar = () => {
