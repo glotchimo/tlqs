@@ -35,8 +35,6 @@ export default function TutorForm(props) {
     });
   };
 
-
-
   return (
     <form onSubmit={() => patchCurrentSession(props.id)}>
       <TextField

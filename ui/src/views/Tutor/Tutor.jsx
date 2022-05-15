@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 const styles = {
   gridContainer: {
@@ -31,7 +32,7 @@ export default () => {
 
   const displaySessionData = (currentSession) => {
     return (
-      <Grid item xs={12} key={currentSession.session.id}>
+      <Grid item xs={6} key={currentSession.session.id}>
         <StudentCard
           key={currentSession.session.id}
           id={currentSession.session.id}
@@ -46,7 +47,7 @@ export default () => {
   };
 
   const fetchAllSessionData = () => {
-    fetch("/sessions/")
+    fetch("http://localhost:8080/sessions/")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err));
@@ -54,7 +55,7 @@ export default () => {
 
   const fetchUser = async (userId) => {
     try {
-      let response = await fetch(`/users/${userId}/`);
+      let response = await fetch(`http://localhost:8080/users/${userId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -64,7 +65,7 @@ export default () => {
 
   const fetchCourse = async (classId) => {
     try {
-      let response = await fetch(`/courses/${classId}/`);
+      let response = await fetch(`http://localhost:8080/courses/${classId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -118,7 +119,7 @@ export default () => {
   if (sessionAndUsers.length === 0) {
     return (
       <div style={styles.container}>
-        <h1>Woohoo! You're all caught up with everything. </h1>
+        <h1>Woohoo! You're all caught up with everything.</h1>
       </div>
     );
   }
@@ -141,16 +142,13 @@ export default () => {
       </div>
 
       <div className="SecondaryView">
-        <Grid
-          container
-          spacing={4}
-          style={styles.gridContainer}
-          justify="center"
-        >
-          {sessionAndUsers.slice(1).map((currentSession) => {
-            return displaySessionData(currentSession);
-          })}
-        </Grid>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={3}>
+            {sessionAndUsers.slice(1).map((currentSession) => {
+              return displaySessionData(currentSession);
+            })}
+          </Grid>
+        </Box>
       </div>
     </>
   );
