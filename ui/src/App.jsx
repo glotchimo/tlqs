@@ -43,8 +43,10 @@ export default () => {
       case 0:
         return <Student user={user} />;
       case 1:
-        return <Tutor />;
+        return <Student />;
       case 2:
+        return <Tutor />;
+      case 3:
         return <Admin />;
       default:
         return "Loading...";

@@ -10,7 +10,8 @@ import (
 type Role int
 
 const (
-	Student Role = iota
+	_ Role = iota
+	Student
 	Tutor
 	Faculty
 )
