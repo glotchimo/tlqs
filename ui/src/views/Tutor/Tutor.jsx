@@ -6,20 +6,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 const styles = {
-  gridContainer: {
-    paddingLeft: "40px",
-    paddingRight: "40px",
-    paddingTop: "40px",
+  gridDiv: {
+    margin: "20px",
   },
   container: {
-    backgroundColor: "#525E75",
+    backgroundColor: "343a40",
     color: "#fff",
-    height: "100vh",
-    width: "100vw",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
   },
 };
 
@@ -125,23 +117,21 @@ export default () => {
   }
 
   return (
-    <>
-      <div style={styles.container}>
-        <SessionGlance
-          style={styles.container}
-          key={sessionAndUsers[0].session.id}
-          id={sessionAndUsers[0].session.id}
-          name={sessionAndUsers[0].user.name}
-          email={sessionAndUsers[0].user.email}
-          topic={sessionAndUsers[0].session.topic}
-          course={
-            sessionAndUsers[0].class.code + " " + sessionAndUsers[0].class.title
-          }
-          description={sessionAndUsers[0].session.description}
-        />
-      </div>
+    <Box backgroundColor="#292929">
+      <SessionGlance
+        style={styles.container}
+        key={sessionAndUsers[0].session.id}
+        id={sessionAndUsers[0].session.id}
+        name={sessionAndUsers[0].user.name}
+        email={sessionAndUsers[0].user.email}
+        topic={sessionAndUsers[0].session.topic}
+        course={
+          sessionAndUsers[0].class.code + " " + sessionAndUsers[0].class.title
+        }
+        description={sessionAndUsers[0].session.description}
+      />
 
-      <div className="SecondaryView">
+      <div className="SecondaryView" style={styles.gridDiv}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={3}>
             {sessionAndUsers.slice(1).map((currentSession) => {
@@ -150,6 +140,6 @@ export default () => {
           </Grid>
         </Box>
       </div>
-    </>
+    </Box>
   );
 };

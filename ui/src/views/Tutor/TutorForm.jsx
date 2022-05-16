@@ -9,10 +9,10 @@ const styles = {
       background: "#808080",  
   },
   button: {
-    bgcolor: "#808080",
-    hover: "#ffa31a",
+    bgcolor: "#343a40",
+    hover: "#b7142e",
     "&:hover": {
-      bgcolor: "#ffa31a",
+      bgcolor: "#b7142e",
     },   
       marginTop: "20px",
 

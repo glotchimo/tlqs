@@ -6,37 +6,23 @@ import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
 import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
-import "@fontsource/niramit";
 
 const styles = {
   sessionGlance: {
     backgroundColor: "#292929",
-    color: "#fff",
     height: "100vh",
-    width: "100vw",
+    display: 'flex',
+    color: "#fff",
   },
   personIcon: {
     fontSize: "100px",
-    color: "#ffa31a",
-  },
-  container: {
-    backgroundColor: "#292929",
-    color: "#fff",
-    height: "100vh",
-    width: "100vw",
-  },
-  avatarSx: {
-    bgcolor: "#808080",
-    fontSize: 30,
-    size: 100,
-    height: 120,
-    width: 120,
+    color: "#b7142e",
   },
   buttonSx: {
-    bgcolor: "#808080",
+    bgcolor: "#343a40",
     hover: "#ffa31a",
     "&:hover": {
-      bgcolor: "#ffa31a",
+      bgcolor: "#b7142e",
     },
   },
   modalStyle: {
@@ -47,7 +33,7 @@ const styles = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    border: "2px solid #000",
+    border: "2px solid #343a40",
     align: "center",
     boxShadow: 24,
     p: 4,
