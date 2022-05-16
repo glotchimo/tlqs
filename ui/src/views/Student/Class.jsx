@@ -52,7 +52,7 @@ function Class({ studentData, setStudentData }) {
     }, [open]);
 
     const handleChange = (event, newValue) => {
-        newValue === null ? studentData.classSelection = '' : studentData.classSelection = newValue.code;
+        newValue === null ? studentData.classSelection = '' : studentData.classSelection = newValue.id;
     };
 
     return (
