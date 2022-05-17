@@ -43,7 +43,7 @@ export default () => {
       case 0:
         return <Student user={user} />;
       case 1:
-        return <Student />;
+        return <Student user={user} />;
       case 2:
         return <Tutor />;
       case 3:

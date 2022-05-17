@@ -1,0 +1,6 @@
+#preview-box pre code {
+    width: auto !important;
+    color: red;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
