@@ -11,8 +11,11 @@ const styles = {
   sessionGlance: {
     backgroundColor: "#292929",
     height: "100vh",
-    display: 'flex',
+    display: "flex",
     color: "#fff",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   personIcon: {
     fontSize: "100px",
@@ -45,46 +48,44 @@ export default (props) => {
 
   return (
     <>
-      <Grid
-        style={styles.sessionGlance}
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item xs={3} md={5}>
-          <Typography variant="h3" component="div" gutterBottom>
-            {props.name}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            <PersonIcon style={styles.personIcon} />
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            <h2>{props.email}</h2>
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            <h2>{props.topic}</h2>
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            <h2>{props.course}</h2>
-          </Typography>
-          <Button
-            sx={styles.buttonSx}
-            variant="contained"
-            onClick={() => setOpen(true)}
-          >
-            Mark Completed
-          </Button>
-        </Grid>
+      <div className="parent">
+        <Grid style={styles.sessionGlance} spacing={3} container>
+          <Grid item xs={6}>
+            <Box sx={{ textAlign: "left", m: 5 }}>
+              <Typography variant="h3" component="div" gutterBottom>
+                {props.name}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                <PersonIcon style={styles.personIcon} />
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                <h2>{props.email}</h2>
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                <h2>{props.topic}</h2>
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                <h2>{props.course}</h2>
+              </Typography>
+              <Button
+                sx={styles.buttonSx}
+                variant="contained"
+                onClick={() => setOpen(true)}
+              >
+                Mark Completed
+              </Button>
+            </Box>
+          </Grid>
 
-        <Grid item xs={4}>
-          <Box sx={{ textAlign: "justify", m: 5 }}>
-            <Typography variant="body1" gutterBottom>
-              <h2>{props.description}</h2>
-            </Typography>
-          </Box>
+          <Grid item xs={6}>
+            <Box sx={{ textAlign: "left" }}>
+              <Typography variant="subtitle1" gutterBottom>
+                <h2>{props.description}</h2>
+              </Typography>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
 
       <Modal
         open={open}

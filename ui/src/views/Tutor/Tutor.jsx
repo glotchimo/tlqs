@@ -9,7 +9,8 @@ const styles = {
   gridDiv: {
     margin: "20px",
   },
-  container: {
+
+    container: {
     backgroundColor: "343a40",
     color: "#fff",
   },
@@ -117,7 +118,7 @@ export default () => {
   }
 
   return (
-    <Box backgroundColor="#292929">
+    <Box className="MainView" backgroundColor="#292929">
       <SessionGlance
         style={styles.container}
         key={sessionAndUsers[0].session.id}
