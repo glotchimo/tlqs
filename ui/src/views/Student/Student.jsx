@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Tutorial from './Tutorial'
@@ -9,8 +9,10 @@ import Problem from './Problem'
 import Submit from './Submit'
 import './Student.css'
 
-function Student() {
+function Student({ user }) {
 
+    const fetchLocation = "http://localhost:8080/users/";
+    const [studentId, setStudentId] = useState('');
     const [studentTopic, setStudentTopic] = useState('');
     const [studentProblem, setStudentProblem] = useState('');
     const [sessionData, setSessionData] = useState({
@@ -19,6 +21,24 @@ function Student() {
         problem: '',
         submitted: false
     });
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+            try {
+                const response = await fetch(fetchLocation + "?email=" + user.email);
+                const json = await response.json();
+                if (studentId == '') {
+                    setStudentId(json[0].id);
+                }
+            } catch (error) {
+                console.log("error", error);
+            }
+        }
+
+        fetchData();
+
+    }, []);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -61,7 +81,7 @@ function Student() {
                         justifyContent="center"
                     >
                         <Problem studentProblem={studentProblem} setStudentProblem={setStudentProblem} />
-                        <Submit sessionData={sessionData} setSessionData={setSessionData} studentProblem={studentProblem} studentTopic={studentTopic} />
+                        <Submit sessionData={sessionData} setSessionData={setSessionData} studentProblem={studentProblem} studentTopic={studentTopic} studentId={studentId} />
                     </Grid>
                 </Grid>
             </Grid>
