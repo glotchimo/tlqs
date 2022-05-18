@@ -15,6 +15,7 @@ const styles = {
   button: {
     bgcolor: "#343a40",
     hover: "#b7142e",
+    marginRight: "10px",
     "&:hover": {
       bgcolor: "#b7142e",
     },
@@ -23,13 +24,10 @@ const styles = {
 };
 
 export default function TutorForm(props) {
-    const [tutorInput, setTutorInput] = useState("");
-    const [problemPreview, setProblemPreview] = useState("");
+  const [tutorInput, setTutorInput] = useState("");
 
-    const handleChange = (event) => {
-        setTutorInput(event.target.value);
-        setProblemPreview(tutorInput);
-        console.log(tutorInput);
+  const handleChange = (event) => {
+    setTutorInput(event.target.value);
   };
 
   const patchCurrentSession = async (sessionId) => {
@@ -48,14 +46,14 @@ export default function TutorForm(props) {
   return (
     <FormControl fullWidth>
       <form onSubmit={() => patchCurrentSession(props.id)}>
-      <TextField
-      variant="outlined"
-      onChange={handleChange}
-        style={styles.form}
-        fullWidth
-        rows={6}
-        multiline
-      />
+        <TextField
+          variant="outlined"
+          onChange={handleChange}
+          style={styles.form}
+          fullWidth
+          rows={6}
+          multiline
+        />
         <Box
           id="preview-container"
           sx={{ m: 1, border: "1px solid", borderRadius: "4px 4px" }}
@@ -68,10 +66,11 @@ export default function TutorForm(props) {
               fontFamily: "IBM Plex Sans",
               wordWrap: "break-line",
               overflowWrap: "break-line",
-            }}>
+            }}
+          >
             <ReactMarkdown>{tutorInput}</ReactMarkdown>
           </Box>
-      </Box>
+        </Box>
 
         <Button
           variant="contained"
@@ -80,6 +79,9 @@ export default function TutorForm(props) {
           sx={styles.button}
         >
           Submit Notes
+        </Button>
+        <Button variant="contained" color="primary" sx={styles.button}>
+          Preview
         </Button>
       </form>
     </FormControl>

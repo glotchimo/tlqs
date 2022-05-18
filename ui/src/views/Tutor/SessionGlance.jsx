@@ -4,16 +4,14 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
-import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
 
 const styles = {
-  sessionGlance: {
+    sessionGlance: {
     backgroundColor: "#292929",
     height: "100vh",
-    display: "flex",
     color: "#fff",
-    flexDirection: "column",
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -50,13 +48,10 @@ export default (props) => {
     <>
       <div className="parent">
         <Grid style={styles.sessionGlance} container>
-          <Grid item xs={6}>
+        <Grid item xs={4} md={5}>
             <Box sx={{ textAlign: "left", m: 5 }}>
               <Typography variant="h3" component="div" gutterBottom>
                 {props.name}
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom component="div">
-                <PersonIcon style={styles.personIcon} />
               </Typography>
               <Typography variant="subtitle1" gutterBottom component="div">
                 <h2>{props.email}</h2>
@@ -77,9 +72,9 @@ export default (props) => {
             </Box>
           </Grid>
 
-          <Grid item xs={6}>
-            <Box sx={{ textAlign: "left" }}>
-              <Typography variant="subtitle1" gutterBottom>
+          <Grid item xs={4} md={5}>
+            <Box sx={{ textAlign: "justify" }}>
+            <Typography variant="subtitle1" gutterBottom>
                 <h2>{props.description}</h2>
               </Typography>
             </Box>
