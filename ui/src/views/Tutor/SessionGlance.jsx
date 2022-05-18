@@ -49,7 +49,7 @@ export default (props) => {
   return (
     <>
       <div className="parent">
-        <Grid style={styles.sessionGlance} spacing={3} container>
+        <Grid style={styles.sessionGlance} container>
           <Grid item xs={6}>
             <Box sx={{ textAlign: "left", m: 5 }}>
               <Typography variant="h3" component="div" gutterBottom>
