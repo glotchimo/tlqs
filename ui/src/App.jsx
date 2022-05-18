@@ -13,6 +13,7 @@ export default () => {
     getAccessTokenSilently,
   } = useAuth0();
 
+  const [id, setID] = React.useState("");
   const [role, setRole] = React.useState(-1);
 
   React.useEffect(() => {
@@ -30,7 +31,10 @@ export default () => {
       body: JSON.stringify({ name: user.name, email: user.email }),
     })
       .then((response) => response.json())
-      .then((data) => setRole(data.role))
+      .then((data) => {
+        setID(data.id);
+        setRole(data.role);
+      })
       .catch((e) => console.log(e));
   }, [user]);
 
@@ -40,10 +44,8 @@ export default () => {
 
   if (isAuthenticated) {
     switch (role) {
-      case 0:
-        return <Student user={user} />;
       case 1:
-        return <Student user={user} />;
+        return <Student user={id} />;
       case 2:
         return <Tutor />;
       case 3:
