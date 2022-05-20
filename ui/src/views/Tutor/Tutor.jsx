@@ -10,7 +10,7 @@ const styles = {
     margin: "20px",
   },
 
-    container: {
+  container: {
     backgroundColor: "343a40",
     color: "#fff",
   },
@@ -131,16 +131,6 @@ export default () => {
         }
         description={sessionAndUsers[0].session.description}
       />
-
-      <div className="SecondaryView" style={styles.gridDiv}>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={3}>
-            {sessionAndUsers.slice(1).map((currentSession) => {
-              return displaySessionData(currentSession);
-            })}
-          </Grid>
-        </Box>
-      </div>
     </Box>
   );
 };

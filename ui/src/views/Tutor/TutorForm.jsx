@@ -5,6 +5,11 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import ReactMarkdown from "react-markdown";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import Typography from "@mui/material/Typography";
 
 const styles = {
   form: {
@@ -21,13 +26,26 @@ const styles = {
     },
     marginTop: "20px",
   },
+  modalStyle: {
+      color: "#ffffff",
+      backgroundColor: "#292929",
+  }
 };
 
+
 export default function TutorForm(props) {
+  const [open, setOpen] = React.useState(false);
   const [tutorInput, setTutorInput] = useState("");
 
   const handleChange = (event) => {
     setTutorInput(event.target.value);
+  };
+  const handleButtonClick = () => {
+      if (tutorInput.length === 0) {
+          alert("Please enter some text into the preview box before showing.");
+    } else {
+      setOpen(true);
+    }
   };
 
   const patchCurrentSession = async (sessionId) => {
@@ -44,33 +62,16 @@ export default function TutorForm(props) {
   };
 
   return (
-    <FormControl fullWidth>
-      <form onSubmit={() => patchCurrentSession(props.id)}>
-        <TextField
-          variant="outlined"
-          onChange={handleChange}
-          style={styles.form}
-          fullWidth
-          rows={6}
-          multiline
-        />
-        <Box
-          id="preview-container"
-          sx={{ m: 1, border: "1px solid", borderRadius: "4px 4px" }}
-        >
-          <Box
-            id="preview-box"
-            sx={{
-              minHeight: "20vh",
-              m: 1,
-              fontFamily: "IBM Plex Sans",
-              wordWrap: "break-line",
-              overflowWrap: "break-line",
-            }}
-          >
-            <ReactMarkdown>{tutorInput}</ReactMarkdown>
-          </Box>
-        </Box>
+    <>
+      <form onSubmit={() => patchCurrentSession(props.sessionId)}>
+        <FormControl fullWidth>
+          <TextField
+            multiline
+            placeholder="Where do I begin..."
+            rows={25}
+            onChange={handleChange}
+          />
+        </FormControl>
 
         <Button
           variant="contained"
@@ -80,10 +81,30 @@ export default function TutorForm(props) {
         >
           Submit Notes
         </Button>
-        <Button variant="contained" color="primary" sx={styles.button}>
-          Preview
+        <Button
+          sx={styles.button}
+          variant="contained"
+          onClick={() => handleButtonClick()}
+        >
+          Show Preview
         </Button>
       </form>
-    </FormControl>
+      <Dialog
+      open={open}
+      style={{width: "100%", height: "100%"}}
+        onClose={() => setOpen(false)}
+        aria-labelledby="customized-dialog-title"
+      >
+      <DialogContent dividers
+          style={styles.modalStyle}
+      >
+          <Box sx={{ textAlign: "left", m: 5 }}>
+            <Typography gutterBottom>
+              <ReactMarkdown>{tutorInput}</ReactMarkdown>
+            </Typography>
+          </Box>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
