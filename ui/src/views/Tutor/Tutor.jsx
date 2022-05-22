@@ -39,8 +39,18 @@ export default () => {
     );
   };
 
+  const compareTimes = (timeA, timeB) => {
+    let comparison = 0;
+    if (timeA.session.created_at > timeB.session.created_at) {
+      comparison = 1;
+    } else if (timeA.session.created_at < timeB.session.created_at) {
+      comparison = -1;
+    }
+    return comparison;
+  };
+
   const fetchAllSessionData = () => {
-    fetch("http://localhost:8080/sessions/")
+    fetch("/sessions/")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err));
@@ -48,7 +58,7 @@ export default () => {
 
   const fetchUser = async (userId) => {
     try {
-      let response = await fetch(`http://localhost:8080/users/${userId}/`);
+      let response = await fetch(`/users/${userId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -58,7 +68,7 @@ export default () => {
 
   const fetchCourse = async (classId) => {
     try {
-      let response = await fetch(`http://localhost:8080/courses/${classId}/`);
+      let response = await fetch(`/courses/${classId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -118,10 +128,7 @@ export default () => {
   }
 
   if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
-    const sorted = sessionAndUsers.sort((a, b) => {
-      return a.session.id - b.session.id;
-    });
-    setSessionAndUsers(sorted);
+    sessionAndUsers.sort(compareTimes);
     setSessionsSorted(true);
   }
 

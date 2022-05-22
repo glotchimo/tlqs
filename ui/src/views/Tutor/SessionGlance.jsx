@@ -98,7 +98,7 @@ export default (props) => {
                 overflow: "auto",
               }}
             >
-              <TutorForm id={props.id}/>
+              <TutorForm id={props.id} />
             </Box>
           </Grid>
         </Grid>
