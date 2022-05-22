@@ -1,14 +1,12 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 
 const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: "#A41029",
   color: "#fff",
-  backgroundColor: "#343a40",
   padding: theme.spacing(1),
   textAlign: "center",
   margintop: theme.spacing(1),
@@ -18,18 +16,20 @@ const Item = styled(Paper)(({ theme }) => ({
 export default (props) => {
   return (
     <Item>
-      <Typography variant="h6" gutterBottom component="div">
-        {props.name}
-      </Typography>
-      <Typography variant="h6" gutterBottom component="div">
-        {props.email}
-      </Typography>
-      <Typography variant="h6" gutterBottom component="div">
-        {props.topic}
-      </Typography>
-      <Typography variant="h6" gutterBottom component="div">
-        {props.course}
-      </Typography>
+      <Box sx={{ textAlign: "left", m: 5 }}>
+        <Typography variant="h6" gutterBottom component="div">
+          {props.name}
+        </Typography>
+        <Typography gutterBottom component="div">
+          {props.email}
+        </Typography>
+        <Typography gutterBottom component="div">
+          {props.topic}
+        </Typography>
+        <Typography gutterBottom component="div">
+          {props.course}
+        </Typography>
+      </Box>
     </Item>
   );
 };

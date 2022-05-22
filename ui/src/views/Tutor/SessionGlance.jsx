@@ -1,6 +1,4 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
@@ -15,25 +13,18 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-  personIcon: {
-    fontSize: "100px",
+  studentTitle: {
+    fontSize: "4.5em",
+    fontWeight: "bold",
     color: "#b7142e",
   },
-  buttonSx: {
-    bgcolor: "#343a40",
-    hover: "#ffa31a",
-    "&:hover": {
-      bgcolor: "#b7142e",
-    },
-  },
-  };
+};
 
 export default (props) => {
-
   return (
     <>
       <Grid container>
-        <Grid item xs={6} sx={{ backgroundColor: "white", height: "100vh" }}>
+        <Grid item xs={6} sx={{ height: "100vh" }}>
           <Grid
             container
             spacing={0}
@@ -43,7 +34,12 @@ export default (props) => {
           >
             <div>
               <Box sx={{ textAlign: "left", m: 5 }}>
-                <Typography variant="h3" component="div" gutterBottom>
+                <Typography
+                  variant="h3"
+                  component="div"
+                  style={styles.studentTitle}
+                  gutterBottom
+                >
                   {props.name}
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom component="div">
@@ -102,7 +98,7 @@ export default (props) => {
                 overflow: "auto",
               }}
             >
-              <TutorForm />
+              <TutorForm id={props.id}/>
             </Box>
           </Grid>
         </Grid>

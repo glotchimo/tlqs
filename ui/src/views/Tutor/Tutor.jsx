@@ -6,18 +6,18 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 const styles = {
-  gridDiv: {
-    margin: "20px",
-  },
-
   container: {
-    backgroundColor: "343a40",
-    color: "#fff",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#b7142e",
+    fontSize: "20px",
   },
 };
 
 export default () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [sessionsSorted, setSessionsSorted] = useState(false);
   const [data, setData] = useState([]);
   const [sessionAndUsers, setSessionAndUsers] = useState([]);
   const previousSessionAndUsers = React.useRef(sessionAndUsers);
@@ -117,20 +117,37 @@ export default () => {
     );
   }
 
+  if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
+    const sorted = sessionAndUsers.sort((a, b) => {
+      return a.session.id - b.session.id;
+    });
+    setSessionAndUsers(sorted);
+    setSessionsSorted(true);
+  }
+
   return (
-    <Box className="MainView" backgroundColor="#292929">
-      <SessionGlance
-        style={styles.container}
-        key={sessionAndUsers[0].session.id}
-        id={sessionAndUsers[0].session.id}
-        name={sessionAndUsers[0].user.name}
-        email={sessionAndUsers[0].user.email}
-        topic={sessionAndUsers[0].session.topic}
-        course={
-          sessionAndUsers[0].class.code + " " + sessionAndUsers[0].class.title
-        }
-        description={sessionAndUsers[0].session.description}
-      />
+    <Box>
+      <div className="MainView">
+        <SessionGlance
+          style={styles.container}
+          key={sessionAndUsers[0].session.id}
+          id={sessionAndUsers[0].session.id}
+          name={sessionAndUsers[0].user.name}
+          email={sessionAndUsers[0].user.email}
+          topic={sessionAndUsers[0].session.topic}
+          course={
+            sessionAndUsers[0].class.code + " " + sessionAndUsers[0].class.title
+          }
+          description={sessionAndUsers[0].session.description}
+        />
+        <div className="SecondaryView">
+          <Grid container spacing={4}>
+            {sessionAndUsers.slice(1).map((currentSession) => {
+              return displaySessionData(currentSession);
+            })}
+          </Grid>
+        </div>
+      </div>
     </Box>
   );
 };

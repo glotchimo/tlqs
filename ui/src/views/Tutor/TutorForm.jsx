@@ -12,26 +12,31 @@ import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
 
 const styles = {
-  form: {
-    marginTop: "10px",
-    color: "#ffffff",
-    background: "#808080",
+  textArea: {
+    style: {
+      lineHeight: 1.5,
+      fontSize: 20,
+      color: "#000000",
+    },
+  },
+  typography: {
+    fontSize: 20,
   },
   button: {
-    bgcolor: "#343a40",
+    bgcolor: "#b7142e",
     hover: "#b7142e",
     marginRight: "10px",
     "&:hover": {
-      bgcolor: "#b7142e",
+      bgcolor: "#A41029",
     },
     marginTop: "20px",
   },
   modalStyle: {
-      color: "#ffffff",
-      backgroundColor: "#292929",
-  }
+    color: "#ffffff",
+    fontSize: 20,
+    backgroundColor: "#292929",
+  },
 };
-
 
 export default function TutorForm(props) {
   const [open, setOpen] = React.useState(false);
@@ -41,8 +46,8 @@ export default function TutorForm(props) {
     setTutorInput(event.target.value);
   };
   const handleButtonClick = () => {
-      if (tutorInput.length === 0) {
-          alert("Please enter some text into the preview box before showing.");
+    if (tutorInput.length === 0) {
+      alert("Please enter some text into the preview box before showing.");
     } else {
       setOpen(true);
     }
@@ -63,16 +68,16 @@ export default function TutorForm(props) {
 
   return (
     <>
-      <form onSubmit={() => patchCurrentSession(props.sessionId)}>
+      <form onSubmit={() => patchCurrentSession(props.id)}>
         <FormControl fullWidth>
           <TextField
-            multiline
-            placeholder="Where do I begin..."
+            multiline={true}
             rows={25}
+            placeholder="Where do I begin..."
             onChange={handleChange}
+            inputProps={styles.textArea}
           />
         </FormControl>
-
         <Button
           variant="contained"
           color="primary"
@@ -90,16 +95,15 @@ export default function TutorForm(props) {
         </Button>
       </form>
       <Dialog
-      open={open}
-      style={{width: "100%", height: "100%"}}
+        open={open}
+        fullWidth
+        maxWidth="md"
+        wordWrap="break-word"
         onClose={() => setOpen(false)}
-        aria-labelledby="customized-dialog-title"
       >
-      <DialogContent dividers
-          style={styles.modalStyle}
-      >
-          <Box sx={{ textAlign: "left", m: 5 }}>
-            <Typography gutterBottom>
+        <DialogContent dividers style={styles.modalStyle}>
+          <Box sx={{ textAlign: "left", m: 5, fontSize: "100em" }}>
+            <Typography gutterBottom style={styles.typography}>
               <ReactMarkdown>{tutorInput}</ReactMarkdown>
             </Typography>
           </Box>
