@@ -5,51 +5,56 @@ import Student from "./views/Student/Student.jsx";
 import Tutor from "./views/Tutor/Tutor.jsx";
 
 export default () => {
-  const {
-    isAuthenticated,
-    isLoading,
-    loginWithRedirect,
-    user,
-    getAccessTokenSilently,
-  } = useAuth0();
 
-  const [role, setRole] = React.useState(-1);
 
-  React.useEffect(() => {
-    if (user == null) {
-      return;
-    }
+  return(
+    <Admin/>
+  );
+  // const {
+  //   isAuthenticated,
+  //   isLoading,
+  //   loginWithRedirect,
+  //   user,
+  //   getAccessTokenSilently,
+  // } = useAuth0();
 
-    fetch("/users/", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authentication: `Bearer ${getAccessTokenSilently().then((t) => t)}`,
-      },
-      body: JSON.stringify({ name: user.name, email: user.email }),
-    })
-      .then((response) => response.json())
-      .then((data) => setRole(data.role))
-      .catch((e) => console.log(e));
-  }, [user]);
+  // const [role, setRole] = React.useState(-1);
 
-  if (isLoading) {
-    return "Loading...";
-  }
+  // React.useEffect(() => {
+  //   if (user == null) {
+  //     return;
+  //   }
 
-  if (isAuthenticated) {
-    switch (role) {
-      case 0:
-        return <Student />;
-      case 1:
-        return <Tutor />;
-      case 2:
-        return <Admin />;
-      default:
-        return "Loading...";
-    }
-  } else {
-    return loginWithRedirect();
-  }
+  //   fetch("/users/", {
+  //     method: "POST",
+  //     mode: "cors",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authentication: `Bearer ${getAccessTokenSilently().then((t) => t)}`,
+  //     },
+  //     body: JSON.stringify({ name: user.name, email: user.email }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => setRole(data.role))
+  //     .catch((e) => console.log(e));
+  // }, [user]);
+
+  // if (isLoading) {
+  //   return "Loading...";
+  // }
+
+  // if (isAuthenticated) {
+  //   switch (role) {
+  //     case 0:
+  //       return <Student />;
+  //     case 1:
+  //       return <Tutor />;
+  //     case 2:
+  //       return <Admin />;
+  //     default:
+  //       return "Loading...";
+  //   }
+  // } else {
+  //   return loginWithRedirect();
+  // }
 };
