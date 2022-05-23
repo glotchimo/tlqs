@@ -14,11 +14,12 @@ function Department({ sessionData, setSessionData }) {
     };
 
     return (
-        <Box sx={{ width: '90%', height: '21.5vh', mt: '5vh', backgroundColor: '#E9E9E9', overflow: 'hidden' }}>
+        <Box sx={{ width: '90%', height: '10vh', mt: '5vh', overflow: 'hidden' }}>
             <FormControl fullWidth>
-                <InputLabel sx={{ m: 2 }} id="department-select-label">Department</InputLabel>
+                <InputLabel sx={{ m: 2, }}
+                    id="department-select-label">Department</InputLabel>
                 <Select
-                    sx={{ m: 2 }}
+                    sx={{ m: 2, }}
                     labelId="department-select-label"
                     id="department-simple-select"
                     value={department}

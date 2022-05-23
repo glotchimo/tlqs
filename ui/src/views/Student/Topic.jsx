@@ -12,10 +12,9 @@ function Topic({ studentTopic, setStudentTopic }) {
     };
 
     return (
-        <Box sx={{ width: '90%', height: '21.5vh', backgroundColor: '#E9E9E9', overflow: 'hidden' }}>
+        <Box sx={{ width: '90%', height: '10vh', overflow: 'hidden' }}>
             <FormControl fullWidth>
                 <TextField
-                    boxShadow={4}
                     label="Topic"
                     placeholder='What topics does your problem touch on?'
                     sx={{ m: 2 }}

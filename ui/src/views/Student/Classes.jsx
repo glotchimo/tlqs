@@ -28,9 +28,7 @@ function Classes({ sessionData, setSessionData }) {
     }, [sessionData]);
 
     useEffect(() => {
-        console.log(scope);
         getCourses();
-
     }, [scope])
 
     const handleChange = (event, newValue) => {
@@ -38,7 +36,7 @@ function Classes({ sessionData, setSessionData }) {
     };
 
     return (
-        <Box sx={{ width: '90%', height: '21.5vh', backgroundColor: '#E9E9E9', overflow: 'hidden' }}>
+        <Box sx={{ width: '90%', height: '10vh', overflow: 'hidden' }}>
             <Autocomplete
                 disablePortal
                 disabled={disableClasses}

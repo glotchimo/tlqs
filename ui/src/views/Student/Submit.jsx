@@ -61,14 +61,19 @@ function Submit({ sessionData, setSessionData, studentProblem, studentTopic, stu
         }
         else {
             let notification = verifyMissingFields();
-            console.log(sessionData);
-            console.log(studentId);
-            //alert(notification);
+            alert(notification);
         }
     }
     return (
         <Box sx={{ mt: '2vh', overflow: 'hidden' }}>
-            <Button variant="contained" onClick={verify}>Submit</Button>
+            <Button variant="contained" onClick={verify} sx={{
+                color: '#white',
+                bgcolor: '#b7142e',
+                '&:hover': {
+                    backgroundColor: '#D41837',
+                    color: 'white'
+                }
+            }}>Submit</Button>
         </Box>
     )
 }
