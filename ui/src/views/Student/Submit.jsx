@@ -19,7 +19,8 @@ function Submit({ sessionData, setSessionData, studentProblem, studentTopic, stu
             "course": sessionData.classId,
             "topic": studentTopic,
             "description": studentProblem,
-            "retrospective": ''
+            "retrospective": '',
+            "completed": false
         });
 
         var requestOptions = {
