@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
 import Grid from "@mui/material/Grid";
+import ReactMarkdown from "react-markdown";
 
 const styles = {
   sessionGlance: {
@@ -54,9 +55,10 @@ export default (props) => {
               </Box>
             </div>
             <div>
-              <Box sx={{ textAlign: "left", m: 5 }}>
-                <Typography variant="subtitle1" gutterBottom>
-                  <h2>{props.description}</h2>
+      <Box
+      sx={{ textAlign: "left", m: 2, overflow: "auto", height: "50vh" }}>
+                <Typography gutterBottom>
+                  <ReactMarkdown>{props.description}</ReactMarkdown>
                 </Typography>
               </Box>
             </div>
@@ -66,8 +68,7 @@ export default (props) => {
           item
           xs={6}
           sx={{
-            backgroundColor: "white",
-            height: "100vh",
+            backgroundColor: "white", height: "100vh",
             "*::-webkit-scrollbar": {
               width: "8px",
               height: "8px",
@@ -77,7 +78,7 @@ export default (props) => {
               borderRadius: "10px",
             },
             "*::-webkit-scrollbar-thumb": {
-              backgroundColor: "#dfdfdf",
+              backgroundColor: "#b7142e",
               outline: "10px",
             },
           }}
@@ -92,8 +93,7 @@ export default (props) => {
             <Box
               sx={{
                 width: "90%",
-                height: "85vh",
-                mt: "5vh",
+                height: "90%",
                 backgroundColor: "white",
                 overflow: "auto",
               }}
