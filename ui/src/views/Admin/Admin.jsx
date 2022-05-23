@@ -14,15 +14,15 @@ export default () => {
   let bar = (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar style={{backgroundColor:"#343a40"}}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Button style={{ color: "white" }} onClick={() => setView(0)}>
+            <Button style={{ color:"#fff", backgroundColor:"#b7142e"}} onClick={() => setView(0)}>
               Courses
             </Button>
-            <Button style={{ color: "white" }} onClick={() => setView(1)}>
+            <Button style={{ color:"#fff", backgroundColor:"#b7142e" }} onClick={() => setView(1)}>
               Sessions
             </Button>
-            <Button style={{ color: "white" }} onClick={() => setView(2)}>
+            <Button style={{color:"#fff", backgroundColor:"#b7142e" }} onClick={() => setView(2)}>
               Users
             </Button>
           </Typography>
