@@ -1,79 +1,108 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TutorForm from "./TutorForm";
-import Avatar from "@mui/material/Avatar";
+import Grid from "@mui/material/Grid";
+import ReactMarkdown from "react-markdown";
 
 const styles = {
-  personIcon: {
-    width: "125px",
-    height: "125px",
-    margin: "0 auto",
-  },
-  studentDetails: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modalStyle: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "#525E75",
-    border: "2px solid #000",
-    align: "center",
+  sessionGlance: {
+    backgroundColor: "#292929",
+    height: "100vh",
     color: "#fff",
-    boxShadow: 24,
-    p: 4,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  studentTitle: {
+    fontSize: "4.5em",
+    fontWeight: "bold",
+    color: "#b7142e",
   },
 };
 
 export default (props) => {
-  const [open, setOpen] = React.useState(false);
-
   return (
     <>
-      <div>
-        <Typography
-          style={styles.studentDetails}
-          gutterBottom
-          variant="h2"
-          component="h2"
+      <Grid container>
+        <Grid item xs={6} sx={{ height: "100vh" }}>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="left"
+            justifyContent="center"
+          >
+            <div>
+              <Box sx={{ textAlign: "left", m: 5 }}>
+                <Typography
+                  variant="h3"
+                  component="div"
+                  style={styles.studentTitle}
+                  gutterBottom
+                >
+                  {props.name}
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom component="div">
+                  <h2>{props.email}</h2>
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom component="div">
+                  <h2>{props.topic}</h2>
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom component="div">
+                  <h2>{props.course}</h2>
+                </Typography>
+              </Box>
+            </div>
+            <div>
+      <Box
+      sx={{ textAlign: "left", m: 2, overflow: "auto", height: "50vh" }}>
+                <Typography gutterBottom>
+                  <ReactMarkdown>{props.description}</ReactMarkdown>
+                </Typography>
+              </Box>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            backgroundColor: "white", height: "100vh",
+            "*::-webkit-scrollbar": {
+              width: "8px",
+              height: "8px",
+            },
+            "*::-webkit-scrollbar-track": {
+              backgroundColor: "rgba(0,0,0,0.4)",
+              borderRadius: "10px",
+            },
+            "*::-webkit-scrollbar-thumb": {
+              backgroundColor: "#b7142e",
+              outline: "10px",
+            },
+          }}
         >
-          {props.name}
-        </Typography>
-        <Avatar style={styles.personIcon}>
-          {props.name.charAt(0).toUpperCase()}
-        </Avatar>
-        <div style={styles.studentDetails}>
-          <h2>{props.email}</h2>
-          <h2>{props.course}</h2>
-          <h2>{props.topic}</h2>
-          <h2>{props.description}</h2>
-          <Button variant="contained" onClick={() => setOpen(true)}>
-            Mark Completed
-          </Button>
-        </div>
-      </div>
-
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={styles.modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Current Student: {props.name}
-          </Typography>
-          <TutorForm id={props.id} />
-        </Box>
-      </Modal>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Box
+              sx={{
+                width: "90%",
+                height: "90%",
+                backgroundColor: "white",
+                overflow: "auto",
+              }}
+            >
+              <TutorForm id={props.id} />
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };

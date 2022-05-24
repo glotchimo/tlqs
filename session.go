@@ -23,6 +23,7 @@ type Session struct {
 func (session *Session) BeforeCreate(scope *gorm.DB) error {
 	session.ID = uuid.New().String()
 	session.CreatedAt = time.Now().Format("15:04:05")
+
 	return nil
 }
 

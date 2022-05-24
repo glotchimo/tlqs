@@ -3,27 +3,21 @@ import React, { useState, useEffect } from "react";
 import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 const styles = {
-  gridContainer: {
-    paddingLeft: "40px",
-    paddingRight: "40px",
-    paddingTop: "40px",
-  },
   container: {
-    backgroundColor: "#525E75",
-    color: "#fff",
-    height: "100vh",
-    width: "100vw",
-    display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    color: "#b7142e",
+    fontSize: "20px",
   },
 };
 
 export default () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [sessionsSorted, setSessionsSorted] = useState(false);
   const [data, setData] = useState([]);
   const [sessionAndUsers, setSessionAndUsers] = useState([]);
   const previousSessionAndUsers = React.useRef(sessionAndUsers);
@@ -31,7 +25,7 @@ export default () => {
 
   const displaySessionData = (currentSession) => {
     return (
-      <Grid item xs={12} key={currentSession.session.id}>
+      <Grid item xs={6} key={currentSession.session.id}>
         <StudentCard
           key={currentSession.session.id}
           id={currentSession.session.id}
@@ -43,6 +37,16 @@ export default () => {
         />
       </Grid>
     );
+  };
+
+  const compareTimes = (timeA, timeB) => {
+    let comparison = 0;
+    if (timeA.session.created_at > timeB.session.created_at) {
+      comparison = 1;
+    } else if (timeA.session.created_at < timeB.session.created_at) {
+      comparison = -1;
+    }
+    return comparison;
   };
 
   const fetchAllSessionData = () => {
@@ -118,14 +122,19 @@ export default () => {
   if (sessionAndUsers.length === 0) {
     return (
       <div style={styles.container}>
-        <h1>Woohoo! You're all caught up with everything. </h1>
+        <h1>Woohoo! You're all caught up with everything.</h1>
       </div>
     );
   }
 
+  if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
+    sessionAndUsers.sort(compareTimes);
+    setSessionsSorted(true);
+  }
+
   return (
-    <>
-      <div style={styles.container}>
+    <Box>
+      <div className="MainView">
         <SessionGlance
           style={styles.container}
           key={sessionAndUsers[0].session.id}
@@ -138,20 +147,14 @@ export default () => {
           }
           description={sessionAndUsers[0].session.description}
         />
+        <div className="SecondaryView">
+          <Grid container spacing={4}>
+            {sessionAndUsers.slice(1).map((currentSession) => {
+              return displaySessionData(currentSession);
+            })}
+          </Grid>
+        </div>
       </div>
-
-      <div className="SecondaryView">
-        <Grid
-          container
-          spacing={4}
-          style={styles.gridContainer}
-          justify="center"
-        >
-          {sessionAndUsers.slice(1).map((currentSession) => {
-            return displaySessionData(currentSession);
-          })}
-        </Grid>
-      </div>
-    </>
+    </Box>
   );
 };
