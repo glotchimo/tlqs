@@ -1,28 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-
-function Department({ studentData, setStudentData }) {
-
-    const [department, setDepartment] = React.useState('');
+function Department({ sessionData, setSessionData }) {
+    const [department, setDepartment] = useState('');
 
     const handleChange = (event) => {
         setDepartment(event.target.value);
-        setStudentData(studentData => ({ ...studentData, departmentSelection: event.target.value }));
+        setSessionData(sessionData => ({ ...sessionData, department: event.target.value }));
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <FormControl sx={{ width: '80%' }}>
-                <InputLabel id="department-select-label">Department</InputLabel>
+        <Box sx={{ width: '90%', height: '10vh', mt: '5vh', overflow: 'hidden' }}>
+            <FormControl fullWidth>
+                <InputLabel sx={{ m: 2, }}
+                    id="department-select-label">Department</InputLabel>
                 <Select
-                    sx={{ textAlign: 'left' }}
+                    sx={{ m: 2, }}
                     labelId="department-select-label"
-                    id="department-select"
+                    id="department-simple-select"
                     value={department}
                     label="Department"
                     onChange={handleChange}
@@ -31,7 +30,7 @@ function Department({ studentData, setStudentData }) {
                     <MenuItem value={'Mathematics'}>Mathematics</MenuItem>
                 </Select>
             </FormControl>
-        </Box >
+        </Box>
     )
 }
 

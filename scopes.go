@@ -55,3 +55,14 @@ func ByDepartment(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.D
 		return db.Where("department = ?", department)
 	}
 }
+
+func ByEmail(w http.ResponseWriter, r *http.Request) func(*gorm.DB) *gorm.DB {
+	email := r.URL.Query().Get("email")
+	if email == "" {
+		return ByDefault()
+	}
+
+	return func(db *gorm.DB) *gorm.DB {
+		return db.Where("email = ?", email)
+	}
+}
