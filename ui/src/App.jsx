@@ -46,6 +46,7 @@ export default () => {
     switch (role) {
       case 1:
         return <Student user={id} />;
+
       case 2:
         return <Tutor />;
       case 3:

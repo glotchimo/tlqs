@@ -8,6 +8,7 @@ import {
   GridToolbarDensitySelector,
   GridToolbarExport,
 } from "@mui/x-data-grid";
+import { color } from "@mui/system";
 
 export default () => {
   const [rows, setRows] = useState([]);
@@ -25,10 +26,10 @@ export default () => {
   const toolbar = () => {
     return (
       <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        <GridToolbarExport />
+        <GridToolbarColumnsButton style={{color:"#b7142e"}} />
+        <GridToolbarFilterButton  style={{color:"#b7142e"}}/>
+        <GridToolbarDensitySelector  style={{color:"#b7142e"}}/>
+        <GridToolbarExport style={{color:"#b7142e"}} />
       </GridToolbarContainer>
     );
   };
@@ -53,7 +54,7 @@ export default () => {
       rowsPerPageOptions={[100]}
       autoHeight
       components={{ Toolbar: toolbar }}
-      style={{ marginTop: "0.5rem" }}
+      style={{ marginTop: "0.5rem"}}
     />
   );
 };

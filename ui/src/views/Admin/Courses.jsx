@@ -21,10 +21,10 @@ export default () => {
   const toolbar = () => {
     return (
       <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        <GridToolbarExport />
+        <GridToolbarColumnsButton style={{color:"#b7142e"}}/>
+        <GridToolbarFilterButton style={{color:"#b7142e"}} />
+        <GridToolbarDensitySelector style={{color:"#b7142e"}}/>
+        <GridToolbarExport style={{color:"#b7142e"}} />
       </GridToolbarContainer>
     );
   };
