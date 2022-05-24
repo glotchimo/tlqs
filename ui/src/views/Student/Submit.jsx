@@ -1,24 +1,26 @@
+import Box from '@mui/material/Box';
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 
-function Submit({ studentData, setStudentData, studentDescription, setStudentDescription }) {
+function Submit({ sessionData, setSessionData, studentProblem, studentTopic, studentId }) {
     const [submitted, setSubmitted] = useState(false);
-    let deptValid = studentData.departmentSelection !== '';
-    let classValid = studentData.classSelection !== '';
-    let topicValid = studentData.topicSelection !== '';
-    let studentInputValid = studentDescription !== '';
+    let deptValid = sessionData.department !== '';
+    let classValid = sessionData.classId !== '';
+    let topicValid = studentTopic !== '';
+    let studentInputValid = studentProblem !== '';
 
     function sendSession() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "student": "WIP -- not valid",
-            "tutor": "WIP -- not valid",
-            "course": studentData.classSelection,
-            "topic": studentData.topicSelection,
-            "description": studentDescription,
-            "retrospective": "Not yet touched."
+            "student": studentId,
+            "tutor": '',
+            "course": sessionData.classId,
+            "topic": studentTopic,
+            "description": studentProblem,
+            "retrospective": '',
+            "completed": false
         });
 
         var requestOptions = {
@@ -36,17 +38,17 @@ function Submit({ studentData, setStudentData, studentDescription, setStudentDes
 
     function verifyMissingFields() {
         let results = "You are missing the following fields: ";
-        if (studentData.departmentSelection === '') {
-            results += " \nDepartment choice"
+        if (sessionData.department === '') {
+            results += " \nDepartment choice is empty."
         }
-        if (studentData.classSelection === '') {
-            results += "\nClass choice"
+        if (sessionData.classId === '') {
+            results += "\nClass choice is empty."
         }
-        if (studentData.topicSelection === '') {
-            results += "\nTopic choice"
+        if (studentTopic === '') {
+            results += "\nTopic field is empty."
         }
-        if (studentDescription === '') {
-            results += "\nStudent description"
+        if (studentProblem === '') {
+            results += "\nStudent description is empty."
         }
         return results
     }
@@ -56,16 +58,24 @@ function Submit({ studentData, setStudentData, studentDescription, setStudentDes
         if (deptValid && classValid && topicValid && studentInputValid) {
             sendSession();
             setSubmitted(true);
-            setStudentData(studentData => ({ ...studentData, submitted: true }));
+            setSessionData(sessionData => ({ ...sessionData, submitted: true }));
         }
         else {
             let notification = verifyMissingFields();
             alert(notification);
         }
     }
-
     return (
-        <Button sx={{ alignItems: 'center', justifyContent: 'center', color: 'white' }} variant="contained" onClick={verify}>Submit</Button>
+        <Box sx={{ mt: '2vh', overflow: 'hidden' }}>
+            <Button variant="contained" onClick={verify} sx={{
+                color: '#white',
+                bgcolor: '#b7142e',
+                '&:hover': {
+                    backgroundColor: '#D41837',
+                    color: 'white'
+                }
+            }}>Submit</Button>
+        </Box>
     )
 }
 
