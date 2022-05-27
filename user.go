@@ -25,6 +25,7 @@ type User struct {
 
 func (user *User) BeforeCreate(scope *gorm.DB) error {
 	user.ID = uuid.New().String()
+	user.Role = 1
 	return nil
 }
 
