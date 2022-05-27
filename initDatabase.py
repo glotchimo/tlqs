@@ -6,7 +6,6 @@ from requests.exceptions import HTTPError
 sessions_wanted = 56
 courseResponseIds = []
 postHeaders={
-        #bruh
 }
 
 # Make sure sessions wanted is less than the number of classes in the csv which is 56
@@ -57,13 +56,13 @@ for id in courseResponseIds:
         json_data_currenttutor = {
             'name': 'Tutor ' + str(session_count),
             'email': 'tutor' + str(session_count) + '@tutor.edu',
-            'role':1, 
+            'role':2, 
         }
 
         json_data_currentstudent = {
             'name': 'student ' + str(session_count),
             'email': 'student' + str(session_count) + '@student.edu',
-            'role':0, 
+            'role':1, 
         }
 
         postTutor = requests.post('http://localhost:8080/users/', json=json_data_currenttutor, headers=postHeaders)
