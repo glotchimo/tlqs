@@ -10,10 +10,12 @@ import ProblemPreview from './ProblemPreview'
 import WaitRoom from './WaitRoom'
 import Submit from './Submit'
 import './Student.css'
+import MdTutorial from './MdTutorial';
 
 function Student({ user }) {
 
     const fetchLocation = "http://localhost:8080/users/";
+    const [sessionId, setSessionId] = useState('');
     const [studentId, setStudentId] = useState('');
     const [studentTopic, setStudentTopic] = useState('');
     const [studentProblem, setStudentProblem] = useState('');
@@ -34,25 +36,27 @@ function Student({ user }) {
 
 
     useEffect(() => {
-        const fetchData = async () => {
+        //     const fetchData = async () => {
 
-            try {
-                const response = await fetch(fetchLocation + "?email=" + user.email);
-                const json = await response.json();
-                if (studentId === '') {
-                    setStudentId(json[0].id);
-                }
-            } catch (error) {
-                console.log("error", error);
-            }
-        }
+        //     try {
+        //         //console.log(user);
+        //         const response = await fetch(fetchLocation + "?email=" + user.email);
+        //         const json = await response.json();
+        //         if (studentId === '') {
+        //             setStudentId(user);
+        //         }
+        //     } catch (error) {
+        //         console.log("error", error);
+        //     }
+        // }
 
-        fetchData();
+        // fetchData();
+        setStudentId(user);
 
     }, []);
 
     if (sessionData.submitted === true) {
-        return (<WaitRoom sessionData={sessionData} setSessionData={setSessionData} studentProblem={studentProblem} setStudentProblem={setStudentProblem} />);
+        return (<WaitRoom sessionId={sessionId} studentId={studentId} sessionData={sessionData} setSessionData={setSessionData} studentProblem={studentProblem} setStudentProblem={setStudentProblem} />);
     }
     else {
         return (
@@ -85,6 +89,7 @@ function Student({ user }) {
                                 <Classes sessionData={sessionData} setSessionData={setSessionData} />
                                 <Topic studentTopic={studentTopic} setStudentTopic={setStudentTopic} />
                                 <ProblemDescription studentProblem={studentProblem} setStudentProblem={setStudentProblem} />
+                                <MdTutorial />
                             </Grid>
 
                         </Grid>
@@ -111,7 +116,7 @@ function Student({ user }) {
                                 justifyContent="center"
                             >
                                 <ProblemPreview studentProblem={studentProblem} setStudentProblem={setStudentProblem} />
-                                <Submit sessionData={sessionData} setSessionData={setSessionData} studentProblem={studentProblem} studentTopic={studentTopic} studentId={studentId} />
+                                <Submit sessionId={sessionId} setSessionId={setSessionId} sessionData={sessionData} setSessionData={setSessionData} studentProblem={studentProblem} studentTopic={studentTopic} studentId={studentId} />
                             </Grid>
                         </Grid>
                     </Grid>
