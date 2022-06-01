@@ -36,7 +36,7 @@ function MdTutorial() {
                         Markdown Format Guide
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Here is an external link to a great guide for Markdown style syntax: <br></br> <a href="https://about.gitlab.com/handbook/markdown-guide/">https://about.gitlab.com/handbook/markdown-guide/</a> <br></br><br></br>
+                        Here is an external link to a great guide for Markdown style syntax: <br></br> <a href="https://about.gitlab.com/handbook/markdown-guide/" target="_blank" rel="noopener noreferrer">https://about.gitlab.com/handbook/markdown-guide/</a> <br></br><br></br>
 
                         <b>Simple Styling Commands:</b> <br></br><br></br>
                         ***Bold and Italicized text***<br></br>
