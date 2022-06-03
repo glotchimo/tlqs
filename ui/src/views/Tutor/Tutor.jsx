@@ -13,6 +13,9 @@ const styles = {
     color: "#b7142e",
     fontSize: "20px",
   },
+  gridContainer: {
+    margin: "5 auto",
+  },
 };
 
 export default () => {
@@ -50,7 +53,7 @@ export default () => {
   };
 
   const fetchAllSessionData = () => {
-    fetch("/sessions/")
+    fetch("http://localhost:8080/sessions/")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err));
@@ -58,7 +61,7 @@ export default () => {
 
   const fetchUser = async (userId) => {
     try {
-      let response = await fetch(`/users/${userId}/`);
+      let response = await fetch(`http://localhost:8080/users/${userId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -68,7 +71,7 @@ export default () => {
 
   const fetchCourse = async (classId) => {
     try {
-      let response = await fetch(`/courses/${classId}/`);
+      let response = await fetch(`http://localhost:8080/courses/${classId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -148,11 +151,17 @@ export default () => {
           description={sessionAndUsers[0].session.description}
         />
         <div className="SecondaryView">
-          <Grid container spacing={4}>
-            {sessionAndUsers.slice(1).map((currentSession) => {
-              return displaySessionData(currentSession);
-            })}
-          </Grid>
+          <Box sx={{ flexGrow: 1, m: 1 }}>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 8, md: 18, lg: 24, xl: 36 }}
+            >
+              {sessionAndUsers.slice(1).map((currentSession) => {
+                return displaySessionData(currentSession);
+              })}
+            </Grid>
+          </Box>
         </div>
       </div>
     </Box>

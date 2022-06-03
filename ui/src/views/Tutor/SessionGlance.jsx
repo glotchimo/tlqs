@@ -55,9 +55,14 @@ export default (props) => {
               </Box>
             </div>
             <div>
-      <Box
-      sx={{ textAlign: "left", m: 2, overflow: "auto", height: "50vh" }}>
-                <Typography gutterBottom>
+              <Box
+                sx={{
+                  textAlign: "left",
+                  m: 5,
+                  overflow: "auto",
+                }}
+              >
+                <Typography variant="h6" gutterBottom component="div" >
                   <ReactMarkdown>{props.description}</ReactMarkdown>
                 </Typography>
               </Box>
@@ -68,7 +73,8 @@ export default (props) => {
           item
           xs={6}
           sx={{
-            backgroundColor: "white", height: "100vh",
+            backgroundColor: "white",
+            height: "100vh",
             "*::-webkit-scrollbar": {
               width: "8px",
               height: "8px",
@@ -93,9 +99,7 @@ export default (props) => {
             <Box
               sx={{
                 width: "90%",
-                height: "90%",
-                backgroundColor: "white",
-                overflow: "auto",
+                height: "55vh",
               }}
             >
               <TutorForm id={props.id} />
