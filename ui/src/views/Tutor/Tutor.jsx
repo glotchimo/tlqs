@@ -13,6 +13,9 @@ const styles = {
     color: "#b7142e",
     fontSize: "20px",
   },
+  gridContainer: {
+    margin: "5 auto",
+  },
 };
 
 export default () => {
@@ -95,21 +98,30 @@ export default () => {
     }
   };
 
+  //grab the list of sessions from the API
   useEffect(() => {
     fetchAllSessionData();
   }, []);
 
+  //depend on all sessions to be loaded before sorting them out to users and sessions
   useEffect(() => {
     if (data != previousData.current) {
       loadData().then((data) => setSessionAndUsers(data));
     }
   }, [data]);
 
+  //depends on all session and users to be loaded before updating the state to loaded.
   useEffect(() => {
     if (previousSessionAndUsers.current !== sessionAndUsers) {
       setIsLoading(false);
     }
   }, [sessionAndUsers]);
+
+  //If everything has been loaded into state then we can sort the sessions by time.
+  if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
+    sessionAndUsers.sort(compareTimes);
+    setSessionsSorted(true);
+  }
 
   if (isLoading) {
     return (
@@ -125,11 +137,6 @@ export default () => {
         <h1>Woohoo! You're all caught up with everything.</h1>
       </div>
     );
-  }
-
-  if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
-    sessionAndUsers.sort(compareTimes);
-    setSessionsSorted(true);
   }
 
   return (
@@ -148,11 +155,17 @@ export default () => {
           description={sessionAndUsers[0].session.description}
         />
         <div className="SecondaryView">
-          <Grid container spacing={4}>
-            {sessionAndUsers.slice(1).map((currentSession) => {
-              return displaySessionData(currentSession);
-            })}
-          </Grid>
+          <Box sx={{ flexGrow: 1, m: 1 }}>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 8, md: 18, lg: 24, xl: 36 }}
+            >
+              {sessionAndUsers.slice(1).map((currentSession) => {
+                return displaySessionData(currentSession);
+              })}
+            </Grid>
+          </Box>
         </div>
       </div>
     </Box>
