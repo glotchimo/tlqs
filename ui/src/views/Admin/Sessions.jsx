@@ -8,7 +8,6 @@ import {
   GridToolbarDensitySelector,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { color } from "@mui/system";
 
 export default () => {
   const [rows, setRows] = useState([]);
