@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import {styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import ReactMarkdown from "react-markdown";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
@@ -51,9 +51,24 @@ const styles = {
     },
     m: 3,
   },
-  modalStyle: {
+  dialogContent: {
     color: "#000000",
     fontSize: 20,
+  },
+  dialog: {
+    "*::-webkit-scrollbar": {
+      width: "8px",
+      height: "8px",
+    },
+    "*::-webkit-scrollbar-track": {
+      backgroundColor: "rgba(0,0,0,0.4)",
+      borderRadius: "10px",
+    },
+    "*::-webkit-scrollbar-thumb": {
+      backgroundColor: "#b7142e",
+      outline: "10px",
+    },
+    m: 2,
   },
 };
 
@@ -120,24 +135,10 @@ export default function TutorForm(props) {
         fullWidth
         maxWidth="md"
         wordWrap="break-word"
-        sx={{
-          "*::-webkit-scrollbar": {
-            width: "8px",
-            height: "8px",
-          },
-          "*::-webkit-scrollbar-track": {
-            backgroundColor: "rgba(0,0,0,0.4)",
-            borderRadius: "10px",
-          },
-          "*::-webkit-scrollbar-thumb": {
-            backgroundColor: "#b7142e",
-            outline: "10px",
-          },
-          m: 2,
-        }}
+        sx={styles.dialog}
         onClose={() => setOpen(false)}
       >
-        <DialogContent dividers style={styles.modalStyle}>
+        <DialogContent dividers style={styles.dialogContent}>
           <Box sx={{ textAlign: "left", m: 5, fontSize: "100em" }}>
             <Typography gutterBottom style={styles.typography}>
               <ReactMarkdown>{tutorInput}</ReactMarkdown>
