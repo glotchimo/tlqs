@@ -8,7 +8,6 @@ import {
   GridToolbarDensitySelector,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { color } from "@mui/system";
 
 export default () => {
   const [rows, setRows] = useState([]);
@@ -20,8 +19,19 @@ export default () => {
     { field: "topic", headerName: "Topic", flex: 1 },
     { field: "description", headerName: "Description", flex: 1 },
     { field: "retrospective", headerName: "Retrospective", flex: 1 },
-    {field: "completed", headerName: "Status", flex: 1},
+    {field: changeStatus(), headerName: "Status", flex: 1},
   ];
+  changeStatus=()=>{
+    this.columns[7]="completed"
+    const status = columns[7]
+
+    if(columns[7]== true){
+      return "Completed"
+    }
+    else{
+      return "Not Completed"
+    }
+  }
 
   const toolbar = () => {
     return (
