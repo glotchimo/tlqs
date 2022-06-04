@@ -1,6 +1,6 @@
 # Database
 
-### Models 
+### Models
 
 #### User
 
@@ -14,6 +14,6 @@ The `Session` model must hold all data directly relevant to a single tutor sessi
 
 Both the `Description` and `Retrospective` fields contain raw text data that is entered and rendered as rich text (using `mui/rte`).
 
-### Course & Topic
+### Course
 
-The `Course` and `Topic` models represent offered courses and related topics as pre-defined and maintained by administrators. Courses have a `Department` field similar to `User.Role` that allows convenient filtering on the front-end.
+The `Course` model represents offered courses as defined by the EWU catalog. Courses have a `Department` field similar to `User.Role` that allows convenient filtering on the front-end.
