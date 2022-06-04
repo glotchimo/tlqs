@@ -13,39 +13,26 @@ export default () => {
   const [rows, setRows] = useState([]);
   const columns = [
     { field: "id", headerName: "ID", flex: 1 },
-    { field: "student", headerName: "Student", flex: 1 },
-    { field: "tutor", headerName: "Tutor", flex: 1 },
-    { field: "course", headerName: "Course", flex: 1 },
-    { field: "topic", headerName: "Topic", flex: 1 },
-    { field: "description", headerName: "Description", flex: 1 },
-    { field: "retrospective", headerName: "Retrospective", flex: 1 },
-    {field: changeStatus(), headerName: "Status", flex: 1},
+    { field: "name", headerName: "Names", flex: 1 },
+    { field: "email", headerName: "Email", flex: 1 },
+    { field: "role", headerName: "Role", flex: 1 },
+    { field: "sessions", headerName: "Sessions", flex: 1 },
+    { field: "courses", headerName: "Courses", flex: 1 },
   ];
-  changeStatus=()=>{
-    this.columns[7]="completed"
-    const status = columns[7]
-
-    if(columns[7]== true){
-      return "Completed"
-    }
-    else{
-      return "Not Completed"
-    }
-  }
 
   const toolbar = () => {
     return (
       <GridToolbarContainer>
         <GridToolbarColumnsButton style={{color:"#b7142e"}} />
-        <GridToolbarFilterButton  style={{color:"#b7142e"}}/>
-        <GridToolbarDensitySelector  style={{color:"#b7142e"}}/>
-        <GridToolbarExport style={{color:"#b7142e"}} />
+        <GridToolbarFilterButton style={{color:"#b7142e"}} />
+        <GridToolbarDensitySelector style={{color:"#b7142e"}} />
+        <GridToolbarExport style={{color:"#b7142e"}}/>
       </GridToolbarContainer>
     );
   };
 
-  const getSessions = () => {
-    fetch("/sessions/")
+  const getUsers = () => {
+    fetch("/users/")
       .then((response) => response.json())
       .then((json) => {
         setRows(json);
@@ -53,7 +40,7 @@ export default () => {
   };
 
   useEffect(() => {
-    getSessions();
+    getUsers();
   }, []);
 
   return (
@@ -64,7 +51,7 @@ export default () => {
       rowsPerPageOptions={[100]}
       autoHeight
       components={{ Toolbar: toolbar }}
-      style={{ marginTop: "0.5rem"}}
+      style={{ marginTop: "0.5rem" }}
     />
   );
 };
