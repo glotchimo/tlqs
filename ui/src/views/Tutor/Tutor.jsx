@@ -53,7 +53,7 @@ export default () => {
   };
 
   const fetchAllSessionData = () => {
-    fetch("http://localhost:8080/sessions/")
+    fetch("/sessions/")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err));
@@ -61,7 +61,7 @@ export default () => {
 
   const fetchUser = async (userId) => {
     try {
-      let response = await fetch(`http://localhost:8080/users/${userId}/`);
+      let response = await fetch(`/users/${userId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
@@ -71,7 +71,7 @@ export default () => {
 
   const fetchCourse = async (classId) => {
     try {
-      let response = await fetch(`http://localhost:8080/courses/${classId}/`);
+      let response = await fetch(`/courses/${classId}/`);
       let data = await response.json();
       return data;
     } catch (err) {
