@@ -16,8 +16,6 @@ export default () => {
     { field: "name", headerName: "Names", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
     { field: "role", headerName: "Role", flex: 1 },
-    { field: "sessions", headerName: "Sessions", flex: 1 },
-    { field: "courses", headerName: "Courses", flex: 1 },
   ];
 
   const toolbar = () => {
