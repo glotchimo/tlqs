@@ -13,26 +13,28 @@ export default () => {
   const [rows, setRows] = useState([]);
   const columns = [
     { field: "id", headerName: "ID", flex: 1 },
-    { field: "name", headerName: "Names", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "role", headerName: "Role", flex: 1 },
-    { field: "sessions", headerName: "Sessions", flex: 1 },
-    { field: "courses", headerName: "Courses", flex: 1 },
+    { field: "student", headerName: "Student", flex: 1 },
+    { field: "tutor", headerName: "Tutor", flex: 1 },
+    { field: "course", headerName: "Course", flex: 1 },
+    { field: "topic", headerName: "Topic", flex: 1 },
+    { field: "description", headerName: "Description", flex: 1 },
+    { field: "retrospective", headerName: "Retrospective", flex: 1 },
+    {field: "completed", headerName: "Status", flex: 1},
   ];
 
   const toolbar = () => {
     return (
       <GridToolbarContainer>
         <GridToolbarColumnsButton style={{color:"#b7142e"}} />
-        <GridToolbarFilterButton style={{color:"#b7142e"}} />
-        <GridToolbarDensitySelector style={{color:"#b7142e"}} />
-        <GridToolbarExport style={{color:"#b7142e"}}/>
+        <GridToolbarFilterButton  style={{color:"#b7142e"}}/>
+        <GridToolbarDensitySelector  style={{color:"#b7142e"}}/>
+        <GridToolbarExport style={{color:"#b7142e"}} />
       </GridToolbarContainer>
     );
   };
 
-  const getUsers = () => {
-    fetch("/users/")
+  const getSessions = () => {
+    fetch("/sessions/")
       .then((response) => response.json())
       .then((json) => {
         setRows(json);
@@ -40,7 +42,7 @@ export default () => {
   };
 
   useEffect(() => {
-    getUsers();
+    getSessions();
   }, []);
 
   return (
@@ -51,7 +53,7 @@ export default () => {
       rowsPerPageOptions={[100]}
       autoHeight
       components={{ Toolbar: toolbar }}
-      style={{ marginTop: "0.5rem" }}
+      style={{ marginTop: "0.5rem"}}
     />
   );
 };
