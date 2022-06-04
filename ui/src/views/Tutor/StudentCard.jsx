@@ -14,18 +14,11 @@ const Item = styled(Paper)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-const stylingObject = {
-        cards:{
-
-
-        }
-}
-
 export default (props) => {
   return (
     <Grid item>
       <Item>
-      <Box sx={{ textAlign: "left", m: 5 }}>
+        <Box sx={{ textAlign: "left", m: 5 }}>
           <Typography variant="h6" gutterBottom component="div">
             {props.name}
           </Typography>
