@@ -98,21 +98,30 @@ export default () => {
     }
   };
 
+  //grab the list of sessions from the API
   useEffect(() => {
     fetchAllSessionData();
   }, []);
 
+  //depend on all sessions to be loaded before sorting them out to users and sessions
   useEffect(() => {
     if (data != previousData.current) {
       loadData().then((data) => setSessionAndUsers(data));
     }
   }, [data]);
 
+  //depends on all session and users to be loaded before updating the state to loaded.
   useEffect(() => {
     if (previousSessionAndUsers.current !== sessionAndUsers) {
       setIsLoading(false);
     }
   }, [sessionAndUsers]);
+
+  //If everything has been loaded into state then we can sort the sessions by time.
+  if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
+    sessionAndUsers.sort(compareTimes);
+    setSessionsSorted(true);
+  }
 
   if (isLoading) {
     return (
@@ -128,11 +137,6 @@ export default () => {
         <h1>Woohoo! You're all caught up with everything.</h1>
       </div>
     );
-  }
-
-  if (!isLoading && !sessionsSorted && sessionAndUsers.length > 0) {
-    sessionAndUsers.sort(compareTimes);
-    setSessionsSorted(true);
   }
 
   return (
