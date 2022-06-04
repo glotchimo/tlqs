@@ -1,6 +1,6 @@
 **TLQS Documentation (Admin View)**
 
-made by **Hewr Tarkhany**
+made by **Hewr  Tarkhany**
 
 **PROGRESS:**
 
