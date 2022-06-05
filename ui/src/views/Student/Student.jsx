@@ -14,7 +14,7 @@ import MdTutorial from './MdTutorial';
 
 function Student({ user }) {
 
-    const fetchLocation = "http://localhost:8080/users/";
+    const fetchLocation = "/users/";
     const [sessionId, setSessionId] = useState('');
     const [studentId, setStudentId] = useState('');
     const [studentTopic, setStudentTopic] = useState('');
@@ -36,21 +36,6 @@ function Student({ user }) {
 
 
     useEffect(() => {
-        //     const fetchData = async () => {
-
-        //     try {
-        //         //console.log(user);
-        //         const response = await fetch(fetchLocation + "?email=" + user.email);
-        //         const json = await response.json();
-        //         if (studentId === '') {
-        //             setStudentId(user);
-        //         }
-        //     } catch (error) {
-        //         console.log("error", error);
-        //     }
-        // }
-
-        // fetchData();
         setStudentId(user);
 
     }, []);

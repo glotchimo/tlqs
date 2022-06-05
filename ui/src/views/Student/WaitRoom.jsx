@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
-//import './WaitRoom.css'
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -22,7 +21,7 @@ function WaitRoom({ sessionId, studentId, sessionData, setSessionData, studentPr
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/sessions/" + sessionId + "/", requestOptions)
+        fetch("/sessions/" + sessionId + "/", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));

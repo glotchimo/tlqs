@@ -36,9 +36,11 @@ function MdTutorial() {
                         Markdown Format Guide
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Here is an external link to a great guide for Markdown style syntax: <br></br> <a href="https://about.gitlab.com/handbook/markdown-guide/" target="_blank" rel="noopener noreferrer">https://about.gitlab.com/handbook/markdown-guide/</a> <br></br><br></br>
+                        Here is an external link to a great guide for Markdown style syntax: <br></br> <a href="https://www.markdownguide.org/cheat-sheet" target="_blank" rel="noopener noreferrer">Markdown cheat sheet</a> <br></br><br></br>
 
                         <b>Simple Styling Commands:</b> <br></br><br></br>
+                        `code goes between the backticks`<br></br>
+                        '    Four spaces creates a code block'<br></br>
                         ***Bold and Italicized text***<br></br>
                         **Bold text**<br></br>
                         *Italicized text*<br></br>

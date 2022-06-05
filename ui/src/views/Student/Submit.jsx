@@ -30,7 +30,7 @@ function Submit({ sessionId, setSessionId, sessionData, setSessionData, studentP
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/sessions/", requestOptions)
+        fetch("/sessions/", requestOptions)
             .then(response => response.json())
             .then(response => setSessionId(response.id))
             .then(result => console.log(result))
