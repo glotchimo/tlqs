@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 
-function Submit({ sessionData, setSessionData, studentProblem, studentTopic, studentId }) {
+function Submit({ sessionId, setSessionId, sessionData, setSessionData, studentProblem, studentTopic, studentId }) {
     const [submitted, setSubmitted] = useState(false);
     let deptValid = sessionData.department !== '';
     let classValid = sessionData.classId !== '';
@@ -30,8 +30,9 @@ function Submit({ sessionData, setSessionData, studentProblem, studentTopic, stu
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/sessions/", requestOptions)
-            .then(response => response.text())
+        fetch("/sessions/", requestOptions)
+            .then(response => response.json())
+            .then(response => setSessionId(response.id))
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }

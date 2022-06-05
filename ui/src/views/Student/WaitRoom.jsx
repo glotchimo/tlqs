@@ -1,11 +1,30 @@
 import { React, useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
-//import './WaitRoom.css'
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-function WaitRoom({ sessionData, setSessionData, studentProblem, setStudentProblem }) {
+function WaitRoom({ sessionId, studentId, sessionData, setSessionData, studentProblem, setStudentProblem }) {
     const cancelSession = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "id": sessionId,
+            "tutor": "None",
+            "completed": true
+        });
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("/sessions/" + sessionId + "/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
         setSessionData(sessionData => ({ ...sessionData, submitted: false }));
     }
 
