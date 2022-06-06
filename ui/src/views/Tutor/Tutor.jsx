@@ -4,6 +4,7 @@ import SessionGlance from "./SessionGlance";
 import StudentCard from "./StudentCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import SplashPage from "./SplashPage";
 
 const styles = {
   container: {
@@ -124,18 +125,15 @@ export default () => {
   }
 
   if (isLoading) {
-    return (
-      <div style={styles.container}>
-        <h1>Loading Sessions...</h1>
-      </div>
-    );
+    return <SplashPage status="Loading...🚀" />;
   }
 
   if (sessionAndUsers.length === 0) {
     return (
-      <div style={styles.container}>
-        <h1>Woohoo! You're all caught up with everything.</h1>
-      </div>
+      <SplashPage
+        status="WooHoo! You're all caught up! 🎉"
+        message="Refresh the page to check for new sessions."
+      />
     );
   }
 
