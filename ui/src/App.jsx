@@ -3,6 +3,7 @@ import * as React from "react";
 import Admin from "./views/Admin/Admin.jsx";
 import Student from "./views/Student/Student.jsx";
 import Tutor from "./views/Tutor/Tutor.jsx";
+import SplashScreen from "./views/Tutor/SplashPage.jsx";
 
 export default () => {
   const {
@@ -39,7 +40,7 @@ export default () => {
   }, [user]);
 
   if (isLoading) {
-    return "Loading...";
+    return <SplashScreen status="Loading...🚀" />;
   }
 
   if (isAuthenticated) {
@@ -52,7 +53,7 @@ export default () => {
       case 3:
         return <Admin />;
       default:
-        return "Loading...";
+        return <SplashScreen status="Loading...🚀" />;
     }
   } else {
     return loginWithRedirect();
