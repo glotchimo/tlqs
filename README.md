@@ -13,7 +13,7 @@ These notes can then be further analyzed at a later date to make adjustments and
 ### View Breakdown
 The application is broken into three views [student](./docs/student.md), [tutor](./docs/tutor.md), and [admin](./docs/admin.md). Each view has it's own function in the application, please check out the provided documentation for more info on each view. 
 
-Need an idea of the flow of the application? Please check out the demo video showcasing the [web app](https://www.youtube.com/watch?v=vVqLiVAbyfQ).
+**Need an idea of the flow of the application?** Please check out the demo video showcasing the [web app](https://www.youtube.com/watch?v=vVqLiVAbyfQ).
 
 ### Basic Usage
 
