@@ -1,11 +1,27 @@
 # Tutor Lab Queue System
+[![Docker Image CI](https://github.com/glotchimo/tlqs/actions/workflows/docker.yml/badge.svg)](https://github.com/glotchimo/tlqs/actions/workflows/docker.yml) [![Go ](https://github.com/glotchimo/tlqs/actions/workflows/go.yml/badge.svg)](https://github.com/glotchimo/tlqs/actions/workflows/go.yml)
+
 This is the monorepo for TLQS, containing a React SPA and a Go back-end. It features a Docker setup for quick containerized deployment and a Makefile for a rapid build-test-edit cycle.
+
+### What is TLQS?
+TLQS (pronounced “TALKS”) is a web-based application that supports students by facilitating a robust and streamlined way to interact with the tutors at EWU. 
+
+The application also makes life easier for both tutors and administrators, by allowing a straightforward and visually appealing way to catalog and save notes from a session with a student.
+
+These notes can then be further analyzed at a later date to make adjustments and see trending patterns in the tutor lab.
+
+### View Breakdown
+The application is broken into three views [student](./docs/student.md), [tutor](./docs/tutor.md), and [admin](./docs/admin.md). Each view has it's own function in the application, please check out the provided documentation for more info on each view. 
+
+Need an idea of the flow of the application? Please check out the demo video showcasing the [web app](https://www.youtube.com/watch?v=vVqLiVAbyfQ).
 
 ### Basic Usage
 
-To build and run the service, run `make run`, and to clean up binaries and distribution files, run `make clean`. If you want to run it in the background, use `make run-background`, and if you want to clear all Docker caches, images, volumes, etc. on your system, use `make clean-all`.
+To build and run the service, run `make run`, If you are working on the project locally and want to populate the API with test classes, sessions, and users, use `make populate`, and to clean up binaries and distribution files, run `make clean`. If you want to run it in the background, use `make run-background`, and if you want to clear all Docker caches, images, volumes, etc. on your system, use `make clean-all`.
 
-### Git Instructions
+### Contributing
+
+#### Git Instructions
 
 1. `git checkout -b <branch name>`
 2. Do your changes, use atomic commits (i.e. commit small, individual changes, not huge groups of changes)
