@@ -16,3 +16,8 @@ clean-all:
 	docker-compose down -v
 	docker system prune
 	rm -rf ui/node_modules ui/dist
+
+populate:
+	python3 initDatabase.py
+
+
