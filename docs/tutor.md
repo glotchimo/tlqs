@@ -1,5 +1,5 @@
 
-# Tutor view 🕵🏽‍♀️
+# Tutor view
 
 The tutor view is made to be simple, ensuring that everything that you need is there and easy to access. 
 The expected flow of the view is that the tutor sees the students' problem and from there they can get an idea of what they need to work on with the student. 
