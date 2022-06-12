@@ -1,26 +1,36 @@
 import csv
 import requests
 from requests.exceptions import HTTPError
-#By default all the courses will be posted into the database for testing purposes
-#Change the session wanted number to limit the number of created sessions
+
+# Ensure that the courses.csv file present
+# By default all the courses will be posted into the database for testing purposes
+# Change the session wanted number to limit the number of created sessions
 sessions_wanted = 56
 courseResponseIds = []
 postHeaders={
 }
 
-# Make sure sessions wanted is less than the number of classes in the csv which is 56
 if(sessions_wanted > 56):
-    print("Too many sessions wanted")
+    print('Too many sessions wanted, exitting...')
     exit()
 
-print("Loading all courses from courses.csv.....")
-# add all courses to the database
+print('Loading all courses from courses.csv.....')
+
+try:
+    requests = requests.get('http://localhost:8080/users/', timeout=5)
+    print('The API is running, proceeding to populating API')
+
+except (requests.ConnectionError, requests.Timeout) as exception:
+    print('The API is not up, ensure that the make run command has finished executing.')
+    print('Exitting...')
+    exit()
+
+# Add all courses to the database
 line_count=0
 math_count=0
 with open('courses.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     for row in csv_reader:
-        # skipping the column headers for the csv
         if line_count == 0:
             line_count += 1
             math_count += 1
@@ -73,11 +83,10 @@ for id in courseResponseIds:
             'topic': 'topic ' + str(session_count),
             'tutor': postTutor.json()['id'],
             'student': postStudent.json()['id'],
-            'description': 'description ' + str(session_count),
+            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             'retrospective': '',
         }
 
-        # finally post the completed session object
         postSession = requests.post('http://localhost:8080/sessions/', json=json_data_currentsession, headers=postHeaders)
 
     except HTTPError as http_err:
@@ -85,4 +94,4 @@ for id in courseResponseIds:
     except Exception as err:
         print(f'Other error occurred: {err}')
 
-print(f'Processed {session_count} sessions, with love and care - Luis <3')
+print(f'Processed {session_count} sessions')
