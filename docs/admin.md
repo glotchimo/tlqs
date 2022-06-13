@@ -38,11 +38,7 @@ made by **Hewr Tarkhany**
 
 - 1.Admin can only preview the data that is being posted from tutor
 
-- 2\. Changing the role from the admin section was assigned but I
-  can't do it because docker is disabled because of the
-
-![](./images/image1.png){width="7.088542213473316in"
-height="3.251022528433946in"}
+- 2\. Changing the role from the admin section was assigned but wasn't able to get to it due to third party issues with building our application in docker.
 
 **Solutions:**
 
