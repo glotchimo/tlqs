@@ -138,10 +138,10 @@ height="3.251022528433946in"}
 
 > **Course view:**
 
-![](./images/image2.png){width="7.495138888888889in"
-height="2.588888888888889in"}
+![course](https://github.com/glotchimo/tlqs/blob/main/docs/images/course%20view.png)
 
 - **ID :** it will give a unique id for the Course
+![id](https://github.com/glotchimo/tlqs/blob/main/docs/images/id.png)
 
 - **Title :** the tittle of the course example : CSCD320
 
@@ -151,19 +151,18 @@ height="2.588888888888889in"}
 
   - It will allow you to disable any column you want or show all
 
-![](./images/image3.png){width="7.489583333333333in"
-height="2.797222222222222in"}
+![column](https://github.com/glotchimo/tlqs/blob/main/docs/images/columns.png)
 
 - **FILTERS**
 
-![](./images/image4.png){width="7.495138888888889in"
-height="1.9118055555555555in"}
+![filter](https://github.com/glotchimo/tlqs/blob/main/docs/images/filter.png)
 
 - **OPERATOR**
 
 > In this section you will have access to contains, equals, starts with,
 > ends with, is empty ,is not empty, is any of attributes that will
 > allow you to filter the data
+![density](https://github.com/glotchimo/tlqs/blob/main/docs/images/desity.png)
 
 - **Value**
 
@@ -171,15 +170,14 @@ height="1.9118055555555555in"}
 >
 > **EXPORT**
 
-![](./images/image5.png){width="7.5in" height="1.875in"}
+![export](https://github.com/glotchimo/tlqs/blob/main/docs/images/export.png)
 
 - You will have access to download as CSV or print attributes to
   obtain the data
 
 > **SESSION PAGE**
 
-![](./images/image6.png){width="7.489583333333333in"
-height="1.8020833333333333in"}
+![session](https://github.com/glotchimo/tlqs/blob/main/docs/images/session.png)
 
 - Student : the student that needs help
 
@@ -199,8 +197,7 @@ height="1.8020833333333333in"}
 
 > **USER PAGE**
 
-![](./images/image7.png){width="7.5in"
-height="1.7659722222222223in"}
+![user](https://github.com/glotchimo/tlqs/blob/main/docs/images/user.png)
 
 - **Names:** name of the student
 
@@ -261,161 +258,3 @@ the Session and User pages
 
 - Note: The functionality and codes used in this section is explained
   in course section and the same methodology and tools had been used
-
--
-
-**SYSTEM RREQUIREMENTS:**
-
-**MUI:**
-
-- The MUI React library is designed from the ground up to be fast,
-  small and developer-friendly. Using the MUI React library you can
-  add MUI components to your React apps and switch seamlessly between
-  MUI CSS/JS and MUI React even within the same app. MUI is designed
-  to work with React 15.X and 16.X.
-
-- Link https://mui.com/
-
-**Docker:**
-
-> Docker is an open platform for developing, shipping, and running
-> applications. Docker enables you to separate your applications from
-> your infrastructure so you can deliver software quickly. With Docker,
-> you can manage your infrastructure in the same ways you manage your
-> applications. By taking advantage of Docker's methodologies for
-> shipping, testing, and deploying code quickly, you can significantly
-> reduce the delay between writing code and running it in production.
->
-> Link https://docs.docker.com/get-started/overview/
->
-> **Go:**
-
-- The Go programming language is an open source project to make
-  programmers more productive.
-
-- Go is expressive, concise, clean, and efficient. Its concurrency
-  mechanisms make it easy to write programs that get the most out of
-  multicore and networked machines, while its novel type system
-  enables flexible and modular program construction. Go compiles
-  quickly to machine code yet has the convenience of garbage
-  collection and the power of run-time reflection. It\'s a fast,
-  statically typed, compiled language that feels like a dynamically
-  typed, interpreted language.
-
-> Link https://go.dev/learn/
-
-**Golang ORMs**
-
-- Go community has built a number of Object Relational Mapping
-  libraries (ORMs) to allow Go developers to use JSON key:value pair
-  syntax and encoding to map directly to a SQL database like
-  PostgreSQL. ORMs enable developers to use their native programming
-  paradigm to map data to SQL. An ORM transforms your database
-  information to Golang objects and vice-versa. When working with an
-  ORM, instead of writing SQL queries directly into your application,
-  you can map your data much better using Golang struct.
-
-> **GORM attributes**
-
-- Go get -u gorm.io/gorm
-
-- Go get -u gorm.io/driver/sqlite/
-
-- Associations (Has One, Has Many, Belongs To, Many To Many,
-  Polymorphism, Single-table inheritance)
-
-- Hooks (Before/After Create/Save/Update/Delete/Find)
-
-- Eager loading with Preload, Joins
-
-- Transactions, Nested Transactions, Save Point, RollbackTo to Saved
-  Point
-
-- Context, Prepared Statement Mode, DryRun Mode
-
-- Batch Insert, FindInBatches, Find/Create with Map, CRUD with SQL
-  Expr and Context Valuer
-
-- SQL Builder, Upsert, Locking, Optimizer/Index/Comment Hints, Named
-  Argument, SubQuery
-
-- Composite Primary Key, Indexes, Constraints
-
-- Auto Migrations
-
-- Logger
-
-- Extendable, flexible plugin API: Database Resolver (Multiple
-  Databases, Read/Write Splitting) / Prometheus...
-
-- Every feature comes with tests
-
-- Developer Friendly
-
-> Information:
->
-> Stackoverflow - https://stackoverflow.com/questions/tagged/go-gorm
->
-> Github Issues - <https://github.com/go-gorm/gorm/issues>
->
-> https://jfrog.com/blog/top-go-modules-golang-web-apis-with-gorm/
-
-**Postgress:**
-
-> PostgreSQL is an object-relational database management system (ORDBMS)
-> based on POSTGRES, Version 4.2, developed at the University of
-> California at Berkeley Computer Science Department. POSTGRES pioneered
-> many concepts that only became available in some commercial database
-> systems much later.
-
-**Postgress: attributes**
-
-- PostgreSQL is an open-source descendant of this original Berkeley
-  code. It supports a large part of the SQL standard and offers many
-  modern features:
-
-- complex queries
-
-- foreign keys
-
-- triggers
-
-- updatable views
-
-- transactional integrity
-
-- multi-version concurrency control
-
-- Also, PostgreSQL can be extended by the user in many ways, for
-  example by adding new
-
-- data types
-
-- functions
-
-- operators
-
-- aggregate functions
-
-- index methods
-
-- procedural languages
-
-- And because of the liberal license, PostgreSQL can be used,
-  modified, and distributed by anyone free of charge for any purpose,
-  be it private, commercial, or academic.
-
-- **Link: https://www.postgresql.org/docs/current/**
-
-**REACT:**
-
-> React (also known as React.js or ReactJS) is a free and open-source
-> front-end JavaScript library, for building user interfaces based on UI
-> components. It is maintained by Meta (formerly Facebook) and a
-> community of individual developers and companies. React can be used as
-> a base in the development of single-page, mobile, or server-rendered
-> applications with frameworks like Next.js. However, React is only
-> concerned with state management and rendering that state to the DOM,
-> so creating React applications usually requires the use of additional
-> libraries for routing, as well as certain client-side
-> functionality.\[Wikipedia\]
