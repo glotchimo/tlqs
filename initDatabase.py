@@ -3,19 +3,11 @@ import requests
 from requests.exceptions import HTTPError
 
 # Ensure that the courses.csv file present
-# By default all the courses will be posted into the database for testing purposes
-# Change the session wanted number to limit the number of created sessions
-sessions_wanted = 56
 courseResponseIds = []
 postHeaders={
 }
 
-if(sessions_wanted > 56):
-    print('Too many sessions wanted, exitting...')
-    exit()
-
 print('Loading all courses from courses.csv.....')
-
 try:
     requests = requests.get('http://localhost:8080/users/', timeout=5)
     print('The API is running, proceeding to populating API')
@@ -26,13 +18,13 @@ except (requests.ConnectionError, requests.Timeout) as exception:
     exit()
 
 # Add all courses to the database
-line_count=0
+cscd_count=0
 math_count=0
 with open('courses.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     for row in csv_reader:
-        if line_count == 0:
-            line_count += 1
+        if cscd_count == 0:
+            cscd_count += 1
             math_count += 1
 
         if(row['code'].startswith('MATH')):
@@ -48,12 +40,18 @@ with open('courses.csv', mode='r') as csv_file:
                 'department':0, 
                 'code': row['code'],
             }
-            line_count+=1
+            cscd_count+=1
         postCourse = requests.post('http://localhost:8080/courses/', json=json_data_currentcourse, headers=postHeaders)
         courseResponseIds.append(postCourse.json()['id'])
 
-print(f"{line_count-1} CSCD courses loaded....")
+print(f"{cscd_count-1} CSCD courses loaded....")
 print(f"{math_count-1} MATH courses loaded....\n")
+
+# ensure the sessions created are less than the number of courses in the CSV
+sessions_wanted = 10
+if(sessions_wanted > (math_count+cscd_count)-2):
+    print('Too many sessions wanted, exitting...')
+    exit()
 
 print("Creating sessions.....")
 session_count = 0
