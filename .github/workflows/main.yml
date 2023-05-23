@@ -1,0 +1,18 @@
+name: Run Bastila PR Check on Pull Requests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  bastila_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Bastila PR Check
+        uses: ProgrammingJoe/bastila-action@v0.0.5
+        with:
+          BASTILA_KEY: ${{ secrets.BASTILA_KEY }} 
